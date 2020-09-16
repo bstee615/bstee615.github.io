@@ -1,4 +1,37 @@
 baseURL = "http://example.org/"
 languageCode = "en-us"
-title = "My New Hugo Site"
-theme = "ananke"
+author = "Ben Steenhoek"
+title = "Ben"
+theme = "vitae"
+enableRobotsTXT = true
+
+[params]
+	homepage = false
+	description = "Vitae is a blog theme for Hugo that focuses on your content."
+	subtitle = "Here are some posts and projects of mine. Enjoy!"
+	pagetitle = "From me to you"
+	avatar = "/img/avatar.jpg"
+	favicon = true
+    mainSections = ["posts", "projects"]
+
+# Navigation
+[[menu.main]]
+name = "Home"
+url = "/"
+weight = 1
+
+[[menu.main]]
+name = "Posts"
+url = "/posts"
+weight = 2
+
+[[menu.main]]
+name = "Projects"
+url = "/projects"
+weight = 3
+
+# Social Menu
+[[params.social]]
+name = "Github"
+icon = "fab fa-github"
+url = "https://github.com/dataCobra/hugo-vitae"
