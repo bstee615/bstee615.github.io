@@ -8,4 +8,4 @@ project:
     embed: true
 ---
 
-The age-old game of Pong, from Atari.
+{{< project-description >}} The age-old game of Pong, from Atari. {{< /project-description >}}

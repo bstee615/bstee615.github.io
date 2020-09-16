@@ -8,4 +8,4 @@ project:
     embed: true
 ---
 
-snake: a classic game we know and love
+{{< project-description >}} a classic game we know and love. {{< /project-description >}}
