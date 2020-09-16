@@ -34,4 +34,9 @@ weight = 3
 [[params.social]]
 name = "Github"
 icon = "fab fa-github"
-url = "https://github.com/dataCobra/hugo-vitae"
+url = "https://github.com/bstee615"
+
+[[params.social]]
+name = "LinkedIn"
+icon = "fab fa-linkedin"
+url = "https://www.linkedin.com/in/ben-steenhoek"
