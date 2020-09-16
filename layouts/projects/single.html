@@ -1,50 +1,32 @@
 {{ define "main" -}}
+<style>
+	html, body, main, .post {
+		width: 100%;
+		margin: 0;
+		max-width:100%;
+	}
+	.embed {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+</style>
 <div class="post">
-	{{ if isset .Params "image" }}
-	<div class="post-image">
-		<img src="{{ relURL .Params.image }}" {{ if isset .Params "imagetext" }}alt="{{ .Params.imagetext }}"{{ end }}>
-	</div>
-	{{ end }}
-	<div class="author">
-	{{ if eq .Site.Params.listAuthor true}}
-	{{ if isset .Params "author" }}
-		<p>
-		{{ if isset .Params "authorlink" }}
-		{{ i18n "authorpretext" }} <a href="{{ relURL .Params.authorlink }}">{{ .Params.author }}</a>
-		{{ else }}
-		{{ i18n "authorpretext" }} {{ .Params.author }}
-		{{ end }}
-		</p>
-	{{ end }}
-	{{ end }}
-	</div>
-	<div class="post-header">
-	{{ if ne .Date.Year 1 }}
-		<div class="meta">
-			{{ if not .Params.nodate }}
-			<div class="date">
-				<span class="day">{{ dateFormat "02" .Date }}</span>
-				<span class="rest">{{ if $.Site.Data.month }}{{ index $.Site.Data.month (printf "%d" .Date.Month) }} {{ .Date.Year }}{{ else }}{{ dateFormat "Jan 2006" .Date }}{{ end }}</span>
-			</div>
-			{{ end }}
-		</div>
-		{{ end }}
-		<div class="matter">
-			<h1 class="title">{{ .Title }}</h1>
-		</div>
-	</div>
 	<div class="markdown">
-        {{ .Content }}
         {{ if .Param "project" }}
             {{ if .Param "project.page" }}
             <div class="embed">
-                <iframe src='{{ .Param "project.page" }}' width="800" height="600"></iframe>
-            </div>
-            {{ end }}
-            {{ if .Param "project.repo" }}
-            <div class="repo">
-                <a href='{{ .Param "project.repo" }}'>Project site</a>
-            </div>
+				<iframe src='{{ .Param "project.page" }}'
+				frameborder="0" scrolling="no"
+				width="800" height="600"
+				onload="resizeIframe(this)"></iframe>
+			</div>
+			<script>
+				function resizeIframe(obj) {
+				  obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+				  document.getElementById('body').focus();
+				}
+			</script>
             {{ end }}
         {{ end }}
 	</div>
