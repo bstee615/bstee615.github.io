@@ -11,5 +11,6 @@ deploy:
   skip_cleanup: true
   local_dir: public
   github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+  fqdn: benjijang.com
   on:
     branch: master
