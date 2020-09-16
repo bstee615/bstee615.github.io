@@ -1,6 +1,4 @@
 ---
-os: linux
-dist: xenial
 language: minimal
 install:
   - curl -LO https://github.com/gohugoio/hugo/releases/download/v0.75.1/hugo_0.75.1_Linux-64bit.deb
@@ -9,7 +7,7 @@ script:
   - hugo
 deploy:
   provider: pages
-  skip_cleanup: true
+  cleanup: false
   local_dir: public
   github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
   on:
