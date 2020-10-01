@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Ben</title>
+		<link>https://benjijang.com/</link>
+		<description>Recent content on benjijang.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>en-us</language>
+		<lastBuildDate>Tue, 15 Sep 2020 17:03:17 -0500</lastBuildDate>
+		
+		<atom:link href="https://benjijang.com/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Hello,  World!</title>
+			<link>https://benjijang.com/posts/my-first-post/</link>
+			<pubDate>Tue, 15 Sep 2020 17:03:17 -0500</pubDate>
+			
+			<guid>https://benjijang.com/posts/my-first-post/</guid>
+			<description>
+				
+				Thanks for coming to my site. It’s under construction right now, but I hope you come back soon for cool thoughts!
+
+				
+			</description>
+		</item>
+		<item>
+			<title>Pong</title>
+			<link>https://benjijang.com/projects/pong/</link>
+			<pubDate>Fri, 09 Nov 2018 00:00:00 +0000</pubDate>
+			
+			<guid>https://benjijang.com/projects/pong/</guid>
+			<description>
+				
+				 Pong: The age-old game of Pong, from Atari. Repo 
+				
+			</description>
+		</item>
+		<item>
+			<title>Snake</title>
+			<link>https://benjijang.com/projects/snake/</link>
+			<pubDate>Tue, 31 Jul 2018 00:00:00 +0000</pubDate>
+			
+			<guid>https://benjijang.com/projects/snake/</guid>
+			<description>
+				
+				 Snake: a classic game we know and love. Repo 
+				
+			</description>
+		</item>
+		
+	</channel>
+</rss>
