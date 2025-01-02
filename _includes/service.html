@@ -5,7 +5,8 @@
     <div class="recentposts-item">
         <div>
             <div>
-              {{ post.title }}
+              <span class="recentposts-shortname"><span>{{ post.shortname }}</span></span>
+              <span>{{ post.title }}</span>
             </div>
             <div>
               {% include venue_type.html %}

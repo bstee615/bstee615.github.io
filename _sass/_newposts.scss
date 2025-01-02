@@ -15,6 +15,23 @@
         border-right: 1px solid $text-color;
     }
 }
+
+.recentposts-shortname {
+  padding: 5px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none !important;
+  span {
+    padding: 4px 6px;
+    text-align: center;
+    background-color: $info-color;
+    font-weight: normal;
+    border-radius: 8px;
+    color: $text-color;
+    font-size: $type-size-6;
+  }
+}
   
 .recentposts-index {
     margin-right: 12px;
