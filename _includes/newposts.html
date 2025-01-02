@@ -5,7 +5,6 @@
     {% for post in top_k_posts %}
       {% unless post.tags contains "stream" %}
         <div class="recentposts-item">
-          <div><div class="recentposts-index">{{ forloop.index }}.</div></div>
           <div>
               <div>
               <a class="recentposts-clamp" href="{{ root_url }}{{ post.url }}">{{ post.title }}</a>
