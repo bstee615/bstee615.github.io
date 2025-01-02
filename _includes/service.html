@@ -5,10 +5,10 @@
     <div class="recentposts-item">
         <div>
             <div>
-              <span class="venue-type"><span style="background-color: #52adc8;">{{ post.shortname }}</span></span>
               <span>{{ post.title }}</span>
             </div>
             <div>
+              <span class="venue-type"><span style="background-color: #52adc8; color: #fff;">{{ post.shortname }}</span></span>
               {% include venue_type.html %}
               <span class="recentposts-date">{{ post.date | date: "%a, %b %d, %Y" }}</span>
             </div>
