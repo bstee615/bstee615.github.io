@@ -1,9 +1,16 @@
-- title: "FORGE '25 Industry Track PC"
-  date: 2025-04-29
+- title: "AI Foundation Models and Software Engineering Industry Track"
+  shortname: FORGE
+  date: 2025-04-27
   venue-type: "conference-reviewer"
-- title: "TOSEM Reviewer"
+- title: "Transactions on Software Engineering and Methodology"
+  shortname: TOSEM
   date: 2024-12-30
   venue-type: "journal-reviewer"
-- title: "ESE Reviewer"
+- title: "Empirical Software Engineering"
+  shortname: ESE
   date: 2025-01-01
+  venue-type: "journal-reviewer"
+- title: "IEEE Transactions on Information Forensics and Security"
+  shortname: TIFS
+  date: 2023-12-18
   venue-type: "journal-reviewer"
