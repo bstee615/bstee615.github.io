@@ -8,11 +8,7 @@
               {{ service.title }}
             </div>
             <div>
-              {% if service.service-type %}
-              <span class="venue-type">
-                {{ service.service-type | replace: "-", " " | upcase }}
-              </span>
-              {% endif %}
+              {% include venue_type.html %}
               <span class="recentposts-date">{{ service.date | date: "%a, %b %d, %Y" }}</span>
             </div>
         </div>
