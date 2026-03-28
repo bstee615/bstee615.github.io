@@ -1,5 +1,26 @@
+- title: Senior Researcher
+  date: Fall 2024 - Present
+  organization: Microsoft, Developer Division (Code|AI)
+  location: Des Moines, IA (Remote)
+  text: |
+    <ul>
+    <li>Building developer tools for secure software engineering and next-generation agent systems for software engineering.</li>
+    <li>First author, "Closing the Gap: A User Study on the Real-world Usefulness of AI-powered Vulnerability Detection & Repair in the IDE" (<b>accepted ICSE 2025</b>).</li>
+    <li>Co-author, "Saving SWE-Bench: A Benchmark Mutation Approach for Realistic Agent Evaluation" (<b>accepted CAIN 2026</b>).</li>
+    </ul>
+
+- title: Research Intern
+  date: May 2023 - Aug 2024
+  organization: Microsoft
+  location: Remote
+  text: |
+    <ul>
+    <li>Summer 2023: Conducted research on improving large language models such as Codex using reinforcement learning, resulting in "Reinforcement Learning from Automatic Feedback for High-Quality Unit Test Generation" (<b>accepted DeepTest @ ICSE 2025</b>).</li>
+    <li>Summer 2024: Conducted research on AI-powered vulnerability detection and repair in the IDE, contributing to "Closing the Gap" (<b>accepted ICSE 2025</b>).</li>
+    </ul>
+
 - title: Research Assistant
-  date: Aug 2020 - Present
+  date: Aug 2020 - May 2024
   organization: Iowa State University, Program Analysis Lab
   location: Ames, IA
   text: |
@@ -8,21 +29,10 @@
     <li>First author, "Dataflow Analysis-Inspired Deep Learning for Efficient Vulnerability Detection." (<b>accepted ICSE 2024</b>).</li>
     <li>Contributing author, "TRACED: Execution-aware Pre-training for Source Code" (<b>accepted ICSE 2024</b>).</li>
     <li>Contributing author, "Validating static warnings via testing code fragments" (<b>accepted ISSTA 2021</b>; 27% acceptance rate).</li>
-    <li>Conducted novel research resulting in 2 first-author conference papers in submission to ICSE24, one accepted and one presently under review.</li>
     <li>Collaborated with ARiSE lab at Columbia University and CERT lab @ Carnegie-Mellon University.</li>
     <li>Improved experiment iteration time by building tools for static analysis (<a href="https://github.com/bstee615/tree-climber">tree-climber</a>) and dynamic analysis and code generation (<a href="https://github.com/bstee615/pal-tools">pal-tools</a>).</li>
     <li>Enabled collaboration on experiments by acquiring and maintaining bug benchmarks for use in experiments.</li>
     </ul>
-
-- title: Research Intern
-  date: May 2023 - Dec 2023
-  organization: Microsoft
-  location: Remote
-  text: |
-    <ul>
-    <li>Conducted research on improving large language models such as Codex using reinforcement learning.</li>
-    </ul>
-  #   <li>First-author conference paper in submission to ESEC/FSE24.</li>
 
 - title: Software Developer Intern
   date: 2018 - 2021

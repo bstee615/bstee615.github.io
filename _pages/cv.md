@@ -9,7 +9,7 @@ redirect_from:
 
 {% include base_path %}
 
-Ph.D. student seeking machine learning research internship.
+Senior Researcher at Microsoft, working on developer tools for secure software engineering and next-generation agent systems.
 <br>
 Research interests are the intersection of machine learning and software engineering.
 <br>
