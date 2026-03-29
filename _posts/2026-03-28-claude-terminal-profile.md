@@ -12,6 +12,10 @@ Every time I open Claude Code in a new directory I get a workspace trust prompt 
 
 Here's the gist: [Windows Terminal profile for Claude](https://gist.github.com/bstee615/9b43dd9e40f91f0f082f5697968f04b3).
 
+Here's what it looks like:
+
+![Screenshot of Claude terminal quick launcher](/images/screenshot-claude-terminal.png)
+
 You can install it with a PowerShell one-liner:
 
 ```powershell

@@ -37,9 +37,3 @@ Then connect with:
 | `ssh -p 2222 myuser@zap` | Windows PowerShell |
 | `ssh -p 2223 myuser@zap` | Debian bash |
 | `ssh -p 2224 myuser@zap` | Alpine sh |
-
-# How it works
-
-Everything boots automatically. Windows starts Tailscale and sshd as services. Alpine's `wsl.conf` runs a startup script that brings up dockerd and any other services I need. Debian uses systemd. No manual intervention needed after a reboot.
-
-The gist covers the full setup: Tailscale auth, ACL policy, sshd configuration, firewall rules, and the WSL startup scripts. I save the three SSH commands as profiles in Termius for one-tap access from my phone.

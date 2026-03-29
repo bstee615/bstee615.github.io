@@ -9,20 +9,13 @@ author_profile: true
 
 # Benjamin Steenhoek
 
-Ph.D. Student, Iowa State University
+Senior Researcher, [Microsoft Code\|_AI_](https://www.microsoft.com/en-us/research/group/codeai/)
 
 **Current work**:
-* Research Assistant, Iowa State University
-* Research Intern, Microsoft Data & AI
+* GitHub Copilot [Next Edit Suggestions](https://code.visualstudio.com/docs/copilot/ai-powered-suggestions#_next-edit-suggestions)
 
-**Located in**: Des Moines, IA
+**Located in**: Des Moines, IA 🌽
 
-**Work email**: <a href="mailto:benjis@iastate.edu">benjis@iastate.edu</a>
+**Work email**: <a href="mailto:benjis@iastate.edu">bensteenhoek@microsoft.com</a>
 
-**Featured papers:** selected papers relevant to presentation at ICSE. Check them out!
-
-- [DeepDFA: Deep Learning + Dataflow Analysis for Vulnerability Detection](https://dl.acm.org/doi/pdf/10.1145/3597503.3623345)
-- [TRACED: Execution-aware source code pre-training](https://arxiv.org/pdf/2306.07487)
-- [Empirical Study: Deep Learning for Vulnerability Detection](https://arxiv.org/pdf/2212.08109)
-- [Empirical Study: LLMs for Vulnerability Detection](https://arxiv.org/pdf/2403.17218)
-- [RLSQM: Reinforcement Learning for Test Generation](https://arxiv.org/pdf/2310.02368)
+## We are hiring! Please reach out if you're interested.
