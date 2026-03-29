@@ -1,14 +1,14 @@
 - title: PhD Computer Science
-  date: Aug 2019 - May 2024 (expected)
+  date: 2019 - 2024
   organization: Iowa State University, Program Analysis Lab
   location: Ames, IA
   text: |
     <ul>
-    <li>Research interests: deep learning-based vulnerability detection, graph neural networks, ML for SE.</li>
+    <li>Thesis: <a href="/publication/2024-12-19-phddissertation">Understanding and improving deep learning models for vulnerability detection</a>.</li>
     </ul>
 
 - title: MS Computer Science
-  date: Aug 2019 - Dec 2021
+  date: 2019 - 2021
   organization: Iowa State University, Program Analysis Lab
   location: Ames, IA
   text: |

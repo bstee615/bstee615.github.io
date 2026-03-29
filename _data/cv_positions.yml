@@ -15,12 +15,12 @@
   location: Remote
   text: |
     <ul>
-    <li>Summer 2023: Conducted research on improving large language models such as Codex using reinforcement learning, resulting in "Reinforcement Learning from Automatic Feedback for High-Quality Unit Test Generation" (<b>accepted DeepTest @ ICSE 2025</b>).</li>
-    <li>Summer 2024: Conducted research on AI-powered vulnerability detection and repair in the IDE, contributing to "Closing the Gap" (<b>accepted ICSE 2025</b>).</li>
+    <li>Summer 2023: Conducted research on improving large language models such as Codex using reinforcement learning, resulting in <a href="/publication/deepvulguard">"Reinforcement Learning from Automatic Feedback for High-Quality Unit Test Generation", DeepTest @ ICSE 2025</a>.</li>
+    <li>Summer 2024: Conducted research on AI-powered vulnerability detection and repair in the IDE, contributing to <a href="/publication/rlsqm">"Closing the Gap", ICSE 2025</a>.</li>
     </ul>
 
 - title: Research Assistant
-  date: Aug 2020 - May 2024
+  date: 2020 - 2024
   organization: Iowa State University, Program Analysis Lab
   location: Ames, IA
   text: |

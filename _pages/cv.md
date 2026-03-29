@@ -10,10 +10,7 @@ redirect_from:
 {% include base_path %}
 
 Senior Researcher at Microsoft, working on developer tools for secure software engineering and next-generation agent systems.
-<br>
 Research interests are the intersection of machine learning and software engineering.
-<br>
-Experience in deep learning, machine learning, program analysis, software development.
 
 
 # Education
