@@ -11,3 +11,5 @@ comments:
 
 sass:
   style: expanded
+
+safe: false
