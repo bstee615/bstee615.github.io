@@ -1,3 +1,11 @@
+- title: "International Conference on Learning Representations"
+  shortname: ICLR
+  date: 2026-04-24
+  venue-type: "conference-pc"
+- title: "IEEE/ACM International Conference on AI Engineering – Software Engineering for AI"
+  shortname: CAIN
+  date: 2026-04-27
+  venue-type: "conference-pc"
 - title: "AI Foundation Models and Software Engineering Industry Track"
   shortname: FORGE
   date: 2025-04-27
