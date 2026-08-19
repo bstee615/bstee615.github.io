@@ -766,7 +766,7 @@ const pageSlide = {
 
   .header-controls {
     position: relative;
-    gap: 0;
+    gap: 0.15rem;
   }
 
   .wordmark {
@@ -795,7 +795,7 @@ const pageSlide = {
 
   .header-control:hover,
   .header-control:focus-visible {
-    background: transparent;
+    background: color-mix(in oklch, var(--accent) 12%, transparent);
   }
 
   .header-control[hidden] {
@@ -803,23 +803,14 @@ const pageSlide = {
   }
 
   .header-control svg {
-    box-sizing: content-box;
     width: 1.1rem;
     min-width: 1.1rem;
     height: 1.1rem;
-    padding: 0.3rem;
-    border-radius: var(--radius-field);
     fill: none;
     stroke: currentColor;
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-width: 2;
-    transition: background-color 160ms ease;
-  }
-
-  .header-control:hover svg,
-  .header-control:focus-visible svg {
-    background: color-mix(in oklch, var(--accent) 12%, transparent);
   }
 
   .header-control span {
