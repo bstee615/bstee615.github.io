@@ -1,0 +1,29 @@
+---
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+const segments: Array<{ type: "text" | "code"; value: string }> = [];
+const codePattern = /`([^`\n]+)`/g;
+let cursor = 0;
+
+for (const match of text.matchAll(codePattern)) {
+  const index = match.index ?? 0;
+  if (index > cursor) {
+    segments.push({ type: "text", value: text.slice(cursor, index) });
+  }
+  segments.push({ type: "code", value: match[1] });
+  cursor = index + match[0].length;
+}
+
+if (cursor < text.length) {
+  segments.push({ type: "text", value: text.slice(cursor) });
+}
+---
+
+{
+  segments.map((segment) =>
+    segment.type === "code" ? <code>{segment.value}</code> : segment.value,
+  )
+}

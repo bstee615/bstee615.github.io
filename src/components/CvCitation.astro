@@ -1,0 +1,19 @@
+---
+import HighlightedIdentity from "./HighlightedIdentity.astro";
+
+interface Props {
+  citation: string;
+}
+
+const { citation } = Astro.props;
+---
+
+<p><HighlightedIdentity text={citation} /></p>
+
+<style>
+  p {
+    margin: 0.2rem 0 0;
+    color: var(--muted);
+    font-size: 0.84rem;
+  }
+</style>

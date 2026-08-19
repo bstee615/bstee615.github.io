@@ -1,0 +1,26 @@
+---
+import { getCollection } from "astro:content";
+import RedirectLayout from "../../layouts/RedirectLayout.astro";
+import { writingPath } from "../../routes";
+import { legacyPostPath } from "../../utils/posts";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+
+  return posts.flatMap((post) => {
+    const match = legacyPostPath(post)?.match(/^\/stream\/([^/]+)\/?$/);
+    if (!match) return [];
+
+    return [
+      {
+        params: { slug: match[1] },
+        props: { target: writingPath(post.id) },
+      },
+    ];
+  });
+}
+
+const { target } = Astro.props;
+---
+
+<RedirectLayout target={target} />

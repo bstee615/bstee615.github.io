@@ -1,0 +1,223 @@
+---
+import type { PublicationVisual } from "../utils/publications";
+
+interface Props {
+  kind: PublicationVisual;
+  title: string;
+}
+
+const { kind, title } = Astro.props;
+---
+
+<div
+  class:list={["work-visual", `work-visual--${kind}`]}
+  role="img"
+  aria-label={`Concept illustration for ${title}`}
+>
+  {
+    kind === "trace" && (
+      <svg viewBox="0 0 640 400" aria-hidden="true">
+        <path class="trace-line" d="M72 92H190L234 150H362L408 88H560" />
+        <path
+          class="trace-line trace-line--soft"
+          d="M72 280H174L242 220H366L438 294H560"
+        />
+        <circle cx="72" cy="92" r="13" />
+        <circle cx="234" cy="150" r="13" />
+        <circle cx="408" cy="88" r="13" />
+        <circle cx="174" cy="280" r="13" />
+        <circle cx="366" cy="220" r="13" />
+        <rect x="254" y="164" width="132" height="48" rx="12" />
+        <text x="320" y="194" text-anchor="middle">
+          semantics
+        </text>
+      </svg>
+    )
+  }
+  {
+    kind === "mutation" && (
+      <svg viewBox="0 0 640 400" aria-hidden="true">
+        <rect class="panel" x="54" y="70" width="214" height="260" rx="18" />
+        <rect
+          class="panel panel--strong"
+          x="372"
+          y="70"
+          width="214"
+          height="260"
+          rx="18"
+        />
+        <path
+          class="copy-line"
+          d="M98 125H226M98 166H210M98 207H232M98 248H188"
+        />
+        <path class="copy-line" d="M416 125H544M416 166H512M416 207H548" />
+        <path class="arrow" d="M286 200H346M326 178L348 200L326 222" />
+        <circle cx="460" cy="270" r="24" />
+        <path class="check" d="M448 270L458 280L476 258" />
+      </svg>
+    )
+  }
+  {
+    kind === "feedback" && (
+      <svg viewBox="0 0 640 400" aria-hidden="true">
+        <path
+          class="loop"
+          d="M188 268C108 198 158 84 274 78C392 72 478 138 464 238"
+        />
+        <path class="arrow" d="M438 214L465 242L491 214" />
+        <rect class="panel" x="212" y="136" width="216" height="126" rx="22" />
+        <path class="copy-line" d="M254 178H384M254 216H346" />
+        <circle cx="172" cy="286" r="44" />
+        <text x="172" y="294" text-anchor="middle">
+          +21%
+        </text>
+      </svg>
+    )
+  }
+  {
+    kind === "dataflow" && (
+      <svg viewBox="0 0 640 400" aria-hidden="true">
+        <path
+          class="edge"
+          d="M128 200L248 104M128 200L248 296M248 104L390 144M248 296L390 256M390 144L518 200M390 256L518 200"
+        />
+        <circle cx="128" cy="200" r="38" />
+        <circle cx="248" cy="104" r="30" />
+        <circle cx="248" cy="296" r="30" />
+        <circle cx="390" cy="144" r="34" />
+        <circle cx="390" cy="256" r="34" />
+        <circle cx="518" cy="200" r="42" />
+      </svg>
+    )
+  }
+</div>
+
+<style>
+  .work-visual {
+    --visual-ink: var(--color-primary);
+    position: relative;
+    min-height: 220px;
+    overflow: hidden;
+    border-radius: 1.4rem;
+    background: var(--visual-bg, var(--color-base-200));
+  }
+
+  .work-visual::after {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(
+      color-mix(in oklch, var(--color-base-content) 16%, transparent) 0.8px,
+      transparent 0.8px
+    );
+    background-size: 16px 16px;
+    content: "";
+    mask-image: linear-gradient(to bottom right, black, transparent 72%);
+  }
+
+  .work-visual--trace {
+    --visual-bg: color-mix(
+      in oklch,
+      var(--color-primary) 20%,
+      var(--color-base-100)
+    );
+    --visual-ink: color-mix(
+      in oklch,
+      var(--color-primary) 84%,
+      var(--color-base-content)
+    );
+  }
+
+  .work-visual--mutation {
+    --visual-bg: color-mix(
+      in srgb,
+      var(--color-secondary) 30%,
+      var(--color-base-100)
+    );
+    --visual-ink: color-mix(
+      in srgb,
+      var(--color-secondary) 68%,
+      var(--color-base-content)
+    );
+  }
+
+  .work-visual--feedback {
+    --visual-bg: color-mix(
+      in srgb,
+      var(--color-secondary) 20%,
+      var(--color-base-100)
+    );
+    --visual-ink: color-mix(
+      in srgb,
+      var(--color-secondary) 68%,
+      var(--color-base-content)
+    );
+  }
+
+  .work-visual--dataflow {
+    --visual-bg: color-mix(
+      in oklch,
+      var(--color-accent) 24%,
+      var(--color-base-100)
+    );
+    --visual-ink: color-mix(
+      in oklch,
+      var(--color-accent) 78%,
+      var(--color-base-content)
+    );
+  }
+
+  svg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    color: var(--visual-ink);
+  }
+
+  path,
+  circle,
+  rect {
+    vector-effect: non-scaling-stroke;
+  }
+
+  circle,
+  rect {
+    fill: color-mix(in oklch, var(--visual-ink) 12%, var(--color-base-100));
+    stroke: currentColor;
+    stroke-width: 4;
+  }
+
+  path {
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 5;
+  }
+
+  .trace-line--soft {
+    opacity: 0.58;
+  }
+
+  .panel {
+    fill: color-mix(in oklch, var(--color-base-100) 64%, transparent);
+  }
+
+  .panel--strong {
+    fill: color-mix(in oklch, var(--color-base-100) 84%, transparent);
+  }
+
+  .copy-line {
+    stroke-width: 7;
+  }
+
+  .edge {
+    opacity: 0.65;
+  }
+
+  text {
+    fill: currentColor;
+    font: 700 20px var(--font-sans);
+  }
+</style>

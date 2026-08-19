@@ -1,0 +1,372 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CvCitation from "../../components/CvCitation.astro";
+import cv, { type CvEntry } from "../../data/cv";
+import { organizations, siteMetadata } from "../../data/site";
+import { publicationPath } from "../../routes";
+import { cvPublicationVenueTypes } from "../../utils/publications";
+
+const publications = (await getCollection("publications"))
+  .filter(
+    ({ data }) =>
+      cvPublicationVenueTypes.has(data.venueType) && !data.excludeFromCv,
+  )
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const selectedPublications = publications.filter(({ data }) => data.selected);
+const morePublications = publications.filter(({ data }) => !data.selected);
+const withOrganizations = (entries: CvEntry[]) =>
+  entries.map((entry) => ({
+    ...entry,
+    organization: organizations[entry.organizationId],
+  }));
+const positions = withOrganizations(cv.positions);
+const education = withOrganizations(cv.education);
+const primaryPositions = positions.filter((position) => !position.more);
+const morePositions = positions.filter((position) => position.more);
+---
+
+<BaseLayout title="CV" description="Curriculum vitae for Benjamin Steenhoek.">
+  <article class="cv">
+    <header class="cv-header">
+      <h1>{siteMetadata.name}</h1>
+      <p>Building next-generation coding and agent systems.</p>
+    </header>
+
+    <section>
+      <h2>Professional Experience</h2>
+      <div class="cv-entries">
+        {
+          primaryPositions.map((position) => (
+            <article class="cv-entry">
+              <div class="cv-entry__heading">
+                <h3>{position.title}</h3>
+                {position.date && <time>{position.date}</time>}
+              </div>
+              <div class="cv-entry__meta">
+                <span>
+                  <a href={position.organization.url}>
+                    {position.organization.name}
+                  </a>
+                </span>
+                <span>{position.location}</span>
+              </div>
+              <div class="cv-details" set:html={position.bodyHtml} />
+            </article>
+          ))
+        }
+      </div>
+      <details>
+        <summary>More professional experience</summary>
+        <div class="details-content">
+          <div class="details-content__inner">
+            <div class="cv-entries">
+              {
+                morePositions.map((position) => (
+                  <article class="cv-entry">
+                    <div class="cv-entry__heading">
+                      <h3>{position.title}</h3>
+                      {position.date && <time>{position.date}</time>}
+                    </div>
+                    <div class="cv-entry__meta">
+                      <span>
+                        <a href={position.organization.url}>
+                          {position.organization.name}
+                        </a>
+                      </span>
+                      <span>{position.location}</span>
+                    </div>
+                    <div class="cv-details" set:html={position.bodyHtml} />
+                  </article>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <div class="cv-entries">
+        {
+          education.map((position) => (
+            <article class="cv-entry">
+              <div class="cv-entry__heading">
+                <h3>{position.title}</h3>
+                <time>{position.date}</time>
+              </div>
+              <div class="cv-entry__meta">
+                <span>
+                  <a href={position.organization.url}>
+                    {position.organization.name}
+                  </a>
+                </span>
+                <span>{position.location}</span>
+              </div>
+              <div class="cv-details" set:html={position.bodyHtml} />
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section>
+      <h2>Selected Publications</h2>
+      <ol class="cv-publications">
+        {
+          selectedPublications.map((publication) => (
+            <li>
+              <h3>
+                <a href={publicationPath(publication.id)}>
+                  {publication.data.title}
+                </a>
+                <span class="publication-links">
+                  {publication.data.links.map((link) => (
+                    <a class="btn btn-secondary btn-xs" href={link.url}>
+                      {link.label}
+                    </a>
+                  ))}
+                </span>
+              </h3>
+              <CvCitation citation={publication.data.citation} />
+            </li>
+          ))
+        }
+      </ol>
+      <details>
+        <summary>More publications</summary>
+        <div class="details-content">
+          <div class="details-content__inner">
+            <ol class="cv-publications">
+              {
+                morePublications.map((publication) => (
+                  <li>
+                    <h3>
+                      <a href={publicationPath(publication.id)}>
+                        {publication.data.title}
+                      </a>
+                      <span class="publication-links">
+                        {publication.data.links.map((link) => (
+                          <a class="btn btn-secondary btn-xs" href={link.url}>
+                            {link.label}
+                          </a>
+                        ))}
+                      </span>
+                    </h3>
+                    <CvCitation citation={publication.data.citation} />
+                  </li>
+                ))
+              }
+            </ol>
+          </div>
+        </div>
+      </details>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .cv {
+    width: var(--page);
+    margin: 0 auto;
+    padding: var(--section-padding) 0;
+    font-size: 0.94rem;
+    line-height: 1.5;
+  }
+
+  .cv-header {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .cv-header h1 {
+    margin: 0 0 0.5rem;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    letter-spacing: -0.03em;
+  }
+
+  .cv-header p {
+    max-width: 52rem;
+    margin: 0;
+    color: var(--muted);
+    font-size: 1rem;
+  }
+
+  .cv section {
+    margin-top: var(--section-padding);
+  }
+
+  .cv section > h2 {
+    margin: 0 0 1rem;
+    padding-bottom: 0.35rem;
+    font-size: 1.2rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .cv-entries {
+    display: grid;
+    gap: 1.4rem;
+  }
+
+  .cv-entry__heading,
+  .cv-entry__meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .cv-entry h3,
+  .cv-publications h3 {
+    margin: 0;
+    font-size: 1rem;
+    letter-spacing: 0;
+  }
+
+  .cv-entry time,
+  .cv-entry__meta span:last-child {
+    flex: 0 0 auto;
+    text-align: right;
+  }
+
+  .cv-entry__meta {
+    margin-top: 0.15rem;
+    color: var(--muted);
+    font-size: 0.86rem;
+  }
+
+  .cv :global(.cv-details ul),
+  .cv-publications {
+    margin: 0.55rem 0 0;
+    padding-left: 1.2rem;
+  }
+
+  .cv :global(.cv-details ul) {
+    list-style: disc;
+    padding-left: 1.35rem;
+  }
+
+  .cv :global(.cv-details li),
+  .cv-publications li {
+    margin: 0.3rem 0;
+  }
+
+  details {
+    margin-top: 1rem;
+  }
+
+  summary {
+    display: flex;
+    min-height: 2.75rem;
+    align-items: center;
+    cursor: pointer;
+    color: var(--accent);
+    font-weight: 800;
+    touch-action: manipulation;
+  }
+
+  details[open] > .details-content > .details-content__inner {
+    animation: details-reveal 180ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .details-content :where(.cv-entries, .cv-publications) {
+    margin-top: 1rem;
+  }
+
+  @keyframes details-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(-0.35rem);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .cv-publications h3 {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.55rem;
+    font-weight: 750;
+    line-height: 1.35;
+  }
+
+  .cv-publications h3 > a:first-child {
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .publication-links {
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 0.45rem;
+  }
+
+  .publication-links a {
+    font-size: 0.68rem;
+    font-weight: 550;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 600px) {
+    .cv-entry__heading,
+    .cv-entry__meta {
+      display: block;
+    }
+
+    .cv-entry time,
+    .cv-entry__meta span {
+      display: block;
+      text-align: left;
+    }
+
+    .cv-publications h3 {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .publication-links {
+      flex-wrap: wrap;
+    }
+
+    .publication-links .btn {
+      --btn-height: 2.5rem;
+    }
+  }
+
+  @media print {
+    .cv {
+      width: 100%;
+      padding: 0;
+      color: #000;
+      font-size: 9pt;
+    }
+
+    details {
+      display: block;
+    }
+
+    details > summary {
+      display: none;
+    }
+
+    .cv-entry,
+    .cv-publications li {
+      break-inside: avoid;
+    }
+
+    .cv section > h2 {
+      break-after: avoid;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    details[open] > .details-content > .details-content__inner {
+      animation: none;
+    }
+  }
+</style>

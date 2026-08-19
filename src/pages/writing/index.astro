@@ -1,0 +1,107 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import InlineMarkdown from "../../components/InlineMarkdown.astro";
+import { writingPath } from "../../routes";
+import { formatDate } from "../../utils/dates";
+import { postKindLabel } from "../../utils/posts";
+
+const posts = (await getCollection("posts")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<BaseLayout title="Blog" description="Notes and essays by Benjamin Steenhoek.">
+  <section class="writing">
+    <header>
+      <h1>Blog</h1>
+    </header>
+    <ol>
+      {
+        posts.map((post) => (
+          <li>
+            <time datetime={post.data.date.toISOString()}>
+              {formatDate(post.data.date, "list")}
+              <span>{postKindLabel(post.data.kind)}</span>
+            </time>
+            <div>
+              <h2>
+                <a href={writingPath(post.id)}>
+                  <InlineMarkdown text={post.data.title} />
+                </a>
+              </h2>
+              {post.data.description && <p>{post.data.description}</p>}
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+</BaseLayout>
+
+<style>
+  .writing {
+    width: var(--page);
+    margin: 0 auto;
+    padding: var(--section-padding) 0;
+  }
+
+  header {
+    margin-bottom: 2rem;
+  }
+
+  header h1 {
+    margin: 0;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+  }
+
+  .writing > ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .writing > ol > li {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+  }
+
+  time {
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+
+  time span {
+    display: block;
+    margin-top: 0.25rem;
+    color: var(--accent);
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    margin-bottom: 0.6rem;
+    font-size: clamp(1.65rem, 4vw, 2.4rem);
+  }
+
+  h2 a {
+    text-decoration: none;
+  }
+
+  li p {
+    display: -webkit-box;
+    overflow: hidden;
+    color: var(--muted);
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  @media (max-width: 600px) {
+    .writing > ol > li {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+  }
+</style>

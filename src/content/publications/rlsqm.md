@@ -1,0 +1,29 @@
+---
+title: Reinforcement Learning from Automatic Feedback for High-Quality Unit Test Generation
+summary: We propose a novel technique called Reinforcement Learning from Static Quality Metrics (RLSQM).
+date: 2025-04-27
+venue: DeepTest (ICSE Workshop)
+venueType: workshop-paper
+authors:
+  - Benjamin Steenhoek
+  - Michele Tufano
+  - Neel Sundaresan
+  - Alexey Svyatkovskiy
+citation: >-
+  Benjamin Steenhoek, Michele Tufano, Neel Sundaresan, and Alexey Svyatkovskiy. 2025. Reinforcement Learning from
+  Automatic Feedback for High-Quality Unit Test Generation. In 2025 Sixth International Workshop on Deep Learning for
+  Testing and Testing for Deep Learning (DeepTest ’25), April 27–May 3, 2025, Ottawa, Canada.
+links:
+  - label: Paper
+    url: https://arxiv.org/abs/2412.14308
+selected: true
+visual: feedback
+---
+
+We propose a novel technique called Reinforcement Learning from Static Quality Metrics (RLSQM).
+
+- We show that LLMs can generate undesirable test smells. Thus, we utilize Proximal Policy Optimization (PPO) to train models for optimizing a single quality metric at a time and amalgamate these rewards into a unified reward model aimed at capturing different best practices and quality aspects of tests.
+- We provide insights into how reliably utilize RL to improve test generation quality and into the effects of various training strategies.
+- The RL-optimized model consistently generated high-quality test cases compared to the base LLM, improving the model by up to 21%, and successfully generates nearly 100% syntactically correct code.
+- RLSQM also outperformed GPT-4 on four out of seven metrics.
+- Our data are available at [this https URL](https://figshare.com/s/ded476c8d4c221222849).

@@ -1,0 +1,31 @@
+---
+title: "To Err is Machine: Vulnerability Detection Challenges LLM Reasoning"
+summary: >-
+  We present a challenging code reasoning task: vulnerability detection. We evaluated the vulnerability detection
+  capabilities of SOTA LLMs. We systematically searched for the best-performing prompts and analyzed their reasoning.
+date: 2024-12-02
+venue: ArXiv
+venueType: conference-paper
+authors:
+  - Benjamin Steenhoek
+  - Md Mahbubur Rahman
+  - Monoshi Kumar Roy
+  - Mirza Sanjida Alam
+  - Hengbo Tong
+  - Swarna Das
+  - Earl T. Barr
+  - Wei Le
+citation: >-
+  Benjamin Steenhoek, Md Mahbubur Rahman, Monoshi Kumar Roy, Mirza Sanjida Alam, Hengbo Tong, Swarna Das, Earl T. Barr,
+  and Wei Le. 2024. To Err is Machine: Vulnerability Detection Challenges LLM Reasoning. ArXiv.
+links:
+  - label: Paper
+    url: https://arxiv.org/pdf/2403.17218
+---
+
+In this paper, we present a challenging code reasoning task: vulnerability detection. Large Language Models (LLMs) have shown promising results in natural-language and math reasoning, but state-of-the-art (SOTA) models reported only 54.5% Balanced Accuracy in our vulnerability detection evaluation, even those models pre-trained on large amounts of source code.
+
+- We analyzed LLM responses and show that the models struggle to reason about the code semantics relevant to identifying vulnerabilities.
+- We explored prominent models and training settings to understand their effects on vulnerability detection performance — including better prompts, larger models, more pre-training data, and fine-tuning — but none led to significant improvements.
+
+Our results suggest that new models, new training methods, or more execution-specific pretraining data may be needed to conquer vulnerability detection. We speculate that auto-regressive pre-training on source code may not effectively extract code semantics, especially on the current pretraining mixtures, in which execution data is scarce.

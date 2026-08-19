@@ -1,0 +1,142 @@
+name: Site
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  quality:
+    name: Lint and build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint and validate content
+        run: npm run lint
+
+      - name: Build site
+        run: npm run build
+
+      - name: Upload built site
+        uses: actions/upload-artifact@v7
+        with:
+          name: site-dist
+          path: dist
+          if-no-files-found: error
+          retention-days: 1
+
+  frontend:
+    name: Frontend tests
+    if: ${{ false }} # Temporarily disabled because hosted runs are taking too long.
+    needs: quality
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Download built site
+        uses: actions/download-artifact@v8
+        with:
+          name: site-dist
+          path: dist
+
+      - name: Cache Chromium
+        id: playwright-cache
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Chromium and system dependencies
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
+
+      - name: Install Chromium system dependencies
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
+
+      - name: Run frontend tests
+        run: npm run test:e2e
+
+      - name: Upload frontend test report
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-report
+          path: |
+            playwright-report
+            test-results
+          if-no-files-found: ignore
+          retention-days: 7
+
+  deploy:
+    name: Deploy GitHub Pages
+    if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+    needs: quality
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: github-pages
+      cancel-in-progress: false
+    steps:
+      - name: Download built site
+        uses: actions/download-artifact@v8
+        with:
+          name: site-dist
+          path: dist
+
+      - name: Select GitHub Actions as the Pages source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          build_type="$(gh api "repos/${{ github.repository }}/pages" --jq .build_type 2>/dev/null || true)"
+          if [ "$build_type" = "legacy" ]; then
+            gh api --method PUT "repos/${{ github.repository }}/pages" -f build_type=workflow
+          fi
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v6
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
