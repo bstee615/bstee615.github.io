@@ -5,7 +5,7 @@
   text: |
     <ul>
     <li>Led training, evaluation, and rollout of a customizable <a href="https://code.visualstudio.com/docs/editing/ai-powered-suggestions">GitHub Copilot Inline Suggestions model</a>, addressing 10+ community issues and increasing accepted suggestions by 10%.</li>
-    <li>Drove the core science development and release of an internal agent evaluation & analysis platform, collaborating across teams to scale a greenfield prototype to 1M+ monthly benchmark executions that now serves as the primary evaluation infrastructure for GitHub Copilot's flagship agents: <a href="https://code.visualstudio.com/docs/agents/overview">VS Code Agent</a>, <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent">Copilot Cloud Agent</a>, and <a href="https://github.com/features/copilot/cli">Copilot CLI</a>, plus many others.</li>
+    <li>Drove the core science development and release of an internal agent evaluation & analysis platform, collaborating across teams to scale a greenfield prototype to 1M+ monthly benchmark executions that now serves as the primary evaluation infrastructure for GitHub Copilot's flagship coding agents: <a href="https://code.visualstudio.com/docs/agents/overview">VS Code Agent</a>, <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent">Copilot Cloud Agent</a>, and <a href="https://github.com/features/copilot/cli">Copilot CLI</a>, plus many others.</li>
     </ul>
 
 - title: Research Intern
