@@ -5,11 +5,17 @@
     <div class="recentposts-item">
         <div style="display: flex; flex-direction: column; justify-content: space-between;">
             <div>
-              <span>{{ post.title }}</span>
+              {% if post.url %}
+                <a href="{{ post.url }}">{{ post.title }}</a>
+              {% else %}
+                <span>{{ post.title }}</span>
+              {% endif %}
             </div>
             <div>
               <div>
+                {% if post.url %}<a href="{{ post.url }}">{% endif %}
                 <span class="venue-type"><span style="background-color: #52adc8; color: #fff;">{{ post.shortname }}</span></span>
+                {% if post.url %}</a>{% endif %}
                 {% include venue_type.html %}
               </div>
               <div>

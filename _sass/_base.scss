@@ -349,3 +349,26 @@ b, i, strong, em, blockquote, p, q, span, figure, img, h1, h2, header, input, a,
 .spaced-out div {
   margin-top: auto;
 }
+
+.more-experience,
+.more-publications {
+  margin: 1.5em 0;
+  padding: 0.75em 1em;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+}
+
+.more-experience summary,
+.more-publications summary {
+  cursor: pointer;
+  font-family: $sans-serif-narrow;
+  font-size: $type-size-5;
+  font-weight: bold;
+}
+
+.publication-links {
+  margin-left: 0.5em;
+  white-space: nowrap;
+  font-size: $type-size-6;
+  font-weight: normal;
+}

@@ -33,6 +33,11 @@
         <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
       {% endif %}
       {% include venue_type.html %}
+      {% if post.paperurl %}
+        <span class="publication-links">
+          <a href="{{ post.paperurl }}">PDF</a>{% if post.codeurl %}<span aria-hidden="true"> · </span><a href="{{ post.codeurl }}">Code</a>{% endif %}
+        </span>
+      {% endif %}
     </h2>
     
     {% if post.read_time %}
@@ -53,12 +58,9 @@
     <p class="archive__item-excerpt" itemprop="description"><p>{{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}<strong><a href="{{ base_path }}{{ post.url }}" rel="permalink"> Read more</a></strong></p></p>
     {% endif %}
     
-    {% if post.citation and post.paperurl %}
-      <p>Recommended citation: {{ post.citation }} <a href="{{ post.paperurl | absolute_url }}"><u>{{ post.paperurl | absolute_url }}</u></a></p>
-    {% elsif post.citation %}
-      <p>Recommended citation: {{ post.citation }} </p>
-    {% elsif post.paperurl %}
-      <p>Download <a href=" {{ post.paperurl | absolute_url }} "><u>here</u></a></p>
+    {% assign formatted_citation = post.citation | replace: "Benjamin Steenhoek", "<strong>Benjamin Steenhoek</strong>" | replace: "Steenhoek, Benjamin", "<strong>Steenhoek, Benjamin</strong>" | replace: "Steenhoek, B.", "<strong>Steenhoek, B.</strong>" %}
+    {% if post.citation %}
+      <p>Recommended citation: {{ formatted_citation }} </p>
     {% endif %}
 
   </article>

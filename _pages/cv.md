@@ -9,9 +9,24 @@ redirect_from:
 
 {% include base_path %}
 
-Senior Researcher at Microsoft, working on developer tools for secure software engineering and next-generation agent systems.
-Research interests are the intersection of machine learning and software engineering.
+Senior Researcher at [Microsoft Code\|AI](https://www.microsoft.com/en-us/research/group/codeai/), working on developer tools for secure software engineering and next-generation agent systems.
 
+
+# Professional Experience
+{% for position in site.data.cv_positions %}
+  {% unless position.more %}
+  {% include cv_position.html %}
+  {% endunless %}
+{% endfor %}
+
+<details class="more-experience">
+  <summary>More professional experience</summary>
+  {% for position in site.data.cv_positions %}
+    {% if position.more %}
+      {% include cv_position.html %}
+    {% endif %}
+  {% endfor %}
+</details>
 
 # Education
 {% for position in site.data.cv_education %}
@@ -19,21 +34,17 @@ Research interests are the intersection of machine learning and software enginee
 {% endfor %}
 
 
-# Professional Experience
-{% for position in site.data.cv_positions %}
-  {% include cv_position.html %}
-{% endfor %}
-
-
-# Publications
+# Selected publications
 <ul>
-{% for post in site.publications reversed %}
-  {% assign cv_venues = "conference-paper,workshop-paper,preprint,thesis,dissertation,poster" | split: "," %}
-  {% if cv_venues contains post.venue-type %}
-    {% include archive-single-cv.html %}
-  {% endif %}
-{% endfor %}
+{% include publication-list.html selection="selected" layout="cv" %}
 </ul>
+
+<details class="more-publications">
+  <summary>More publications</summary>
+  <ul>
+  {% include publication-list.html selection="more" layout="cv" %}
+  </ul>
+</details>
 
 
 # My Projects

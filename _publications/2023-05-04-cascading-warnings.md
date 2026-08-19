@@ -7,6 +7,7 @@ date: 2023-05-04
 venue: 'ArXiv'
 venue-type: preprint
 paperurl: 'https://doi.org/10.48550/arXiv.2305.02515'
+codeurl: 'https://github.com/iowastateuniversity-programanalysis/hydrogen'
 citation: 'Guo, X., Joshy, A. K., Steenhoek, B., Le, W., & Flynn, L. (2023). A Study of Static Warning Cascading Tools (Experience Paper). ArXiv.'
 ---
 
