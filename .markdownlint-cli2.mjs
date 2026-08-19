@@ -15,5 +15,12 @@ export default {
     "first-line-h1": false,
     "single-title": false,
   },
-  globs: ["**/*.md", "!node_modules/**", "!dist/**", "!.astro/**"],
+  globs: [
+    "**/*.md",
+    "!node_modules/**",
+    "!dist/**",
+    "!.astro/**",
+    "!playwright-report/**",
+    "!test-results/**",
+  ],
 };

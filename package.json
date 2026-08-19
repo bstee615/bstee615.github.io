@@ -5,16 +5,19 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "check": "npm run lint && npm run build",
+    "check": "npm run lint && npm run build && npm run test:e2e",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "import:gist": "node scripts/import-gist.mjs",
     "lint": "npm run format:check && npm run lint:code && npm run lint:markdown",
     "lint:code": "eslint . && astro check",
     "lint:markdown": "markdownlint-cli2",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "test": "npm run build && npm run test:e2e",
+    "test:e2e": "playwright test"
   },
   "prettier": {
+    "endOfLine": "auto",
     "plugins": [
       "prettier-plugin-astro"
     ],
@@ -37,6 +40,8 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^22.20.1",
     "eslint": "^10.8.1",
     "eslint-plugin-astro": "^1.7.0",
     "globals": "^17.11.0",
