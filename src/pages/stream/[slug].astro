@@ -28,8 +28,5 @@ const { target } = Astro.props;
   </head>
   <body>
     <p>Redirecting to <a href={target}>{target}</a>.</p>
-    <script is:inline define:vars={{ target }}>
-      window.location.replace(target);
-    </script>
   </body>
 </html>

@@ -125,9 +125,12 @@ const { Content } = await render(post);
   }
 
   .body :global(table) {
+    display: block;
     width: 100%;
+    max-width: 100%;
     margin: 1.75rem 0;
-    overflow: hidden;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
     border: 1px solid var(--line);
     border-collapse: separate;
     border-radius: var(--radius-field);
@@ -154,5 +157,20 @@ const { Content } = await render(post);
   .body :global(th + th),
   .body :global(td + td) {
     border-left: 1px solid var(--line);
+  }
+
+  @media (max-width: 600px) {
+    .body {
+      font-size: 1.08rem;
+    }
+
+    .body :global(th),
+    .body :global(td) {
+      padding: 0.6rem 0.75rem;
+    }
+
+    .body :global(.copy-code-button) {
+      --btn-height: 2.5rem;
+    }
   }
 </style>

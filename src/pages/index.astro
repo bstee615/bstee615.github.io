@@ -311,10 +311,11 @@ const publicationsByYear = Array.from(
     scrollbar-color: var(--muted) transparent;
     scrollbar-gutter: stable;
     scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
   }
 
   .activity-scroll > li {
-    height: var(--activity-row-height);
+    min-height: var(--activity-row-height);
     box-sizing: border-box;
   }
 
@@ -552,6 +553,10 @@ const publicationsByYear = Array.from(
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
+    }
+
+    .publication-row__links .btn {
+      min-height: 2.75rem;
     }
   }
 

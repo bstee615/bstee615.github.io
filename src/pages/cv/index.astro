@@ -52,7 +52,7 @@ const highlightName = (citation: string) =>
           </article>
         ))}
       </div>
-      <details data-animated-details>
+      <details>
         <summary>More professional experience</summary>
         <div class="details-content">
           <div class="details-content__inner">
@@ -112,7 +112,7 @@ const highlightName = (citation: string) =>
           </li>
         ))}
       </ol>
-      <details data-animated-details>
+      <details>
         <summary>More publications</summary>
         <div class="details-content">
           <div class="details-content__inner">
@@ -230,42 +230,31 @@ const highlightName = (citation: string) =>
   }
 
   summary {
+    display: flex;
+    min-height: 2.75rem;
+    align-items: center;
     cursor: pointer;
     color: var(--accent);
     font-weight: 800;
+    touch-action: manipulation;
   }
 
-  .details-content {
-    display: grid;
-    grid-template-rows: 0fr;
-    opacity: 0;
-    transition:
-      grid-template-rows 320ms cubic-bezier(0.22, 1, 0.36, 1),
-      opacity 200ms ease;
-  }
-
-  details.is-open > .details-content {
-    grid-template-rows: 1fr;
-    opacity: 1;
-  }
-
-  details.is-closing > .details-content {
-    grid-template-rows: 0fr;
-    opacity: 0;
-  }
-
-  .details-content__inner {
-    min-height: 0;
-    overflow: hidden;
+  details[open] > .details-content > .details-content__inner {
+    animation: details-reveal 180ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .details-content :where(.cv-entries, .cv-publications) {
     margin-top: 1rem;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .details-content {
-      transition: none;
+  @keyframes details-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(-0.35rem);
+    }
+    to {
+      opacity: 1;
+      transform: none;
     }
   }
 
@@ -317,6 +306,19 @@ const highlightName = (citation: string) =>
       display: block;
       text-align: left;
     }
+
+    .cv-publications h3 {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .publication-links {
+      flex-wrap: wrap;
+    }
+
+    .publication-links .btn {
+      --btn-height: 2.5rem;
+    }
   }
 
   @media print {
@@ -344,57 +346,10 @@ const highlightName = (citation: string) =>
       break-after: avoid;
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    details[open] > .details-content > .details-content__inner {
+      animation: none;
+    }
+  }
 </style>
-
-<script is:inline>
-  document.querySelectorAll("details[data-animated-details]").forEach((detail) => {
-    const summary = detail.querySelector("summary");
-    const content = detail.querySelector(".details-content");
-    if (!summary || !content) return;
-
-    let closeTimer;
-    if (detail.open) detail.classList.add("is-open");
-
-    summary.addEventListener("click", (event) => {
-      event.preventDefault();
-      if (detail.classList.contains("is-closing")) {
-        window.clearTimeout(closeTimer);
-        detail.classList.remove("is-closing");
-        detail.classList.add("is-open");
-        return;
-      }
-
-      if (!detail.open) {
-        detail.open = true;
-        content.getBoundingClientRect();
-        window.requestAnimationFrame(() => detail.classList.add("is-open"));
-        return;
-      }
-
-      detail.classList.remove("is-open");
-      detail.classList.add("is-closing");
-      closeTimer = window.setTimeout(() => {
-        detail.open = false;
-        detail.classList.remove("is-closing");
-      }, 320);
-    });
-  });
-</script>
-
-<script>
-  let previouslyOpen = new WeakSet();
-
-  window.addEventListener("beforeprint", () => {
-    previouslyOpen = new WeakSet();
-    document.querySelectorAll("details").forEach((detail) => {
-      if (detail.open) previouslyOpen.add(detail);
-      detail.open = true;
-    });
-  });
-
-  window.addEventListener("afterprint", () => {
-    document.querySelectorAll("details").forEach((detail) => {
-      if (!previouslyOpen.has(detail)) detail.open = false;
-    });
-  });
-</script>

@@ -142,309 +142,7 @@ const pageSlide = {
       <span>My opinions are my own.</span>
       <span>Powered by <a href="https://astro.build/">Astro</a> and <a href="https://pages.github.com/">GitHub Pages</a>.</span>
     </footer>
-    <script is:inline>
-      const themeToggle = document.querySelector("#theme-toggle");
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
-      const getSavedTheme = () => {
-        const value = document.cookie
-          .split("; ")
-          .find((cookie) => cookie.startsWith("site-theme="))
-          ?.split("=")[1];
-        return value === "pastel-dark" || value === "pastel-light"
-          ? value
-          : undefined;
-      };
-      const applyThemeLabel = () => {
-        const isDark = document.documentElement.dataset.theme === "pastel-dark";
-        themeToggle?.setAttribute("aria-label", `Switch to ${isDark ? "light" : "dark"} mode`);
-      };
-      const applySystemTheme = () => {
-        if (getSavedTheme()) return;
-
-        document.documentElement.dataset.theme = systemTheme.matches
-          ? "pastel-dark"
-          : "pastel-light";
-        applyThemeLabel();
-      };
-
-      window.siteThemePreferenceCleanup?.();
-      systemTheme.addEventListener("change", applySystemTheme);
-      window.siteThemePreferenceCleanup = () => {
-        systemTheme.removeEventListener("change", applySystemTheme);
-      };
-      applySystemTheme();
-      applyThemeLabel();
-      if (themeToggle) themeToggle.onclick = () => {
-        const nextTheme = document.documentElement.dataset.theme === "pastel-dark"
-          ? "pastel-light"
-          : "pastel-dark";
-        document.documentElement.dataset.theme = nextTheme;
-        const secureCookie = window.location.protocol === "https:" ? "; Secure" : "";
-        document.cookie = `site-theme=${nextTheme}; Path=/; Max-Age=31536000; SameSite=Lax${secureCookie}`;
-        applyThemeLabel();
-      };
-
-      const transitionPageOrder = new Map([
-        ["/", 0],
-        ["/cv/", 1],
-        ["/writing/", 2],
-      ]);
-      const isDetailPage = (pathname) =>
-        /^\/(?:publication|writing)\/[^/]+\/?$/.test(pathname);
-      const isMainPage = (pathname) =>
-        transitionPageOrder.has(pathname) || pathname === "/publications/";
-      let transitionObserver;
-      let pendingDetailBackTarget;
-
-      const pageLabel = () => {
-        const label = document.title.replace(/ · Benjamin Steenhoek$/, "");
-        return label === "Benjamin Steenhoek" ? "Home" : label;
-      };
-
-      const saveCurrentScrollPosition = () => {
-        history.replaceState(
-          {
-            ...(history.state ?? {}),
-            scrollX: window.scrollX,
-            scrollY: window.scrollY,
-          },
-          "",
-        );
-      };
-
-      const restoreCurrentScrollPosition = () => {
-        const { scrollX, scrollY } = history.state ?? {};
-        if (!Number.isFinite(scrollX) || !Number.isFinite(scrollY)) return;
-
-        const previousScrollBehavior = document.documentElement.style.scrollBehavior;
-        document.documentElement.style.scrollBehavior = "auto";
-        window.scrollTo(scrollX, scrollY);
-        window.requestAnimationFrame(() => {
-          document.documentElement.style.scrollBehavior = previousScrollBehavior;
-        });
-      };
-
-      const configureDetailBackButton = () => {
-        const button = document.querySelector("[data-detail-back]");
-        if (!(button instanceof HTMLAnchorElement)) return;
-
-        const fallback = window.location.pathname.startsWith("/publication/")
-          ? { href: "/publications/", label: "Publications" }
-          : { href: "/writing/", label: "Blog" };
-        const isDetail = isDetailPage(window.location.pathname);
-        const target = history.state?.siteDetailBackTarget;
-        const label = button.querySelector("[data-detail-back-label]");
-        button.hidden = !isDetail;
-        if (!isDetail) return;
-
-        if (!target || target.destination !== window.location.href) {
-          button.href = fallback.href;
-          button.setAttribute("aria-label", `Back to ${fallback.label}`);
-          if (label) label.textContent = `Back to ${fallback.label}`;
-          return;
-        }
-
-        button.href = target.href;
-        button.setAttribute("aria-label", `Back to ${target.label}`);
-        if (label) label.textContent = `Back to ${target.label}`;
-        if (button.dataset.detailBackBound === "true") return;
-        button.dataset.detailBackBound = "true";
-        button.addEventListener("click", (event) => {
-          const currentTarget = history.state?.siteDetailBackTarget;
-          if (!currentTarget || currentTarget.destination !== window.location.href) return;
-
-          event.preventDefault();
-          history.back();
-        });
-      };
-
-      const configureScrollTopButton = () => {
-        const button = document.querySelector("[data-scroll-top]");
-        if (!(button instanceof HTMLButtonElement)) return;
-
-        const updateVisibility = () => {
-          button.hidden = window.scrollY <= 1;
-        };
-
-        if (button.dataset.scrollTopBound !== "true") {
-          button.dataset.scrollTopBound = "true";
-          button.addEventListener("click", () => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          });
-          window.addEventListener("scroll", updateVisibility, { passive: true });
-        }
-        updateVisibility();
-      };
-
-      const writeClipboardText = async (text) => {
-        if (navigator.clipboard?.writeText) {
-          try {
-            await navigator.clipboard.writeText(text);
-            return;
-          } catch (error) {
-            console.warn("Clipboard API unavailable; using selection fallback", error);
-          }
-        }
-
-        const textarea = document.createElement("textarea");
-        textarea.value = text;
-        textarea.style.position = "fixed";
-        textarea.style.opacity = "0";
-        document.body.append(textarea);
-        textarea.select();
-        const copied = document.execCommand("copy");
-        textarea.remove();
-        if (!copied) throw new Error("Browser rejected the clipboard copy command");
-      };
-
-      const configureCodeCopyButtons = () => {
-        document.querySelectorAll(".body pre").forEach((pre) => {
-          if (!(pre instanceof HTMLElement) || pre.closest(".code-sample")) return;
-
-          const code = pre.querySelector("code");
-          if (!code) return;
-
-          const wrapper = document.createElement("div");
-          wrapper.className = "code-sample";
-          pre.before(wrapper);
-          wrapper.append(pre);
-
-          const button = document.createElement("button");
-          button.className = "copy-code-button btn btn-secondary btn-xs";
-          button.type = "button";
-          button.textContent = "Copy";
-          button.setAttribute("aria-label", "Copy code sample");
-          wrapper.append(button);
-
-          button.addEventListener("click", async () => {
-            try {
-              await writeClipboardText(code.textContent ?? "");
-              button.textContent = "Copied";
-              button.setAttribute("aria-label", "Code sample copied");
-              window.setTimeout(() => {
-                button.textContent = "Copy";
-                button.setAttribute("aria-label", "Copy code sample");
-              }, 1800);
-            } catch (error) {
-              console.error("Could not copy code sample", error);
-              button.textContent = "Copy failed";
-              button.setAttribute("aria-label", "Code sample could not be copied");
-            }
-          });
-        });
-      };
-
-      const finishTransitionScroll = () => {
-        if (document.documentElement.hasAttribute("data-astro-transition")) return;
-
-        transitionObserver?.disconnect();
-        transitionObserver = undefined;
-        delete document.documentElement.dataset.transitionScroll;
-      };
-
-      const configurePageTransitions = () => {
-        document.querySelectorAll("a[href]").forEach((link) => {
-          if (!(link instanceof HTMLAnchorElement)) return;
-
-          const target = new URL(link.href, window.location.href);
-          if (target.origin !== window.location.origin) return;
-
-          const isHeaderLink = Boolean(link.closest(".site-header"));
-          const isSlideNavigation = link.hasAttribute("data-slide-navigation");
-          const isTransitionPage = transitionPageOrder.has(target.pathname);
-          const isDetailNavigation =
-            isDetailPage(target.pathname) ||
-            (isDetailPage(window.location.pathname) && isMainPage(target.pathname));
-          const isCurrentPage =
-            target.pathname === window.location.pathname &&
-            target.search === window.location.search;
-
-          if (
-            ((isHeaderLink && isTransitionPage) || isSlideNavigation || isDetailNavigation) &&
-            !isCurrentPage
-          ) {
-            delete link.dataset.astroReload;
-          } else {
-            link.dataset.astroReload = "";
-          }
-        });
-      };
-
-      configurePageTransitions();
-      configureDetailBackButton();
-      configureScrollTopButton();
-      configureCodeCopyButtons();
-      window.addEventListener("pagehide", saveCurrentScrollPosition);
-      window.addEventListener("pageshow", restoreCurrentScrollPosition);
-      document.addEventListener("astro:page-load", () => {
-        configurePageTransitions();
-        configureDetailBackButton();
-        configureScrollTopButton();
-        configureCodeCopyButtons();
-      });
-      document.addEventListener("astro:before-preparation", (event) => {
-        saveCurrentScrollPosition();
-
-        const isPageChange =
-          event.from.pathname !== event.to.pathname ||
-          event.from.search !== event.to.search;
-        if (isPageChange) {
-          document.documentElement.dataset.transitionScroll = "instant";
-        }
-
-        const fromIsDetail = isDetailPage(event.from.pathname);
-        const toIsDetail = isDetailPage(event.to.pathname);
-        if (toIsDetail) {
-          pendingDetailBackTarget = {
-            destination: event.to.href,
-            href: event.from.href,
-            label: pageLabel(),
-          };
-          event.direction = "forward";
-          return;
-        }
-        if (fromIsDetail && isMainPage(event.to.pathname)) {
-          event.direction = "back";
-          return;
-        }
-
-        const sourceElement = event.sourceElement;
-        if (!(sourceElement instanceof Element) || !sourceElement.closest(".site-header")) return;
-        const fromIndex = transitionPageOrder.get(event.from.pathname);
-        const toIndex = transitionPageOrder.get(event.to.pathname);
-        if (fromIndex === undefined || toIndex === undefined || fromIndex === toIndex) return;
-
-        event.direction = toIndex < fromIndex ? "back" : "forward";
-      });
-      document.addEventListener("astro:before-swap", (event) => {
-        event.newDocument.documentElement.dataset.theme =
-          document.documentElement.dataset.theme;
-        if (document.documentElement.dataset.transitionScroll === "instant") {
-          event.newDocument.documentElement.dataset.transitionScroll = "instant";
-        }
-      });
-      document.addEventListener("astro:after-swap", () => {
-        if (
-          pendingDetailBackTarget &&
-          pendingDetailBackTarget.destination === window.location.href
-        ) {
-          history.replaceState(
-            { ...history.state, siteDetailBackTarget: pendingDetailBackTarget },
-            "",
-          );
-        }
-        pendingDetailBackTarget = undefined;
-        configureDetailBackButton();
-        configureScrollTopButton();
-        transitionObserver?.disconnect();
-        transitionObserver = new MutationObserver(finishTransitionScroll);
-        transitionObserver.observe(document.documentElement, {
-          attributes: true,
-          attributeFilter: ["data-astro-transition"],
-        });
-        finishTransitionScroll();
-      });
-    </script>
+    <script src="../scripts/site.ts"></script>
   </body>
 </html>
 
@@ -492,6 +190,7 @@ const pageSlide = {
   a {
     color: var(--accent);
     font-weight: 650;
+    overflow-wrap: anywhere;
     text-decoration-line: underline;
     text-decoration-color: color-mix(in srgb, currentColor 55%, transparent);
     text-decoration-thickness: 0.08em;
@@ -522,7 +221,6 @@ const pageSlide = {
       transform 140ms ease;
   }
 
-  a.btn.btn-secondary:hover,
   a.btn.btn-secondary:focus-visible {
     border-color: color-mix(in oklch, var(--color-secondary) 90%, var(--color-secondary-content));
     color: var(--color-secondary-content);
@@ -555,6 +253,10 @@ const pageSlide = {
     max-width: 100%;
   }
 
+  img {
+    height: auto;
+  }
+
   h1,
   h2,
   h3,
@@ -564,7 +266,9 @@ const pageSlide = {
 
   h1,
   h2,
-  h3 {
+  h3,
+  h4 {
+    overflow-wrap: anywhere;
     line-height: 1.08;
   }
 
@@ -586,6 +290,16 @@ const pageSlide = {
   .body :is(h2, h3, h4) {
     scroll-margin-top: 7rem;
     text-wrap: balance;
+  }
+
+  .body {
+    min-width: 0;
+  }
+
+  .body pre {
+    max-width: 100%;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
   }
 
   .body h2 {
@@ -796,7 +510,6 @@ const pageSlide = {
       background-color 160ms ease;
   }
 
-  .header-control:hover,
   .header-control:focus-visible {
     background: color-mix(in oklch, var(--accent) 12%, transparent);
   }
@@ -843,7 +556,6 @@ const pageSlide = {
       visibility 0s linear 220ms;
   }
 
-  .header-control:hover span,
   .header-control:focus-visible span {
     clip-path: inset(0 0 0 0 round var(--radius-field));
     opacity: 1;
@@ -980,10 +692,6 @@ const pageSlide = {
     transition: transform 180ms ease;
   }
 
-  .publication-card__visual:hover {
-    transform: translateY(-4px) rotate(-0.4deg);
-  }
-
   .publication-card__content h3 {
     margin: 0.7rem 0 1.1rem;
     font-family: var(--font-sans);
@@ -1024,27 +732,61 @@ const pageSlide = {
     }
 
     .site-header__inner {
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.65rem;
+      display: grid;
+      grid-template-areas:
+        "identity theme"
+        "nav nav";
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.25rem 0.5rem;
+      padding: 0.65rem 0;
+    }
+
+    .site-identity {
+      grid-area: identity;
+    }
+
+    .wordmark {
+      font-size: 1.05rem;
+      white-space: nowrap;
     }
 
     .nav-actions {
-      width: 100%;
-      align-items: center;
-      justify-content: space-between;
+      display: contents;
+    }
+
+    #theme-toggle {
+      --btn-height: 2.75rem;
+      grid-area: theme;
+    }
+
+    .header-control {
+      width: 2.75rem;
+      min-width: 2.75rem;
+      max-width: 2.75rem;
+      min-height: 2.75rem;
     }
 
     .site-header nav {
-      gap: 0.65rem;
+      grid-area: nav;
+      justify-content: space-between;
+      gap: 0.2rem;
     }
 
     .site-header nav a {
-      font-size: 0.72rem;
+      display: inline-flex;
+      min-width: 2.75rem;
+      min-height: 2.75rem;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.68rem;
     }
 
     .nav-separator {
-      height: 1rem;
+      display: none;
+    }
+
+    .btn {
+      min-height: 2.75rem;
     }
 
     .section-heading,
@@ -1059,6 +801,64 @@ const pageSlide = {
 
     .publication-card--reverse .publication-card__visual {
       order: initial;
+    }
+
+    .site-header:has([data-detail-back]:not([hidden])) .wordmark {
+      display: none;
+    }
+  }
+
+  @media (min-width: 520px) and (max-width: 760px) and (max-height: 500px) {
+    .site-header__inner {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.5rem 0;
+    }
+
+    .site-identity,
+    #theme-toggle,
+    .site-header nav {
+      grid-area: auto;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .site-header nav {
+      gap: 0.3rem;
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    a.btn.btn-secondary:hover {
+      border-color: color-mix(in oklch, var(--color-secondary) 90%, var(--color-secondary-content));
+      color: var(--color-secondary-content);
+      background-color: color-mix(in oklch, var(--color-secondary) 90%, var(--color-secondary-content));
+      transform: translateY(-1px);
+    }
+
+    .header-control:hover {
+      background: color-mix(in oklch, var(--accent) 12%, transparent);
+    }
+
+    .header-control:hover span {
+      clip-path: inset(0 0 0 0 round var(--radius-field));
+      opacity: 1;
+      transform: translate(0, -50%);
+      visibility: visible;
+      transition-delay: 0s;
+    }
+
+    .publication-card__visual:hover {
+      transform: translateY(-4px) rotate(-0.4deg);
+    }
+  }
+
+  @media (hover: none) {
+    .header-control span {
+      display: none;
     }
   }
 
