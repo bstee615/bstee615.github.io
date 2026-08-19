@@ -41,7 +41,10 @@ const savedTheme = () => {
 const updateThemeLabel = () => {
   const toggle = document.querySelector("#theme-toggle");
   const isDark = document.documentElement.dataset.theme === "pastel-dark";
-  toggle?.setAttribute("aria-label", `Switch to ${isDark ? "light" : "dark"} mode`);
+  toggle?.setAttribute(
+    "aria-label",
+    `Switch to ${isDark ? "light" : "dark"} mode`,
+  );
 };
 
 const applySystemTheme = () => {
@@ -117,7 +120,8 @@ const updateScrollTopButton = () => {
 };
 
 const scheduleScrollTopUpdate = () => {
-  if (!scrollFrame) scrollFrame = window.requestAnimationFrame(updateScrollTopButton);
+  if (!scrollFrame)
+    scrollFrame = window.requestAnimationFrame(updateScrollTopButton);
 };
 
 const writeClipboardText = async (text: string) => {
@@ -126,7 +130,10 @@ const writeClipboardText = async (text: string) => {
       await navigator.clipboard.writeText(text);
       return;
     } catch (error) {
-      console.warn("Clipboard API unavailable; using selection fallback", error);
+      console.warn(
+        "Clipboard API unavailable; using selection fallback",
+        error,
+      );
     }
   }
 
@@ -214,7 +221,8 @@ const handleClick = async (event: MouseEvent) => {
         ? "pastel-light"
         : "pastel-dark";
     document.documentElement.dataset.theme = nextTheme;
-    const secureCookie = window.location.protocol === "https:" ? "; Secure" : "";
+    const secureCookie =
+      window.location.protocol === "https:" ? "; Secure" : "";
     document.cookie = `site-theme=${nextTheme}; Path=/; Max-Age=31536000; SameSite=Lax${secureCookie}`;
     updateThemeLabel();
     return;
@@ -292,7 +300,8 @@ document.addEventListener("astro:before-preparation", (rawEvent) => {
   const isPageChange =
     event.from.pathname !== event.to.pathname ||
     event.from.search !== event.to.search;
-  if (isPageChange) document.documentElement.dataset.transitionScroll = "instant";
+  if (isPageChange)
+    document.documentElement.dataset.transitionScroll = "instant";
 
   const fromIsDetail = isDetailPage(event.from.pathname);
   const toIsDetail = isDetailPage(event.to.pathname);
@@ -314,7 +323,11 @@ document.addEventListener("astro:before-preparation", (rawEvent) => {
   if (!event.sourceElement.closest(".site-header")) return;
   const fromIndex = pageOrder.get(event.from.pathname);
   const toIndex = pageOrder.get(event.to.pathname);
-  if (fromIndex === undefined || toIndex === undefined || fromIndex === toIndex) {
+  if (
+    fromIndex === undefined ||
+    toIndex === undefined ||
+    fromIndex === toIndex
+  ) {
     return;
   }
   event.direction = toIndex < fromIndex ? "back" : "forward";

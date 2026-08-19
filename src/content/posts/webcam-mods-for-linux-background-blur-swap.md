@@ -3,18 +3,15 @@ title: webcam-mods for Linux background blur & swap
 description: >-
   webcam-mods is the best method I have found for webcam background blur/swap on Linux. I use this for my meetings on
   Google Meet and Webex.
-date: 2022-07-07T00:00:00.000Z
-tags:
-  - stream
-  - tools
+date: 2022-07-07
 kind: stream
-legacyUrl: /stream/webcam-mods-for-linux-background-blur-swap/
 ---
 
 [webcam-mods](https://github.com/hamidzr/webcam-mods) is the best method I have found for webcam background blur/swap on Linux. I use this for my meetings on Google Meet and Webex.
 
 Repo: https://github.com/hamidzr/webcam-mods
 Install globally:
+
 ```bash
 pip install git+https://github.com/hamidzr/webcam-mods@master
 ```
@@ -37,5 +34,6 @@ Cropped with bg: `webcam_mods bg-swap`
 
 Video feed was displayed with [ffplay](https://ffmpeg.org/ffplay.html).
 Runner-ups that I tried:
+
 - [Linux-Fake-Background-Webcam](https://github.com/fangfufu/Linux-Fake-Background-Webcam). I found its blur didn't work quite as well (background and limbs pop in/out), so it was distracting in meetings.
 - [fakecam](https://github.com/RazZziel/fakecam). It was a bit difficult to install (see issue [here](https://github.com/RazZziel/fakecam/issues/2)).

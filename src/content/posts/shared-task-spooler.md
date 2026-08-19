@@ -7,25 +7,25 @@ description: >-
   pinged by them, then check back when they're done and run by experiment. If I run my experiment without checking if
   the GPU is in-use, it can my program can experience an error, or worse, the other person's in-progress program may
   experience an error and they'll have to reset it. How can we efficiently run our experiments?
-date: 2023-12-16T00:00:00.000Z
-tags:
-  - blog-post
-  - tooling
+date: 2023-12-16
 kind: blog
-legacyUrl: /posts/2023/12/shared-task-spooler/
-image: /media/cover-shared-task-spooler.webp
-imageMedium: /media/cover-shared-task-spooler-1100.webp
-imageWidth: 1520
-imageHeight: 1013
-imageAlt: Playmobil people queuing for a gallery while a fancy red sports car whizzes past
-imageCreditName: Super Snapper
-imageCreditId: "@supersnapper27"
+cover:
+  src: /media/cover-shared-task-spooler.webp
+  srcMedium: /media/cover-shared-task-spooler-1100.webp
+  width: 1520
+  height: 1013
+  alt: Playmobil people queuing for a gallery while a red sports car passes
+  credit:
+    name: Super Snapper
+    id: "@supersnapper27"
 ---
 
 # TL;DR
+
 I set up a wrapper around task-spooler.
 See the repository: [https://github.com/bstee615/shared-task-spooler](https://github.com/bstee615/shared-task-spooler).
 To use it, create a file containing the below script and invoke it using the same arguments as task-spooler.
+
 ```bash
 #!/bin/bash
 # Dependency: sudo apt install -y task-spooler
@@ -95,6 +95,7 @@ Uh oh, now `bill` ncannot access the same queue.
 Looking into the source code, we see this is because when bill's tsp tries to open the socket file, they receive the error `ENOACCESS`, which spouts the error message.
 
 ```c
+
 ```
 
 Now we can make the socket file accessible by all users using `chmod 777`. If you want more restrictive permissions (for example, to restrict access to a specific group of users), you can use [Linux permission groups](https://www.redhat.com/sysadmin/manage-permissions).
@@ -116,7 +117,6 @@ Works great!
 
 Finally, we want to distinguish jobs submitted by different users, so that each user can manage their own jobs in the shared queue.
 We can do this by giving a label to the jobs using the `-L` option (see [man pages](https://vicerveza.homeunix.net/~viric/soft/ts/#:~:text=-l%20%3Clab%3E%20name%20this%20task%20with%20a%20label%2C%20to%20be%20distinguished%20on%20listing)).
-
 
 ```bash
 alice@shared-box:~$ TS_SOCKET=/tmp/shared-socket tsp -L "$USER" echo hello

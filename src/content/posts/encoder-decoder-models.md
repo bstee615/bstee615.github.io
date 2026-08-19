@@ -4,18 +4,15 @@ description: >-
   Encoder decoder is a deep neural network architecture that consists of 2 components: - Encoder: input -> encoder
   memory (real-valued vector), - Decoder: encoder memory -> output. Input is variable length, encoder memory is fixed
   length.
-date: 2022-06-22T00:00:00.000Z
-tags:
-  - stream
-  - nn
+date: 2022-06-22
 kind: stream
-legacyUrl: /stream/encoder-decoder-models/
 ---
 
 Encoder decoder is a deep neural network architecture that consists of 2 components:
+
 - Encoder: input -> encoder memory (real-valued vector),
 - Decoder: encoder memory -> output.
-Input is variable length, encoder memory is fixed length.
+  Input is variable length, encoder memory is fixed length.
 
 ![Attachments/Pasted image 20220622113403.png](/media/encoder-decoder-diagram.webp)
 [9.6. Encoder-Decoder Architecture — Dive into Deep Learning 0.17.5 documentation](https://d2l.ai/chapter_recurrent-modern/encoder-decoder.html)

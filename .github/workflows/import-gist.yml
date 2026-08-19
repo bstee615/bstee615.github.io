@@ -27,11 +27,6 @@ on:
         description: Publication date override
         required: false
         type: string
-      tags:
-        description: Comma-separated tags
-        required: false
-        default: blog-post,gist
-        type: string
       kind:
         description: Post kind
         required: false
@@ -59,10 +54,6 @@ on:
         type: string
       date:
         required: false
-        type: string
-      tags:
-        required: false
-        default: blog-post,gist
         type: string
       kind:
         required: false
@@ -94,10 +85,9 @@ jobs:
           TITLE: ${{ inputs.title }}
           DESCRIPTION: ${{ inputs.description }}
           DATE: ${{ inputs.date }}
-          TAGS: ${{ inputs.tags }}
           KIND: ${{ inputs.kind }}
         run: |
-          args=("$GIST" --tags "$TAGS" --kind "$KIND")
+          args=("$GIST" --kind "$KIND")
           [ -z "$FILENAME" ] || args+=(--filename "$FILENAME")
           [ -z "$SLUG" ] || args+=(--slug "$SLUG")
           [ -z "$TITLE" ] || args+=(--title "$TITLE")
@@ -108,7 +98,7 @@ jobs:
       - name: Validate site
         run: |
           npm ci
-          npm run build
+          npm run check
 
       - name: Open content pull request
         env:

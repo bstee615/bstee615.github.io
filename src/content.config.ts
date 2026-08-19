@@ -4,8 +4,22 @@ import { z } from "astro/zod";
 import { publicationVenueTypes } from "./utils/publications";
 
 const linkSchema = z.object({
-  label: z.string(),
-  url: z.string(),
+  label: z.string().min(1),
+  url: z.string().min(1),
+});
+
+const coverSchema = z.object({
+  src: z.string().startsWith("/"),
+  srcMedium: z.string().startsWith("/").optional(),
+  width: z.number().int().positive(),
+  height: z.number().int().positive(),
+  alt: z.string().min(1),
+  credit: z
+    .object({
+      name: z.string().min(1),
+      id: z.string().min(1).optional(),
+    })
+    .optional(),
 });
 
 const publications = defineCollection({
@@ -18,7 +32,6 @@ const publications = defineCollection({
     venueType: z.enum(publicationVenueTypes),
     authors: z.array(z.string()).default([]),
     citation: z.string().default(""),
-    tags: z.array(z.string()).default([]),
     links: z.array(linkSchema).default([]),
     selected: z.boolean().default(false),
     excludeFromCv: z.boolean().default(false),
@@ -32,16 +45,8 @@ const posts = defineCollection({
     title: z.string(),
     description: z.string(),
     date: z.coerce.date(),
-    tags: z.array(z.string()).default([]),
-    kind: z.enum(["blog", "stream"]).default("blog"),
-    legacyUrl: z.string(),
-    image: z.string().optional(),
-    imageMedium: z.string().optional(),
-    imageWidth: z.number().int().positive().optional(),
-    imageHeight: z.number().int().positive().optional(),
-    imageAlt: z.string().optional(),
-    imageCreditName: z.string().optional(),
-    imageCreditId: z.string().optional(),
+    kind: z.enum(["blog", "stream"]),
+    cover: coverSchema.optional(),
     math: z.boolean().default(false),
   }),
 });

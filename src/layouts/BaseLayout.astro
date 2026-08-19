@@ -15,7 +15,10 @@ const {
   math = false,
 } = Astro.props;
 const plainTitle = title.replace(/`([^`]+)`/g, "$1");
-const pageTitle = plainTitle === "Benjamin Steenhoek" ? plainTitle : `${plainTitle} · Benjamin Steenhoek`;
+const pageTitle =
+  plainTitle === "Benjamin Steenhoek"
+    ? plainTitle
+    : `${plainTitle} · Benjamin Steenhoek`;
 const pageSlide = {
   forwards: {
     old: {
@@ -55,7 +58,10 @@ const pageSlide = {
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⌁</text></svg>" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⌁</text></svg>"
+    />
     {math && <link rel="stylesheet" href={katexStylesheet} />}
     <ClientRouter fallback="animate" />
     <script is:inline>
@@ -63,7 +69,9 @@ const pageSlide = {
         .split("; ")
         .find((cookie) => cookie.startsWith("site-theme="))
         ?.split("=")[1];
-      const prefersDarkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const prefersDarkTheme = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
       document.documentElement.dataset.theme =
         savedTheme === "pastel-dark" || savedTheme === "pastel-light"
           ? savedTheme
@@ -123,24 +131,49 @@ const pageSlide = {
             <span class="nav-separator" aria-hidden="true"></span>
             <a href="/writing/">Blog</a>
           </nav>
-          <button id="theme-toggle" class="btn btn-circle btn-ghost btn-sm" type="button" aria-label="Switch to dark mode">
-            <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M20.4 15.3A8.5 8.5 0 0 1 8.7 3.6 8.5 8.5 0 1 0 20.4 15.3Z"></path>
+          <button
+            id="theme-toggle"
+            class="btn btn-circle btn-ghost btn-sm"
+            type="button"
+            aria-label="Switch to dark mode"
+          >
+            <svg
+              class="theme-icon theme-icon--moon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                d="M20.4 15.3A8.5 8.5 0 0 1 8.7 3.6 8.5 8.5 0 1 0 20.4 15.3Z"
+              ></path>
             </svg>
-            <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+            <svg
+              class="theme-icon theme-icon--sun"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
               <circle cx="12" cy="12" r="4"></circle>
-              <path d="M12 2V4M12 20V22M4.93 4.93L6.34 6.34M17.66 17.66L19.07 19.07M2 12H4M20 12H22M4.93 19.07L6.34 17.66M17.66 6.34L19.07 4.93"></path>
+              <path
+                d="M12 2V4M12 20V22M4.93 4.93L6.34 6.34M17.66 17.66L19.07 19.07M2 12H4M20 12H22M4.93 19.07L6.34 17.66M17.66 6.34L19.07 4.93"
+              ></path>
             </svg>
           </button>
         </div>
       </div>
     </header>
-    <main id="content" transition:name="page-content" transition:animate={pageSlide}>
+    <main
+      id="content"
+      transition:name="page-content"
+      transition:animate={pageSlide}
+    >
       <slot />
     </main>
     <footer id="contact" class="site-footer">
       <span>My opinions are my own.</span>
-      <span>Powered by <a href="https://astro.build/">Astro</a> and <a href="https://pages.github.com/">GitHub Pages</a>.</span>
+      <span
+        >Powered by <a href="https://astro.build/">Astro</a> and <a
+          href="https://pages.github.com/">GitHub Pages</a
+        >.</span
+      >
     </footer>
     <script src="../scripts/site.ts"></script>
   </body>
@@ -152,7 +185,11 @@ const pageSlide = {
     --muted: var(--color-muted);
     --paper: var(--color-base-100);
     --surface: var(--color-base-200);
-    --line: color-mix(in oklch, var(--color-base-content) 18%, var(--color-base-100));
+    --line: color-mix(
+      in oklch,
+      var(--color-base-content) 18%,
+      var(--color-base-100)
+    );
     --divider: 1px solid var(--line);
     --accent: var(--color-link);
     --accent-bright: var(--color-secondary-text);
@@ -206,7 +243,14 @@ const pageSlide = {
     text-decoration-color: currentColor;
   }
 
-  :where(.wordmark, .site-header nav a, .compact-list a, .service-list a, .publication-row h4 a, .publication-card__content h3 a) {
+  :where(
+    .wordmark,
+    .site-header nav a,
+    .compact-list a,
+    .service-list a,
+    .publication-row h4 a,
+    .publication-card__content h3 a
+  ) {
     color: inherit;
     font-weight: inherit;
   }
@@ -222,9 +266,17 @@ const pageSlide = {
   }
 
   a.btn.btn-secondary:focus-visible {
-    border-color: color-mix(in oklch, var(--color-secondary) 90%, var(--color-secondary-content));
+    border-color: color-mix(
+      in oklch,
+      var(--color-secondary) 90%,
+      var(--color-secondary-content)
+    );
     color: var(--color-secondary-content);
-    background-color: color-mix(in oklch, var(--color-secondary) 90%, var(--color-secondary-content));
+    background-color: color-mix(
+      in oklch,
+      var(--color-secondary) 90%,
+      var(--color-secondary-content)
+    );
     transform: translateY(-1px);
   }
 
@@ -238,7 +290,10 @@ const pageSlide = {
     transform: none;
   }
 
-  :where(a.btn:not(.header-control)[href^="https://"], a.btn:not(.header-control)[href^="http://"])::after {
+  :where(
+    a.btn:not(.header-control)[href^="https://"],
+    a.btn:not(.header-control)[href^="http://"]
+  )::after {
     content: "↗";
     align-self: center;
     font-size: 0.9em;
@@ -442,23 +497,39 @@ const pageSlide = {
   }
 
   @keyframes page-slide-out-left {
-    from { transform: translate3d(0, 0, 0); }
-    to { transform: translate3d(-100%, 0, 0); }
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-100%, 0, 0);
+    }
   }
 
   @keyframes page-slide-in-right {
-    from { transform: translate3d(100%, 0, 0); }
-    to { transform: translate3d(0, 0, 0); }
+    from {
+      transform: translate3d(100%, 0, 0);
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+    }
   }
 
   @keyframes page-slide-out-right {
-    from { transform: translate3d(0, 0, 0); }
-    to { transform: translate3d(100%, 0, 0); }
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(100%, 0, 0);
+    }
   }
 
   @keyframes page-slide-in-left {
-    from { transform: translate3d(-100%, 0, 0); }
-    to { transform: translate3d(0, 0, 0); }
+    from {
+      transform: translate3d(-100%, 0, 0);
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+    }
   }
 
   .site-header__inner {
@@ -542,7 +613,8 @@ const pageSlide = {
     opacity: 0;
     color: var(--accent);
     background: var(--paper);
-    box-shadow: 0 0.2rem 0.65rem color-mix(in oklch, var(--ink) 12%, transparent);
+    box-shadow: 0 0.2rem 0.65rem
+      color-mix(in oklch, var(--ink) 12%, transparent);
     clip-path: inset(0 100% 0 0 round var(--radius-field));
     pointer-events: none;
     text-overflow: ellipsis;
@@ -833,9 +905,17 @@ const pageSlide = {
 
   @media (hover: hover) and (pointer: fine) {
     a.btn.btn-secondary:hover {
-      border-color: color-mix(in oklch, var(--color-secondary) 90%, var(--color-secondary-content));
+      border-color: color-mix(
+        in oklch,
+        var(--color-secondary) 90%,
+        var(--color-secondary-content)
+      );
       color: var(--color-secondary-content);
-      background-color: color-mix(in oklch, var(--color-secondary) 90%, var(--color-secondary-content));
+      background-color: color-mix(
+        in oklch,
+        var(--color-secondary) 90%,
+        var(--color-secondary-content)
+      );
       transform: translateY(-1px);
     }
 

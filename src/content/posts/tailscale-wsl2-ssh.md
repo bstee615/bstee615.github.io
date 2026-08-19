@@ -5,12 +5,8 @@ description: >-
   drop into whichever WSL2 distro I needed. The tricky part: iOS Tailscale intercepts port 22, WSL2 distros share a
   network namespace so you can't run independent sshd instances on the same port, and adding a Tailscale node per distro
   causes TUN device conflicts.
-date: 2026-03-28T00:00:00.000Z
-tags:
-  - blog-post
-  - tooling
+date: 2026-03-28
 kind: blog
-legacyUrl: /posts/2026/03/tailscale-wsl2-ssh/
 ---
 
 I do a lot of work from my phone while away from my desk and wanted a clean way to SSH into my Windows machine and drop into whichever WSL2 distro I needed. The tricky part: iOS Tailscale intercepts port 22, WSL2 distros share a network namespace so you can't run independent sshd instances on the same port, and adding a Tailscale node per distro causes TUN device conflicts.
@@ -23,7 +19,7 @@ See the gist: [Tailscale + SSH setup for Windows + WSL2](https://gist.github.com
 
 The key bit in `sshd_config`:
 
-```
+```text
 Port 2222
 Port 2223
 Port 2224
@@ -37,8 +33,8 @@ Match LocalPort 2224
 
 Then connect with:
 
-| Command | Destination |
-|---------|-------------|
+| Command                  | Destination        |
+| ------------------------ | ------------------ |
 | `ssh -p 2222 myuser@zap` | Windows PowerShell |
-| `ssh -p 2223 myuser@zap` | Debian bash |
-| `ssh -p 2224 myuser@zap` | Alpine sh |
+| `ssh -p 2223 myuser@zap` | Debian bash        |
+| `ssh -p 2224 myuser@zap` | Alpine sh          |

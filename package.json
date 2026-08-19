@@ -5,8 +5,27 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "check": "npm run lint && npm run build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "import:gist": "node scripts/import-gist.mjs",
+    "lint": "npm run format:check && npm run lint:code && npm run lint:markdown",
+    "lint:code": "eslint . && astro check",
+    "lint:markdown": "markdownlint-cli2",
     "preview": "astro preview"
+  },
+  "prettier": {
+    "plugins": [
+      "prettier-plugin-astro"
+    ],
+    "overrides": [
+      {
+        "files": "*.astro",
+        "options": {
+          "parser": "astro"
+        }
+      }
+    ]
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^7.2.3",
@@ -14,5 +33,17 @@
     "katex": "^0.18.4",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.8.1",
+    "eslint-plugin-astro": "^1.7.0",
+    "globals": "^17.11.0",
+    "markdownlint-cli2": "^0.23.2",
+    "prettier": "^3.9.6",
+    "prettier-plugin-astro": "^0.14.1",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.67.0"
   }
 }

@@ -22,6 +22,8 @@ if (cursor < text.length) {
 }
 ---
 
-{segments.map((segment) =>
-  segment.type === "code" ? <code>{segment.value}</code> : segment.value
-)}
+{
+  segments.map((segment) =>
+    segment.type === "code" ? <code>{segment.value}</code> : segment.value,
+  )
+}

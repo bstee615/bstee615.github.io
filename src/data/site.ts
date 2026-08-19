@@ -53,17 +53,20 @@ const serviceVenues = {
   },
   fse25Ivr: {
     name: "FSE'25 IVR",
-    title: "Ideas, Visions and Reflections Track, ACM International Conference on the Foundations of Software Engineering",
+    title:
+      "Ideas, Visions and Reflections Track, ACM International Conference on the Foundations of Software Engineering",
     url: "https://conf.researchr.org/track/fse-2025/fse-2025-ideas-visions-and-reflections",
   },
   forge25: {
     name: "FORGE'25",
-    title: "ACM International Conference on AI Foundation Models and Software Engineering",
+    title:
+      "ACM International Conference on AI Foundation Models and Software Engineering",
     url: "https://conf.researchr.org/home/forge-2025",
   },
   distill25: {
     name: "IEEE DISTILL '25",
-    title: "IEEE Workshop on Distributed, Secure, and Trustworthy Intelligence with LLMs",
+    title:
+      "IEEE Workshop on Distributed, Secure, and Trustworthy Intelligence with LLMs",
     url: "https://ieeedistill.github.io/",
   },
   tifs: {
@@ -97,25 +100,29 @@ export const service = serviceRecords.map(({ date, venue, role }) => ({
 export const projects = [
   {
     title: "wslwatch",
-    description: "Windows watchdog service that keeps WSL2 distributions running",
+    description:
+      "Windows watchdog service that keeps WSL2 distributions running",
     href: "https://github.com/bstee615/wslwatch",
     published: "2026-03-27",
   },
   {
     title: "rrun",
-    description: "Remote runner that syncs Git-tracked files and streams commands over SSH",
+    description:
+      "Remote runner that syncs Git-tracked files and streams commands over SSH",
     href: "https://github.com/bstee615/rrun",
     published: "2026-03-22",
   },
   {
     title: "shared-task-spooler",
-    description: "Convenience script for managing a shared job queue with task-spooler",
+    description:
+      "Convenience script for managing a shared job queue with task-spooler",
     href: "https://github.com/bstee615/shared-task-spooler",
     published: "2023-12-16",
   },
   {
     title: "task-spooler-gui",
-    description: "Web interface for monitoring and accessing task-spooler queues",
+    description:
+      "Web interface for monitoring and accessing task-spooler queues",
     href: "https://github.com/bstee615/task-spooler-gui",
     published: "2022-07-25",
   },

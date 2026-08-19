@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
 import { unified } from "@astrojs/markdown-remark";
+import { Buffer } from "node:buffer";
 import fs from "node:fs";
 import path from "node:path";
 import rehypeKatex from "rehype-katex";
@@ -8,7 +9,11 @@ import remarkMath from "remark-math";
 const localImageDimensions = (source) => {
   if (!source.startsWith("/")) return undefined;
 
-  const filePath = path.join(process.cwd(), "public", decodeURIComponent(source.slice(1)));
+  const filePath = path.join(
+    process.cwd(),
+    "public",
+    decodeURIComponent(source.slice(1)),
+  );
   if (!fs.existsSync(filePath)) return undefined;
 
   const buffer = fs.readFileSync(filePath);
@@ -16,7 +21,10 @@ const localImageDimensions = (source) => {
     return { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) };
   }
 
-  if (buffer.toString("ascii", 0, 4) === "RIFF" && buffer.toString("ascii", 8, 12) === "WEBP") {
+  if (
+    buffer.toString("ascii", 0, 4) === "RIFF" &&
+    buffer.toString("ascii", 8, 12) === "WEBP"
+  ) {
     const format = buffer.toString("ascii", 12, 16);
     if (format === "VP8X") {
       return {
@@ -43,7 +51,10 @@ const localImageDimensions = (source) => {
 
   if (buffer[0] === 0xff && buffer[1] === 0xd8) {
     let offset = 2;
-    const sizeMarkers = new Set([0xc0, 0xc1, 0xc2, 0xc3, 0xc5, 0xc6, 0xc7, 0xc9, 0xca, 0xcb, 0xcd, 0xce, 0xcf]);
+    const sizeMarkers = new Set([
+      0xc0, 0xc1, 0xc2, 0xc3, 0xc5, 0xc6, 0xc7, 0xc9, 0xca, 0xcb, 0xcd, 0xce,
+      0xcf,
+    ]);
     while (offset < buffer.length) {
       const marker = buffer[offset + 1];
       const length = buffer.readUInt16BE(offset + 2);
@@ -68,7 +79,9 @@ const rehypeImageDelivery = () => (tree) => {
       node.properties.decoding ??= "async";
 
       if (!node.properties.width || !node.properties.height) {
-        const dimensions = localImageDimensions(String(node.properties.src ?? ""));
+        const dimensions = localImageDimensions(
+          String(node.properties.src ?? ""),
+        );
         if (dimensions) Object.assign(node.properties, dimensions);
       }
     }

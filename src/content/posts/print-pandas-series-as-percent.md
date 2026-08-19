@@ -1,21 +1,18 @@
 ---
 title: Print pandas Series as percent
 description: Use this snippet to print a pd.Series of floats as percentages.
-date: 2022-06-23T00:00:00.000Z
-tags:
-  - stream
-  - python
-  - tips
+date: 2022-06-23
 kind: stream
-legacyUrl: /stream/print-pandas-series-as-percent/
 ---
 
 Use this snippet to print a `pd.Series` of floats as percentages.
+
 ```python
 .apply(lambda x: x * 100).apply("{:,.2f}%".format)
 ```
 
 Example:
+
 ```python
 In [1]: import pandas as pd
 
@@ -36,10 +33,10 @@ In [4]: print(s.apply(lambda x: x * 100).apply("{:,.2f}%".format))
 dtype: object
 
 In [5]: print(pd
-			  .Series([1, 1, 2, 3, 4, 4, 4, 5])
-			  .value_counts(normalize=True)
-			  .apply(lambda x: x * 100).apply("{:,.2f}%".format)
-			  )
+              .Series([1, 1, 2, 3, 4, 4, 4, 5])
+              .value_counts(normalize=True)
+              .apply(lambda x: x * 100).apply("{:,.2f}%".format)
+              )
 4    37.50%
 1    25.00%
 2    12.50%

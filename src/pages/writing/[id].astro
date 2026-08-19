@@ -15,34 +15,51 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description} math={post.data.math}>
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  math={post.data.math}
+>
   <article class="post">
     <header>
       <h1><InlineMarkdown text={post.data.title} /></h1>
       <time datetime={post.data.date.toISOString()}>
-        {post.data.date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" })}
+        {
+          post.data.date.toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+            timeZone: "UTC",
+          })
+        }
       </time>
     </header>
-    {post.data.image && (
-      <figure class="post-cover">
-        <img
-          src={post.data.imageMedium ?? post.data.image}
-          srcset={post.data.imageMedium ? `${post.data.imageMedium} 1100w, ${post.data.image} 1520w` : undefined}
-          sizes="(max-width: 760px) calc(100vw - 3rem), 760px"
-          alt={post.data.imageAlt ?? ""}
-          width={post.data.imageWidth}
-          height={post.data.imageHeight}
-          decoding="async"
-          fetchpriority="high"
-        />
-        {post.data.imageCreditName && (
-          <figcaption>
-            Photo by {post.data.imageCreditName}
-            {post.data.imageCreditId && ` (${post.data.imageCreditId})`}
-          </figcaption>
-        )}
-      </figure>
-    )}
+    {
+      post.data.cover && (
+        <figure class="post-cover">
+          <img
+            src={post.data.cover.srcMedium ?? post.data.cover.src}
+            srcset={
+              post.data.cover.srcMedium
+                ? `${post.data.cover.srcMedium} 1100w, ${post.data.cover.src} 1520w`
+                : undefined
+            }
+            sizes="(max-width: 760px) calc(100vw - 3rem), 760px"
+            alt={post.data.cover.alt}
+            width={post.data.cover.width}
+            height={post.data.cover.height}
+            decoding="async"
+            fetchpriority="high"
+          />
+          {post.data.cover.credit && (
+            <figcaption>
+              Photo by {post.data.cover.credit.name}
+              {post.data.cover.credit.id && ` (${post.data.cover.credit.id})`}
+            </figcaption>
+          )}
+        </figure>
+      )
+    }
     <div class="body">
       <Content />
     </div>

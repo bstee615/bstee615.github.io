@@ -6,22 +6,21 @@ description: >-
   files can be very large (over 50GB). By default, the weights and datasets are downloaded to some folders under
   /.cache/huggingface/. Different users will download copies of the same models. This causes the storage requirements to
   grow much larger than what is needed.
-date: 2024-01-16T00:00:00.000Z
-tags:
-  - blog-post
-  - tooling
+date: 2024-01-16
 kind: blog
-legacyUrl: /posts/2024/01/shared-hf-cache/
-image: /media/cover-shared-huggingface-cache.webp
-imageMedium: /media/cover-shared-huggingface-cache-1100.webp
-imageWidth: 1520
-imageHeight: 855
-imageAlt: people holding shoulders sitting on wall
-imageCreditName: Duy Pham
-imageCreditId: "@miinyuii"
+cover:
+  src: /media/cover-shared-huggingface-cache.webp
+  srcMedium: /media/cover-shared-huggingface-cache-1100.webp
+  width: 1520
+  height: 855
+  alt: People sitting on a wall with their arms around each other
+  credit:
+    name: Duy Pham
+    id: "@miinyuii"
 ---
 
 # TL;DR
+
 I set up a shared cache for HuggingFace libraries like `transformers` and `datasets`.
 See the repository: [https://github.com/bstee615/shared-hf-cache](https://github.com/bstee615/shared-hf-cache).
 To use it, create a shared directory which can be edited by all interested users and set the environment variable `export HF_HOME="/huggingface"`.

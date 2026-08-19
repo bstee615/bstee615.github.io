@@ -3,20 +3,17 @@ title: "Meditations on Meditations: I-IV"
 description: >-
   I'm reading Marcus Aurelius's Meditations in Marcus Aurelius and His Times (Transition from Paganism to Christianity)
   [0].
-date: 2022-06-03T00:00:00.000Z
-tags:
-  - blog-post
-  - fun
-  - philosophy
+date: 2022-06-03
 kind: blog
-legacyUrl: /posts/2022/06/meditations-1-thru-4/
-image: /media/cover-meditations.webp
-imageMedium: /media/cover-meditations-1100.webp
-imageWidth: 1520
-imageHeight: 2276
-imageAlt: Stoa in Baku, Azerbaijan
-imageCreditName: Hikmat Gafarzada
-imageCreditId: "@hkmtqffr"
+cover:
+  src: /media/cover-meditations.webp
+  srcMedium: /media/cover-meditations-1100.webp
+  width: 1520
+  height: 2276
+  alt: Stoa in Baku, Azerbaijan
+  credit:
+    name: Hikmat Gafarzada
+    id: "@hkmtqffr"
 ---
 
 I'm reading Marcus Aurelius's _Meditations_ in _Marcus Aurelius and His Times (Transition from Paganism to Christianity)_ [0].
@@ -51,6 +48,7 @@ A man never knows when he will die, so it is necessary to walk uprightly in ever
 > ...a man should use himself to think of those things only about which, if one should suddenly ask, What hast thou now in thy thoughts? With perfect openness thou mightest, immediately answer, This or That; so that from thy words it should be plain that everything in thee is simple and benevolent, and such as befits a social animal, and one that cares not for thoughts about pleasure or sensual enjoyments at all, nor has any rivalry or envy and suspicion, or anything else for which thou wouldst blush if thou shouldst say that thou hadst it in thy mind.
 
 ### III.7
+
 > Never value anything as profitable to thyself which shall compel thee to break thy promise, to lose thy self-respect, to hate any man, to suspect, to curse, to act the hypocrite, to desire anything which needs walls and curtains...
 
 ## Time and death
@@ -60,8 +58,8 @@ How can this be, since I want to have a good life and a happy life?
 
 The argument is driven by the following metaphysical beliefs:
 
-* Man lives only once (II.14).
-* All things break apart into atoms, and this is not a bad thing (IV.5) because it is according to nature (II.17).
+- Man lives only once (II.14).
+- All things break apart into atoms, and this is not a bad thing (IV.5) because it is according to nature (II.17).
 
 Aurelius urges people to live as if his argument and its premises were true.
 However, his argument leans heavily on his perception of the world.
@@ -75,7 +73,7 @@ Either way, it is good to exercise caution against living in the past or living 
 
 ### III.7
 
-> ...he who has preferred to everything intelligence and daemon and the worship of its excellence, acts no tragic part, does not groan, will not need either solitude or much company; and, what is chief of all, he will live without either pursuing or flying from death; but whether for a longer or a shorter time he shall have the soul inclosed in the body, he cares not at all: for even if he must depart immediately, he will go as readily as if he were going to do anything else which can be done with decency and order; taking care of this only all through life, that his thoughts turn not away from anything which belongs to an intelligent animal and a member of a civil community. 
+> ...he who has preferred to everything intelligence and daemon and the worship of its excellence, acts no tragic part, does not groan, will not need either solitude or much company; and, what is chief of all, he will live without either pursuing or flying from death; but whether for a longer or a shorter time he shall have the soul inclosed in the body, he cares not at all: for even if he must depart immediately, he will go as readily as if he were going to do anything else which can be done with decency and order; taking care of this only all through life, that his thoughts turn not away from anything which belongs to an intelligent animal and a member of a civil community.
 
 ## Pain
 
@@ -84,8 +82,8 @@ Aurelius states bluntly that pain is only an opinion, a state of mind.
 
 This is driven by the combination of two metaphysical claims:
 
-* Nothing is evil which is according to nature. (II.17).
-* All is atoms and deterministic according to nature (IV.5).
+- Nothing is evil which is according to nature. (II.17).
+- All is atoms and deterministic according to nature (IV.5).
 
 Things only happen as they are meant to happen.
 Things cannot affect the soul; my opinion that it has hurt me is the thing which "does violence to the soul".

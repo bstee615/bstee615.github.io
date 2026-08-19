@@ -4,31 +4,29 @@ description: >-
   Program analysis methods often represent programs as graphs. These graphs should be automatically generated from the
   source code. There are many tools that have been implemented to do this, but they are often painful to set up. In this
   post, I will compare 3 program analysis frameworks which I have used to generate graph representations of C programs.
-date: 2022-03-07T00:00:00.000Z
-tags:
-  - blog-post
-  - research
-  - tooling
+date: 2022-03-07
 kind: blog
-legacyUrl: /posts/2022/03/no-pain-no-gain/
-image: /media/cover-no-pain-no-gain.webp
-imageMedium: /media/cover-no-pain-no-gain-1100.webp
-imageWidth: 1520
-imageHeight: 1013
-imageAlt: Weights
-imageCreditName: Gene Jeter
-imageCreditId: "@genejeter"
+cover:
+  src: /media/cover-no-pain-no-gain.webp
+  srcMedium: /media/cover-no-pain-no-gain-1100.webp
+  width: 1520
+  height: 1013
+  alt: Weights
+  credit:
+    name: Gene Jeter
+    id: "@genejeter"
 ---
 
 Program analysis methods often represent programs as graphs. These graphs should be automatically generated from the source code. There are many tools that have been implemented to do this, but they are often painful to set up. In this post, I will compare 3 program analysis frameworks which I have used to generate graph representations of C programs.
 
 **TL;DR:** More powerful frameworks are more difficult to set up because they require compiler information or expose complex APIs.
+
 - SrcML is great if all you need is the AST and you don't need 100% precision.
 - Joern is great if you need the CFG or PDG for a large set of programs, and are OK with potentially parsing some programs incorrectly.
 - LLVM is great if you want a rock-solid analysis and want to leverage complex program analysis passes used in the Clang compiler, and you can provide compiler information.
 
 <figure>
-  <img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/dkhrdd6e0293r9ledy0y.png" loading="lazy" decoding="async">
+  <img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/dkhrdd6e0293r9ledy0y.png" alt="Cartoon progression from weak to muscular" loading="lazy" decoding="async">
   <figcaption>No pain ⇒ no gain. More pain ⇒ more gain???
 (source: <a href="https://www.dreamstime.com/stock-illustration-gradual-development-muscle-building-weakling-to-steep-pitching-funny-cartoon-character-vector-illustration-isolated-image48375937">kharlamova</a>)
 </figcaption>
@@ -43,19 +41,22 @@ Program analysis methods often represent programs as graphs. These graphs should
 ## Control flow what-now?
 
 Different types of graphs are used for different analyses, depending on what information is needed [0]:
-* Abstract Syntax Tree (AST): A tree representation of the tokens in a program which abstracts out details like parentheses, whitespace, and separators.
-* Control Flow Graph (CFG): A graph representation where each node is a statement and each edge is a transition in control flow.
-* Program Dependence Graph (PDG): A graph representation where each node is a statement and each edge is a control or data dependency. A variable is dependent on a statement if that statement affects the value of the variable.
+
+- Abstract Syntax Tree (AST): A tree representation of the tokens in a program which abstracts out details like parentheses, whitespace, and separators.
+- Control Flow Graph (CFG): A graph representation where each node is a statement and each edge is a transition in control flow.
+- Program Dependence Graph (PDG): A graph representation where each node is a statement and each edge is a control or data dependency. A variable is dependent on a statement if that statement affects the value of the variable.
 
 I chose to study the relative benefits of 3 popular program analysis frameworks that I have used in my own research:
-* [SrcML: an infrastructure for the exploration, analysis, and manipulation of source code](https://www.srcml.org/)
-* [Joern: The Bug Hunter's Workbench](https://joern.io/)
-* [LLVM: a collection of modular and reusable compiler and toolchain technologies](https://llvm.org/)
+
+- [SrcML: an infrastructure for the exploration, analysis, and manipulation of source code](https://www.srcml.org/)
+- [Joern: The Bug Hunter's Workbench](https://joern.io/)
+- [LLVM: a collection of modular and reusable compiler and toolchain technologies](https://llvm.org/)
 
 I evaluated the frameworks based on 3 criteria which we care about for any program analysis task.
-* Speed: how fast is the framework?
-* Precision: how precise is the resulting CFG?
-* Ease of use: how much effort does it take to use the framework, esp. on a large set of programs?
+
+- Speed: how fast is the framework?
+- Precision: how precise is the resulting CFG?
+- Ease of use: how much effort does it take to use the framework, esp. on a large set of programs?
 
 All of these graph representations can be automatically generated from C source code, though the task is sometimes challenging.
 
@@ -66,7 +67,7 @@ C programs are difficult to parse because the preprocessor allows arbitrary text
 C programs also require compiler information such as types and functions defined in header files in order to parse correctly [2]. These header files can be scattered all across the machine, and the standard library headers are are in different locations in different OS or distributions. The compiler information is usually passed to the parser by way of compiler flags such as `-I` or `-D`.
 
 <figure>
-  <img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yejf6uwhdglzftain6u9.png" loading="lazy" decoding="async">
+  <img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yejf6uwhdglzftain6u9.png" alt="Relative benefits of SrcML, Joern, and LLVM" loading="lazy" decoding="async">
   <figcaption>Relative benefits of SrcML, Joern, and LLVM.
 (source: original)
 </figcaption>
@@ -93,7 +94,7 @@ The SrcML team was pretty responsive in my queries about their framework.
 srcML
 - Does not require compilation
 - Faster than a compiler
-  - “Lastly, the conversion to srcML is extremely efficient, running faster than a compiler (over 25KLOC/sec).” http://www.cs.kent.edu/~jmaletic/papers/ICSM13-srcML.pdf 
+  - “Lastly, the conversion to srcML is extremely efficient, running faster than a compiler (over 25KLOC/sec).” http://www.cs.kent.edu/~jmaletic/papers/ICSM13-srcML.pdf
 - No control/data flow implementation.
   - From Discord: “We do not have a specific tool to generate a control flow graph, but it should be pretty straight forward. We have a slicing tool srcSlice (see tools) - that computes control flow and data flow information on-the-fly as needed to compute a forward program slice.
   - Also, srcPtr does pointer analysis which also needs some control flow information. You can easily get conditionals and loop constructs using Xpath. Using srcSAX and just look for the branching events (if, while etc.) would be pretty easy. The code for all of these are in GitHub.”
@@ -192,8 +193,8 @@ int main()
 I measured the runtime of my prototype tool in seconds on the example program, averaged over 5 runs.
 The results are shown below. Format: Average ± std. deviation.
 
-| LLVM | Joern | SrcML |
-| --- | --- | --- |
+| LLVM              | Joern             | SrcML             |
+| ----------------- | ----------------- | ----------------- |
 | 0.0230s ± 0.0034s | 6.2906s ± 0.0034s | 0.0702s ± 0.0088s |
 
 This evaluation shows the difference in startup times between the frameworks. In my research I have found that the startup time is a pretty large consideration, and the size of the program has a relatively small effect on the framework's performance.
@@ -203,7 +204,7 @@ LLVM and SrcML are pretty similar in performance for all practical matters. Nota
 Joern was the slowest by far. This may be due to the overhead of starting up the Scala VM and Joern's interpreter.
 
 <figure>
-  <img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/varxp2ea4y9zfxbjgrd5.png" loading="lazy" decoding="async">
+  <img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/varxp2ea4y9zfxbjgrd5.png" alt="Program analysis framework tradeoffs across multiple dimensions" loading="lazy" decoding="async">
   <figcaption>Frameworks are multi-dimensional, not just lightweight/heavyweight.
 (source: <a href="https://www.self.com/story/guide-to-navigating-free-weights-at-the-gym">Morgan Johnson</a>)
 </figcaption>
@@ -212,10 +213,11 @@ Joern was the slowest by far. This may be due to the overhead of starting up the
 Each of these frameworks has its sweet spot in program analysis. In reality, analyzing real-world programs is difficult. There are many choices with different dimensions of pain/pleasure. I compared speed on a small example to highlight the differences between the frameworks. I suggest you do your own research into these 3 frameworks to figure out which one fits your application best. Most importantly, don't be dogmatic about using one approach over another - for example, supposing you are used to LLVM giving you compiler-level precision in your analyses, you may benefit from switching to Joern in order to speed up your development cycle.
 
 ## References
+
 [0] F. Yamaguchi, N. Golde, D. Arp and K. Rieck, "Modeling and Discovering Vulnerabilities with Code Property Graphs," 2014 IEEE Symposium on Security and Privacy, 2014, pp. 590-604, DOI: https://doi.org/10.1109/SP.2014.44.
 
 [1] Alejandra Garrido and Ralph Johnson. 2002. Challenges of refactoring C programs. In Proceedings of the International Workshop on Principles of Software Evolution (IWPSE '02). Association for Computing Machinery, New York, NY, USA, 6–14. DOI:https://doi.org/10.1145/512035.512039
 
-[2] Bendersky, E. (2007, Nov). The context sensitivity of C's grammar. Eli Benderskys website ATOM. Retrieved March 3, 2022, from https://web.archive.org/web/20210713114717/https://eli.thegreenplace.net/2007/11/24/the-context-sensitivity-of-cs-grammar 
+[2] Bendersky, E. (2007, Nov). The context sensitivity of C's grammar. Eli Benderskys website ATOM. Retrieved March 3, 2022, from https://web.archive.org/web/20210713114717/https://eli.thegreenplace.net/2007/11/24/the-context-sensitivity-of-cs-grammar
 
 [3] M. L. Collard, M. J. Decker and J. I. Maletic, "srcML: An Infrastructure for the Exploration, Analysis, and Manipulation of Source Code: A Tool Demonstration," 2013 IEEE International Conference on Software Maintenance, 2013, pp. 516-519, DOI: https://doi.org/10.1109/ICSM.2013.85

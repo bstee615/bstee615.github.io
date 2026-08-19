@@ -3,7 +3,7 @@ title: "Closing the Gap: A User Study on the Real-world Usefulness of AI-powered
 summary: >-
   We present DeepVulGuard, an AI-powered vulnerability detection & repair tool built into the VSCode IDE, and the
   results of a user study on this tool with 17 professional software developers.
-date: 2025-04-27T00:00:00.000Z
+date: 2025-04-27
 venue: ICSE
 venueType: conference-paper
 authors:
@@ -18,7 +18,6 @@ citation: >-
   2025. Closing the Gap: A User Study on the Real-world Usefulness of AI-powered Vulnerability Detection & Repair in the
   IDE. In 2025 IEEE/ACM 46th International Conference on Software Engineering (ICSE ’25), April 27–May 3, 2025, Ottawa,
   Canada.
-tags: []
 links:
   - label: Paper
     url: https://arxiv.org/abs/2412.14306
@@ -26,7 +25,8 @@ selected: true
 ---
 
 We present DeepVulGuard, an AI-powered vulnerability detection & repair tool built into the VSCode IDE. We ran a user study of our tool with 17 professional software developers where study participants scanned a total of 24 projects, 6.9k files, and over 1.7 million lines of source code, and generated 170 alerts and 50 fix suggestions.
-* We explored how AI features, including confidence scores, explanations, and chat interaction, can be useful for vulnerability detection and fixing.
-* We offer practical recommendations for evaluating and deploying AI detection and fix models.
-* We analyzed user feedback to reveal several actionable pain points, ranging from incomplete context to lack of customization for the user’s codebase.
-* Although state-of-the-art AI-powered detection and fix tools show promise, they are not yet practical for real-world use due to a high rate of false positives and non-applicable fixes.
+
+- We explored how AI features, including confidence scores, explanations, and chat interaction, can be useful for vulnerability detection and fixing.
+- We offer practical recommendations for evaluating and deploying AI detection and fix models.
+- We analyzed user feedback to reveal several actionable pain points, ranging from incomplete context to lack of customization for the user’s codebase.
+- Although state-of-the-art AI-powered detection and fix tools show promise, they are not yet practical for real-world use due to a high rate of false positives and non-applicable fixes.

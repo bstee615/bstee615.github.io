@@ -1,13 +1,8 @@
 ---
 title: "Auto-Syncing Upstream Periodically to a Fork for Open-Source Contribution"
 description: "When using a fork to contribute to an open-source repo, it's useful for the fork's main branch to stay up to date with the upstream repository's main branch. For example, I contribute to VS Code, which merges hundreds of pull requests per week."
-date: 2026-07-01T20:44:31.000Z
-tags:
-  - "blog-post"
-  - "github-actions"
-  - "tooling"
+date: 2026-07-01
 kind: blog
-legacyUrl: "/writing/fork-sync-workflow/"
 ---
 
 When using a [fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) to contribute to an open-source repo, it's useful for the fork's `main` branch to stay up to date with the upstream repository's `main` branch. For example, I contribute to [VS Code](https://github.com/microsoft/vscode), which merges hundreds of pull requests per week.
@@ -50,6 +45,7 @@ The important invariant is `--ff-only`. The workflow must never create a merge c
 
 ### Example Workflow
 
+<!-- prettier-ignore -->
 ```yaml
 name: Sync fork main
 

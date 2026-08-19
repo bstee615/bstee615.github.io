@@ -4,12 +4,8 @@ description: >-
   Every time I open Claude Code in a new directory I get a workspace trust prompt asking me to approve permissions. It
   makes sense as a safety guardrail, but in directories I own and trust it's just friction. I made a dedicated Windows
   Terminal profile that launches Claude with --permission-mode bypassPermissions so it skips straight to work.
-date: 2026-03-28T00:00:00.000Z
-tags:
-  - blog-post
-  - tooling
+date: 2026-03-28
 kind: blog
-legacyUrl: /posts/2026/03/claude-terminal-profile/
 ---
 
 Every time I open Claude Code in a new directory I get a workspace trust prompt asking me to approve permissions. It makes sense as a safety guardrail, but in directories I own and trust it's just friction. I made a dedicated Windows Terminal profile that launches Claude with `--permission-mode bypassPermissions` so it skips straight to work.
@@ -30,11 +26,11 @@ Or add this manually to `profiles.list` in your Windows Terminal `settings.json`
 
 ```json
 {
-    "commandline": "cmd.exe /c claude --permission-mode bypassPermissions",
-    "guid": "{a1b2c3d4-e5f6-7890-abcd-ef1234567890}",
-    "hidden": false,
-    "name": "Claude",
-    "startingDirectory": "%USERPROFILE%"
+  "commandline": "cmd.exe /c claude --permission-mode bypassPermissions",
+  "guid": "{a1b2c3d4-e5f6-7890-abcd-ef1234567890}",
+  "hidden": false,
+  "name": "Claude",
+  "startingDirectory": "%USERPROFILE%"
 }
 ```
 

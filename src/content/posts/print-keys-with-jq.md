@@ -1,15 +1,12 @@
 ---
 title: Print item keys with jq
 description: I can use jq to print the keys in an array of JSON objects quickly.
-date: 2022-06-19T00:00:00.000Z
-tags:
-  - stream
-  - tools
+date: 2022-06-19
 kind: stream
-legacyUrl: /stream/print-keys-with-jq/
 ---
 
 I can use `jq` to print the keys in an array of JSON objects quickly.
+
 ```bash
 jq '.[0] | keys[]' $filename
 ```
@@ -18,6 +15,7 @@ I sometimes want to know the names of the keys on the objects in a dataset store
 
 For example, when I download a dataset in the following format:
 
+<!-- prettier-ignore -->
 ```json
 [
 	{
@@ -37,6 +35,7 @@ For example, when I download a dataset in the following format:
 ```
 
 The tool will print out:
+
 ```bash
 "id"
 "feat1"

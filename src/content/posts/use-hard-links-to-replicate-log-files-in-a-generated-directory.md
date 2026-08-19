@@ -3,12 +3,8 @@ title: Use hard links to replicate log files in a generated directory
 description: >-
   Recently I wanted to write program logs to a file, then copy it to the directory where I store my checkpoints. Because
   I want to log things before I create the checkpoint directory, I attached my logger to a file in my root directory.
-date: 2022-06-28T00:00:00.000Z
-tags:
-  - stream
-  - tips
+date: 2022-06-28
 kind: stream
-legacyUrl: /stream/use-hard-links-to-replicate-log-files-in-a-generated-directory/
 ---
 
 Recently I wanted to write program logs to a file, then copy it to the directory where I store my checkpoints. Because I want to log things before I create the checkpoint directory, I attached my logger to a file in my root directory.
@@ -21,11 +17,11 @@ logfile = "output_" + datetime.now().strftime("%Y%m%d%H%M%S") + ".log"
 logger.addHander(logging.FileHandler())
 
 try:
-	# do setup, which might involve creating a bunch of logs...
-	checkpoint_dir = create_checkpoint_dir()
-	# do work...
+    # do setup, which might involve creating a bunch of logs...
+    checkpoint_dir = create_checkpoint_dir()
+    # do work...
 finally:
-	shutil.copyfile(logfile, os.path.join(checkpoint_dir, "output.log"))
+    shutil.copyfile(logfile, os.path.join(checkpoint_dir, "output.log"))
 ```
 
 I solved the problem by creating a hard link to the log file in my root directory later in the program, after my checkpoint directory was created.

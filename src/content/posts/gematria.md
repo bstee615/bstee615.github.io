@@ -4,20 +4,17 @@ description: >-
   I've recently been studying history in the Bible by following along with the phenomenal podcast of the same name,
   History in the Bible by Garry Stevens. As part of his series, I learned about gematria, which is the ancient practice
   of assigning a number to a name based on the letters in the name.
-date: 2022-05-13T00:00:00.000Z
-tags:
-  - blog-post
-  - fun
-  - programming-problems
+date: 2022-05-13
 kind: blog
-legacyUrl: /posts/2022/05/gematria/
-image: /media/cover-gematria.webp
-imageMedium: /media/cover-gematria-1100.webp
-imageWidth: 1520
-imageHeight: 1013
-imageAlt: Torah
-imageCreditName: Tanner Mardis
-imageCreditId: "@tannermardis"
+cover:
+  src: /media/cover-gematria.webp
+  srcMedium: /media/cover-gematria-1100.webp
+  width: 1520
+  height: 1013
+  alt: Torah
+  credit:
+    name: Tanner Mardis
+    id: "@tannermardis"
 ---
 
 I've recently been studying history in the Bible by following along with the phenomenal podcast of the same name, [History in the Bible by Garry Stevens](https://www.historyinthebible.com/).
@@ -33,15 +30,15 @@ Let's explore how gematria works, frame it as a programming problem/exercise, an
 
 First, we map each Hebrew letter to a numeric value:
 
-| Decimal |     1 |   2 |     3 |     4 |  5 |   6 |     7 |   8 |   9 |  10 |  20 |  20 |
-|---------|------:|----:|------:|------:|---:|----:|------:|----:|----:|----:|----:|----:|
-| Hebrew  | Aleph | Bet | Gimel | Dalet | He | Vav | Zayin | Het | Tet | Yod | Kaf | Kaf |
-| Glyph   |     א |   ב |     ג |     ד |  ה |   ו |     ז |   ח |   ט |   י |   כ |   כ |
+| Decimal |     1 |   2 |     3 |     4 |   5 |   6 |     7 |   8 |   9 |  10 |  20 |  20 |
+| ------- | ----: | --: | ----: | ----: | --: | --: | ----: | --: | --: | --: | --: | --: |
+| Hebrew  | Aleph | Bet | Gimel | Dalet |  He | Vav | Zayin | Het | Tet | Yod | Kaf | Kaf |
+| Glyph   |     א |   ב |     ג |     ד |   ה |   ו |     ז |   ח |   ט |   י |   כ |   כ |
 
-| Decimal |    30 |  40 |  50 |     60 |   70 | 80 |    90 | 100 |  200 |  300 | 400 |  20 |
-|---------|------:|----:|----:|-------:|-----:|---:|------:|----:|-----:|-----:|----:|----:|
-| Hebrew  | Lamed | Mem | Nun | Samekh | Ayin | Pe | Tsadi | Kof | Resh | Shin | Tav | Kaf |
-| Glyph   |     ל |   מ |   נ |      ס |    ע |  פ |     צ |   ק |    ר |    ש |   ת |   כ |
+| Decimal |    30 |  40 |  50 |     60 |   70 |  80 |    90 | 100 |  200 |  300 | 400 |  20 |
+| ------- | ----: | --: | --: | -----: | ---: | --: | ----: | --: | ---: | ---: | --: | --: |
+| Hebrew  | Lamed | Mem | Nun | Samekh | Ayin |  Pe | Tsadi | Kof | Resh | Shin | Tav | Kaf |
+| Glyph   |     ל |   מ |   נ |      ס |    ע |   פ |     צ |   ק |    ר |    ש |   ת |   כ |
 
 Then, we add the values in the word together.
 
@@ -68,11 +65,14 @@ Then, we add the values in the word together.
 </div>
 
 Here are some cool examples:
-* The value of _alive_ (חי) is 18, prompting some people to donate money in multiples of 18.
-* The value of _[Ha-]Satan_ (הַשָּׂטָן) is 364, leading to the saying that out of the 365 days in the year, _Satan_ has 364 days to prosecute. Wow, he earned that 1-day vacation!
-* The value of _snake_ when transliterated from Greek (דרקון) is 360, which is probably the reason for a peculiar passage in 3 Baruch:
+
+- The value of _alive_ (חי) is 18, prompting some people to donate money in multiples of 18.
+- The value of _[Ha-]Satan_ (הַשָּׂטָן) is 364, leading to the saying that out of the 365 days in the year, _Satan_ has 364 days to prosecute. Wow, he earned that 1-day vacation!
+- The value of _snake_ when transliterated from Greek (דרקון) is 360, which is probably the reason for a peculiar passage in 3 Baruch:
+
 > And this is Hades, which itself also closely resembles him, in that it also drinks about a cubit from 7 the sea, which does not sink at all. Baruch said, And how (does this happen)? And the angel said, Hearken, the Lord God made three hundred and sixty rivers, of which the chief of 8 all are Alphias, Abyrus, and the Gericus; and because of these the sea does not sink.
-* The value of my name, _Benjamin_ (בִּנְיָמִין), is 162.
+
+- The value of my name, _Benjamin_ (בִּנְיָמִין), is 162.
 
 ### Mispar Gadol
 
@@ -81,7 +81,7 @@ One example is _Mispar Gadol_, where the final forms of certain Hebrew character
 This results in a different numeric value for one word, depending on whether you're using the traditional cipher algorithm or Mispar Gadol.
 
 | Decimal |         500 |         600 |         700 |        800 |           900 |
-|---------|------------:|------------:|------------:|-----------:|--------------:|
+| ------- | ----------: | ----------: | ----------: | ---------: | ------------: |
 | Hebrew  | Kaf (final) | Mem (final) | Nun (final) | Pe (final) | Tsadi (final) |
 | Glyph   |           ך |           ם |           ן |          ף |             ץ |
 
@@ -95,12 +95,12 @@ The inputs are given with romanized ASCII characters for simplicity.
 
 The code for this exercise can be found here: [https://github.com/bstee615/gematria](https://github.com/bstee615/gematria).
 
-* Example 1: alive
-  * Input: `het yod`
-  * Output: 18
-* Example 2: snake
-  * Input: `dalet resh kof vav nun`
-  * Output: 360
+- Example 1: alive
+  - Input: `het yod`
+  - Output: 18
+- Example 2: snake
+  - Input: `dalet resh kof vav nun`
+  - Output: 360
 
 Template code:
 
@@ -164,7 +164,8 @@ def solve(characters):
 ```
 
 This is what the output looks like:
-```
+
+```text
 Standard encoding using solve_comprehension:
 dalet resh kof vav nun 360
 he shin tet nun 364
@@ -198,7 +199,8 @@ def solve(characters):
 ```
 
 The output:
-```
+
+```text
 Mispar gadol encoding using solve_mg:
 dalet resh kof vav nun 1010
 he shin tet nun 1014

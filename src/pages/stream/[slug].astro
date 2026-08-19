@@ -1,17 +1,20 @@
 ---
 import { getCollection } from "astro:content";
+import { legacyPostPath } from "../../utils/posts";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
 
   return posts.flatMap((post) => {
-    const match = post.data.legacyUrl.match(/^\/stream\/([^/]+)\/?$/);
+    const match = legacyPostPath(post)?.match(/^\/stream\/([^/]+)\/?$/);
     if (!match) return [];
 
-    return [{
-      params: { slug: match[1] },
-      props: { target: `/writing/${post.id}/` },
-    }];
+    return [
+      {
+        params: { slug: match[1] },
+        props: { target: `/writing/${post.id}/` },
+      },
+    ];
   });
 }
 

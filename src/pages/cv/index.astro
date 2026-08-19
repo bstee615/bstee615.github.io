@@ -6,7 +6,10 @@ import { organizations } from "../../data/site";
 import { cvPublicationVenueTypes } from "../../utils/publications";
 
 const publications = (await getCollection("publications"))
-  .filter(({ data }) => cvPublicationVenueTypes.has(data.venueType) && !data.excludeFromCv)
+  .filter(
+    ({ data }) =>
+      cvPublicationVenueTypes.has(data.venueType) && !data.excludeFromCv,
+  )
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const selectedPublications = publications.filter(({ data }) => data.selected);
@@ -38,38 +41,50 @@ const highlightName = (citation: string) =>
     <section>
       <h2>Professional Experience</h2>
       <div class="cv-entries">
-        {primaryPositions.map((position) => (
-          <article class="cv-entry">
-            <div class="cv-entry__heading">
-              <h3>{position.title}</h3>
-              {position.date && <time>{position.date}</time>}
-            </div>
-            <div class="cv-entry__meta">
-              <span><a href={position.organization.url}>{position.organization.name}</a></span>
-              <span>{position.location}</span>
-            </div>
-            <div class="cv-details" set:html={position.text}></div>
-          </article>
-        ))}
+        {
+          primaryPositions.map((position) => (
+            <article class="cv-entry">
+              <div class="cv-entry__heading">
+                <h3>{position.title}</h3>
+                {position.date && <time>{position.date}</time>}
+              </div>
+              <div class="cv-entry__meta">
+                <span>
+                  <a href={position.organization.url}>
+                    {position.organization.name}
+                  </a>
+                </span>
+                <span>{position.location}</span>
+              </div>
+              <div class="cv-details" set:html={position.text} />
+            </article>
+          ))
+        }
       </div>
       <details>
         <summary>More professional experience</summary>
         <div class="details-content">
           <div class="details-content__inner">
             <div class="cv-entries">
-              {morePositions.map((position) => (
-                <article class="cv-entry">
-                  <div class="cv-entry__heading">
-                    <h3>{position.title}</h3>
-                    {position.date && <time>{position.date}</time>}
-                  </div>
-                  <div class="cv-entry__meta">
-                    <span><a href={position.organization.url}>{position.organization.name}</a></span>
-                    <span>{position.location}</span>
-                  </div>
-                  <div class="cv-details" set:html={position.text}></div>
-                </article>
-              ))}
+              {
+                morePositions.map((position) => (
+                  <article class="cv-entry">
+                    <div class="cv-entry__heading">
+                      <h3>{position.title}</h3>
+                      {position.date && <time>{position.date}</time>}
+                    </div>
+                    <div class="cv-entry__meta">
+                      <span>
+                        <a href={position.organization.url}>
+                          {position.organization.name}
+                        </a>
+                      </span>
+                      <span>{position.location}</span>
+                    </div>
+                    <div class="cv-details" set:html={position.text} />
+                  </article>
+                ))
+              }
             </div>
           </div>
         </div>
@@ -79,63 +94,80 @@ const highlightName = (citation: string) =>
     <section>
       <h2>Education</h2>
       <div class="cv-entries">
-        {education.map((position) => (
-          <article class="cv-entry">
-            <div class="cv-entry__heading">
-              <h3>{position.title}</h3>
-              <time>{position.date}</time>
-            </div>
-            <div class="cv-entry__meta">
-              <span><a href={position.organization.url}>{position.organization.name}</a></span>
-              <span>{position.location}</span>
-            </div>
-            <div class="cv-details" set:html={position.text}></div>
-          </article>
-        ))}
+        {
+          education.map((position) => (
+            <article class="cv-entry">
+              <div class="cv-entry__heading">
+                <h3>{position.title}</h3>
+                <time>{position.date}</time>
+              </div>
+              <div class="cv-entry__meta">
+                <span>
+                  <a href={position.organization.url}>
+                    {position.organization.name}
+                  </a>
+                </span>
+                <span>{position.location}</span>
+              </div>
+              <div class="cv-details" set:html={position.text} />
+            </article>
+          ))
+        }
       </div>
     </section>
 
     <section>
       <h2>Selected Publications</h2>
       <ol class="cv-publications">
-        {selectedPublications.map((publication) => (
-          <li>
-            <h3>
-              <a href={`/publication/${publication.id}/`}>{publication.data.title}</a>
-              <span class="publication-links">
-                {publication.data.links.map((link) => (
-                  <a class="btn btn-secondary btn-xs" href={link.url}>{link.label}</a>
-                ))}
-              </span>
-            </h3>
-            <p set:html={highlightName(publication.data.citation)}></p>
-          </li>
-        ))}
+        {
+          selectedPublications.map((publication) => (
+            <li>
+              <h3>
+                <a href={`/publication/${publication.id}/`}>
+                  {publication.data.title}
+                </a>
+                <span class="publication-links">
+                  {publication.data.links.map((link) => (
+                    <a class="btn btn-secondary btn-xs" href={link.url}>
+                      {link.label}
+                    </a>
+                  ))}
+                </span>
+              </h3>
+              <p set:html={highlightName(publication.data.citation)} />
+            </li>
+          ))
+        }
       </ol>
       <details>
         <summary>More publications</summary>
         <div class="details-content">
           <div class="details-content__inner">
             <ol class="cv-publications">
-              {morePublications.map((publication) => (
-                <li>
-                  <h3>
-                    <a href={`/publication/${publication.id}/`}>{publication.data.title}</a>
-                    <span class="publication-links">
-                      {publication.data.links.map((link) => (
-                        <a class="btn btn-secondary btn-xs" href={link.url}>{link.label}</a>
-                      ))}
-                    </span>
-                  </h3>
-                  <p set:html={highlightName(publication.data.citation)}></p>
-                </li>
-              ))}
+              {
+                morePublications.map((publication) => (
+                  <li>
+                    <h3>
+                      <a href={`/publication/${publication.id}/`}>
+                        {publication.data.title}
+                      </a>
+                      <span class="publication-links">
+                        {publication.data.links.map((link) => (
+                          <a class="btn btn-secondary btn-xs" href={link.url}>
+                            {link.label}
+                          </a>
+                        ))}
+                      </span>
+                    </h3>
+                    <p set:html={highlightName(publication.data.citation)} />
+                  </li>
+                ))
+              }
             </ol>
           </div>
         </div>
       </details>
     </section>
-
   </article>
 </BaseLayout>
 

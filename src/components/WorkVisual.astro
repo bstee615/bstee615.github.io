@@ -7,19 +7,28 @@ interface Props {
 const { kind, title } = Astro.props;
 ---
 
-<div class:list={["work-visual", `work-visual--${kind}`]} role="img" aria-label={`Concept illustration for ${title}`}>
+<div
+  class:list={["work-visual", `work-visual--${kind}`]}
+  role="img"
+  aria-label={`Concept illustration for ${title}`}
+>
   {
     kind === "trace" && (
       <svg viewBox="0 0 640 400" aria-hidden="true">
         <path class="trace-line" d="M72 92H190L234 150H362L408 88H560" />
-        <path class="trace-line trace-line--soft" d="M72 280H174L242 220H366L438 294H560" />
+        <path
+          class="trace-line trace-line--soft"
+          d="M72 280H174L242 220H366L438 294H560"
+        />
         <circle cx="72" cy="92" r="13" />
         <circle cx="234" cy="150" r="13" />
         <circle cx="408" cy="88" r="13" />
         <circle cx="174" cy="280" r="13" />
         <circle cx="366" cy="220" r="13" />
         <rect x="254" y="164" width="132" height="48" rx="12" />
-        <text x="320" y="194" text-anchor="middle">semantics</text>
+        <text x="320" y="194" text-anchor="middle">
+          semantics
+        </text>
       </svg>
     )
   }
@@ -27,8 +36,18 @@ const { kind, title } = Astro.props;
     kind === "mutation" && (
       <svg viewBox="0 0 640 400" aria-hidden="true">
         <rect class="panel" x="54" y="70" width="214" height="260" rx="18" />
-        <rect class="panel panel--strong" x="372" y="70" width="214" height="260" rx="18" />
-        <path class="copy-line" d="M98 125H226M98 166H210M98 207H232M98 248H188" />
+        <rect
+          class="panel panel--strong"
+          x="372"
+          y="70"
+          width="214"
+          height="260"
+          rx="18"
+        />
+        <path
+          class="copy-line"
+          d="M98 125H226M98 166H210M98 207H232M98 248H188"
+        />
         <path class="copy-line" d="M416 125H544M416 166H512M416 207H548" />
         <path class="arrow" d="M286 200H346M326 178L348 200L326 222" />
         <circle cx="460" cy="270" r="24" />
@@ -39,19 +58,27 @@ const { kind, title } = Astro.props;
   {
     kind === "feedback" && (
       <svg viewBox="0 0 640 400" aria-hidden="true">
-        <path class="loop" d="M188 268C108 198 158 84 274 78C392 72 478 138 464 238" />
+        <path
+          class="loop"
+          d="M188 268C108 198 158 84 274 78C392 72 478 138 464 238"
+        />
         <path class="arrow" d="M438 214L465 242L491 214" />
         <rect class="panel" x="212" y="136" width="216" height="126" rx="22" />
         <path class="copy-line" d="M254 178H384M254 216H346" />
         <circle cx="172" cy="286" r="44" />
-        <text x="172" y="294" text-anchor="middle">+21%</text>
+        <text x="172" y="294" text-anchor="middle">
+          +21%
+        </text>
       </svg>
     )
   }
   {
     kind === "dataflow" && (
       <svg viewBox="0 0 640 400" aria-hidden="true">
-        <path class="edge" d="M128 200L248 104M128 200L248 296M248 104L390 144M248 296L390 256M390 144L518 200M390 256L518 200" />
+        <path
+          class="edge"
+          d="M128 200L248 104M128 200L248 296M248 104L390 144M248 296L390 256M390 144L518 200M390 256L518 200"
+        />
         <circle cx="128" cy="200" r="38" />
         <circle cx="248" cy="104" r="30" />
         <circle cx="248" cy="296" r="30" />
@@ -86,23 +113,55 @@ const { kind, title } = Astro.props;
   }
 
   .work-visual--trace {
-    --visual-bg: color-mix(in oklch, var(--color-primary) 20%, var(--color-base-100));
-    --visual-ink: color-mix(in oklch, var(--color-primary) 84%, var(--color-base-content));
+    --visual-bg: color-mix(
+      in oklch,
+      var(--color-primary) 20%,
+      var(--color-base-100)
+    );
+    --visual-ink: color-mix(
+      in oklch,
+      var(--color-primary) 84%,
+      var(--color-base-content)
+    );
   }
 
   .work-visual--mutation {
-    --visual-bg: color-mix(in srgb, var(--color-secondary) 30%, var(--color-base-100));
-    --visual-ink: color-mix(in srgb, var(--color-secondary) 68%, var(--color-base-content));
+    --visual-bg: color-mix(
+      in srgb,
+      var(--color-secondary) 30%,
+      var(--color-base-100)
+    );
+    --visual-ink: color-mix(
+      in srgb,
+      var(--color-secondary) 68%,
+      var(--color-base-content)
+    );
   }
 
   .work-visual--feedback {
-    --visual-bg: color-mix(in srgb, var(--color-secondary) 20%, var(--color-base-100));
-    --visual-ink: color-mix(in srgb, var(--color-secondary) 68%, var(--color-base-content));
+    --visual-bg: color-mix(
+      in srgb,
+      var(--color-secondary) 20%,
+      var(--color-base-100)
+    );
+    --visual-ink: color-mix(
+      in srgb,
+      var(--color-secondary) 68%,
+      var(--color-base-content)
+    );
   }
 
   .work-visual--dataflow {
-    --visual-bg: color-mix(in oklch, var(--color-accent) 24%, var(--color-base-100));
-    --visual-ink: color-mix(in oklch, var(--color-accent) 78%, var(--color-base-content));
+    --visual-bg: color-mix(
+      in oklch,
+      var(--color-accent) 24%,
+      var(--color-base-100)
+    );
+    --visual-ink: color-mix(
+      in oklch,
+      var(--color-accent) 78%,
+      var(--color-base-content)
+    );
   }
 
   svg {
@@ -159,5 +218,4 @@ const { kind, title } = Astro.props;
     fill: currentColor;
     font: 700 20px var(--font-sans);
   }
-
 </style>

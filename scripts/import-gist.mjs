@@ -11,9 +11,7 @@ Options:
   --title <title>         Post title (defaults to the first Markdown H1)
   --description <text>    Post description (defaults to the first paragraph)
   --date <date>           Publication date (defaults to the gist creation date)
-  --tags <a,b,c>          Comma-separated tags (defaults to blog-post,gist)
   --kind <blog|stream>    Post kind (defaults to blog)
-  --legacy-url <path>     Legacy URL (defaults to /writing/<slug>/)
   --keep-heading          Keep the leading H1 in the post body
 `;
 
@@ -33,7 +31,9 @@ for (let index = 0; index < tokens.length; index += 1) {
   if (!token.startsWith("--") || !tokens[index + 1]) {
     throw new Error(`Invalid option: ${token}\n\n${usage}`);
   }
-  options[token.slice(2).replace(/-([a-z])/g, (_, letter) => letter.toUpperCase())] = tokens[index + 1];
+  options[
+    token.slice(2).replace(/-([a-z])/g, (_, letter) => letter.toUpperCase())
+  ] = tokens[index + 1];
   index += 1;
 }
 
@@ -54,11 +54,15 @@ const response = await fetch(`https://api.github.com/gists/${gistId}`, {
   },
 });
 if (!response.ok) {
-  throw new Error(`GitHub returned ${response.status} while fetching gist ${gistId}.`);
+  throw new Error(
+    `GitHub returned ${response.status} while fetching gist ${gistId}.`,
+  );
 }
 
 const gist = await response.json();
-const markdownFiles = Object.values(gist.files).filter((file) => /\.md$/i.test(file.filename));
+const markdownFiles = Object.values(gist.files).filter((file) =>
+  /\.md$/i.test(file.filename),
+);
 const gistFile = options.filename
   ? gist.files[options.filename]
   : markdownFiles.length === 1
@@ -66,12 +70,15 @@ const gistFile = options.filename
     : undefined;
 if (!gistFile) {
   const available = Object.keys(gist.files).join(", ");
-  throw new Error(`Select one Markdown file with --filename. Available files: ${available}`);
+  throw new Error(
+    `Select one Markdown file with --filename. Available files: ${available}`,
+  );
 }
 
 const rawContent = gistFile.truncated
   ? await fetch(gistFile.raw_url).then((rawResponse) => {
-      if (!rawResponse.ok) throw new Error(`Could not fetch ${gistFile.raw_url}.`);
+      if (!rawResponse.ok)
+        throw new Error(`Could not fetch ${gistFile.raw_url}.`);
       return rawResponse.text();
     })
   : gistFile.content;
@@ -82,23 +89,26 @@ if (!title) {
   throw new Error("No title supplied and no Markdown H1 was found.");
 }
 
-const body = options.keepHeading || !headingMatch
-  ? normalizedContent
-  : normalizedContent.replace(`${headingMatch[0]}\n`, "").trimStart();
+const body =
+  options.keepHeading || !headingMatch
+    ? normalizedContent
+    : normalizedContent.replace(`${headingMatch[0]}\n`, "").trimStart();
 const firstParagraph = body
   .split(/\n\s*\n/)
   .map((paragraph) => paragraph.replace(/\s*\n\s*/g, " ").trim())
   .find((paragraph) => paragraph && !/^(?:[-*#>]|\d+\.)\s/.test(paragraph));
-const description = options.description ?? firstParagraph
-  ?.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
-  .replace(/[*_`]/g, "");
+const description =
+  options.description ??
+  firstParagraph?.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1").replace(/[*_`]/g, "");
 if (!description) {
   throw new Error("No description supplied and no prose paragraph was found.");
 }
 
 const slug = options.slug ?? gistFile.filename.replace(/\.md$/i, "");
 if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
-  throw new Error(`Slug "${slug}" must contain only lowercase letters, numbers, and hyphens.`);
+  throw new Error(
+    `Slug "${slug}" must contain only lowercase letters, numbers, and hyphens.`,
+  );
 }
 
 const kind = options.kind ?? "blog";
@@ -106,10 +116,6 @@ if (!["blog", "stream"].includes(kind)) {
   throw new Error(`Kind must be "blog" or "stream", not "${kind}".`);
 }
 
-const tags = (options.tags ?? "blog-post,gist")
-  .split(",")
-  .map((tag) => tag.trim())
-  .filter(Boolean);
 const date = new Date(options.date ?? gist.created_at);
 if (Number.isNaN(date.valueOf())) {
   throw new Error(`Invalid date: ${options.date}`);
@@ -120,15 +126,14 @@ const frontmatter = [
   "---",
   `title: ${yamlString(title)}`,
   `description: ${yamlString(description)}`,
-  `date: ${date.toISOString()}`,
-  "tags:",
-  ...tags.map((tag) => `  - ${yamlString(tag)}`),
+  `date: ${date.toISOString().slice(0, 10)}`,
   `kind: ${kind}`,
-  `legacyUrl: ${yamlString(options.legacyUrl ?? `/writing/${slug}/`)}`,
   "---",
 ].join("\n");
 
 const outputPath = path.resolve("src", "content", "posts", `${slug}.md`);
 await mkdir(path.dirname(outputPath), { recursive: true });
 await writeFile(outputPath, `${frontmatter}\n\n${body}\n`, "utf8");
-console.log(`Imported ${gist.html_url}#file-${gistFile.filename.replaceAll(".", "-")} to ${outputPath}`);
+console.log(
+  `Imported ${gist.html_url}#file-${gistFile.filename.replaceAll(".", "-")} to ${outputPath}`,
+);

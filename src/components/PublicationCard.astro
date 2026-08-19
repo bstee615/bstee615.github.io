@@ -13,24 +13,38 @@ const { data } = publication;
 const venue = formatVenueWithYear(data.venue, data.date);
 ---
 
-<article class:list={[
-  "publication-card",
+<article
+  class:list={[
+    "publication-card",
+    {
+      "publication-card--reverse": data.visual && index % 2 === 1,
+      "publication-card--text-only": !data.visual,
+    },
+  ]}
+>
   {
-    "publication-card--reverse": data.visual && index % 2 === 1,
-    "publication-card--text-only": !data.visual,
-  },
-]}>
-  {data.visual && (
-    <a class="publication-card__visual" href={`/publication/${publication.id}/`} aria-label={`Read about ${data.title}`}>
-      <WorkVisual kind={data.visual} title={data.title} />
-    </a>
-  )}
+    data.visual && (
+      <a
+        class="publication-card__visual"
+        href={`/publication/${publication.id}/`}
+        aria-label={`Read about ${data.title}`}
+      >
+        <WorkVisual kind={data.visual} title={data.title} />
+      </a>
+    )
+  }
   <div class="publication-card__content">
     <div class="eyebrow">{String(index + 1).padStart(2, "0")} / {venue}</div>
     <h3><a href={`/publication/${publication.id}/`}>{data.title}</a></h3>
     <p>{data.summary}</p>
     <div class="text-links">
-      {data.links.map((link) => <a class="btn btn-secondary btn-sm" href={link.url}>{link.label}</a>)}
+      {
+        data.links.map((link) => (
+          <a class="btn btn-secondary btn-sm" href={link.url}>
+            {link.label}
+          </a>
+        ))
+      }
     </div>
   </div>
 </article>

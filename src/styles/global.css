@@ -135,7 +135,11 @@ textarea {
 
 .btn-ghost:hover,
 .btn-ghost:focus-visible {
-  --btn-background: color-mix(in oklch, var(--color-base-content) 10%, transparent);
+  --btn-background: color-mix(
+    in oklch,
+    var(--color-base-content) 10%,
+    transparent
+  );
 }
 
 .btn-sm {
