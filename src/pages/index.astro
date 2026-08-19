@@ -28,9 +28,9 @@ const activityItems = [
   ...projects.map((project) => {
     const date = new Date(`${project.published}T00:00:00.000Z`);
     return {
-      title: project.title,
+      title: `${project.title}: ${project.description}`,
       href: project.href,
-      description: `${formatMonthYear(date)} · Project · ${project.description}`,
+      description: `${formatMonthYear(date)} · Project`,
       date,
     };
   }),
