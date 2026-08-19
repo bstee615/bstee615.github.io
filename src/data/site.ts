@@ -108,6 +108,12 @@ export const projects = [
     published: "2026-03-22",
   },
   {
+    title: "shared-task-spooler",
+    description: "Convenience script for managing a shared job queue with task-spooler.",
+    href: "https://github.com/bstee615/shared-task-spooler",
+    published: "2023-12-16",
+  },
+  {
     title: "task-spooler-gui",
     description: "Web interface for monitoring and accessing task-spooler queues.",
     href: "https://github.com/bstee615/task-spooler-gui",
