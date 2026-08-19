@@ -139,7 +139,7 @@ export const projects = [
   },
   {
     title: "rarl",
-    description: "Robust adversarial reinforcement learning reproduction.",
+    description: 'Reproduction of "robust adversarial reinforcement learning"',
     href: "https://github.com/bstee615/rarl",
     published: "2020-11-24",
   },
