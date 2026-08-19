@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import WorkVisual from "./WorkVisual.astro";
+import { publicationPath } from "../routes";
 import { formatVenueWithYear } from "../utils/publications";
 
 interface Props {
@@ -26,7 +27,7 @@ const venue = formatVenueWithYear(data.venue, data.date);
     data.visual && (
       <a
         class="publication-card__visual"
-        href={`/publication/${publication.id}/`}
+        href={publicationPath(publication.id)}
         aria-label={`Read about ${data.title}`}
       >
         <WorkVisual kind={data.visual} title={data.title} />
@@ -35,7 +36,7 @@ const venue = formatVenueWithYear(data.venue, data.date);
   }
   <div class="publication-card__content">
     <div class="eyebrow">{String(index + 1).padStart(2, "0")} / {venue}</div>
-    <h3><a href={`/publication/${publication.id}/`}>{data.title}</a></h3>
+    <h3><a href={publicationPath(publication.id)}>{data.title}</a></h3>
     <p>{data.summary}</p>
     <div class="text-links">
       {

@@ -2,6 +2,14 @@ import type { CollectionEntry } from "astro:content";
 
 type Post = CollectionEntry<"posts">;
 
+const postKindLabels = {
+  blog: "Blog",
+  stream: "Note",
+} as const satisfies Record<Post["data"]["kind"], string>;
+
+export const postKindLabel = (kind: Post["data"]["kind"]) =>
+  postKindLabels[kind];
+
 const legacyPostOverrides: Record<
   string,
   { format: "post"; slug?: string } | { format: "none" }

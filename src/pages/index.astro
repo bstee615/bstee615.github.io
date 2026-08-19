@@ -3,15 +3,17 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import InlineMarkdown from "../components/InlineMarkdown.astro";
 import SocialIcon from "../components/SocialIcon.astro";
-import { externalLinks, organizations, projects, service } from "../data/site";
+import {
+  externalLinks,
+  organizations,
+  projects,
+  service,
+  siteMetadata,
+} from "../data/site";
+import { publicationPath, routes, writingPath } from "../routes";
+import { formatDate, parseDateOnly } from "../utils/dates";
+import { postKindLabel } from "../utils/posts";
 import { formatVenueWithYear } from "../utils/publications";
-
-const formatMonthYear = (date: Date) =>
-  date.toLocaleDateString("en-US", {
-    month: "short",
-    year: "numeric",
-    timeZone: "UTC",
-  });
 
 const publications = (await getCollection("publications"))
   .filter(({ data }) => data.selected)
@@ -22,16 +24,16 @@ const posts = (await getCollection("posts")).sort(
 const activityItems = [
   ...posts.map((post) => ({
     title: post.data.title,
-    href: `/writing/${post.id}/`,
-    description: `${formatMonthYear(post.data.date)} · ${post.data.kind === "stream" ? "Note" : "Blog"}`,
+    href: writingPath(post.id),
+    description: `${formatDate(post.data.date, "monthYear")} · ${postKindLabel(post.data.kind)}`,
     date: post.data.date,
   })),
   ...projects.map((project) => {
-    const date = new Date(`${project.published}T00:00:00.000Z`);
+    const date = parseDateOnly(project.published);
     return {
       title: `${project.title}: ${project.description}`,
       href: project.href,
-      description: `${formatMonthYear(date)} · Project`,
+      description: `${formatDate(date, "monthYear")} · Project`,
       date,
     };
   }),
@@ -56,7 +58,7 @@ const publicationsByYear = Array.from(
           src="/media/profile-330.webp"
           srcset="/media/profile-330.webp 330w, /media/profile.webp 512w"
           sizes="(max-width: 680px) 110px, clamp(12rem, 21vw, 13rem)"
-          alt="Benjamin Steenhoek"
+          alt={siteMetadata.name}
           width="512"
           height="512"
           decoding="async"
@@ -106,7 +108,7 @@ const publicationsByYear = Array.from(
           <h2>Posts &amp; Projects</h2>
           <a
             class="btn btn-secondary btn-sm"
-            href="/writing/"
+            href={routes.writing}
             data-slide-navigation>See all</a
           >
         </header>
@@ -141,7 +143,7 @@ const publicationsByYear = Array.from(
                   <span>{item.role}</span>
                 </div>
                 <time datetime={item.date}>
-                  {formatMonthYear(new Date(`${item.date}T00:00:00.000Z`))}
+                  {formatDate(parseDateOnly(item.date), "monthYear")}
                 </time>
               </li>
             ))
@@ -168,7 +170,7 @@ const publicationsByYear = Array.from(
                   <article class="publication-row">
                     <div class="publication-row__main">
                       <h4>
-                        <a href={`/publication/${publication.id}/`}>
+                        <a href={publicationPath(publication.id)}>
                           {publication.data.title}
                         </a>
                       </h4>
@@ -185,7 +187,7 @@ const publicationsByYear = Array.from(
                             {index > 0 && ", "}
                             <strong
                               class:list={{
-                                "is-me": author === "Benjamin Steenhoek",
+                                "is-me": author === siteMetadata.name,
                               }}
                             >
                               {author}

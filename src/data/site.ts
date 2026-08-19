@@ -1,3 +1,9 @@
+export const siteMetadata = {
+  name: "Benjamin Steenhoek",
+  defaultDescription: "Senior Researcher at Microsoft.",
+  citationNames: ["Benjamin Steenhoek", "Steenhoek, Benjamin", "Steenhoek, B."],
+} as const;
+
 export const externalLinks = {
   scholar: "https://scholar.google.com/citations?user=uJk56S4AAAAJ",
   linkedin: "https://www.linkedin.com/in/ben-steenhoek",
@@ -76,6 +82,8 @@ const serviceVenues = {
   },
 } as const;
 
+type ServiceVenueId = keyof typeof serviceVenues;
+
 const serviceRecords = [
   { date: "2026-07-24", venue: "tosem", role: "Reviewer" },
   { date: "2026-06-22", venue: "ese", role: "Reviewer" },
@@ -89,7 +97,11 @@ const serviceRecords = [
   { date: "2025-04-27", venue: "forge25", role: "Program committee" },
   { date: "2024-12-30", venue: "ese", role: "Reviewer" },
   { date: "2023-12-18", venue: "tifs", role: "Reviewer" },
-] as const;
+] as const satisfies readonly {
+  date: string;
+  venue: ServiceVenueId;
+  role: string;
+}[];
 
 export const service = serviceRecords.map(({ date, venue, role }) => ({
   ...serviceVenues[venue],

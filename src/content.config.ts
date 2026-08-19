@@ -1,7 +1,10 @@
 import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
-import { publicationVenueTypes } from "./utils/publications";
+import {
+  publicationVenueTypes,
+  publicationVisuals,
+} from "./utils/publications";
 
 const linkSchema = z.object({
   label: z.string().min(1),
@@ -35,7 +38,7 @@ const publications = defineCollection({
     links: z.array(linkSchema).default([]),
     selected: z.boolean().default(false),
     excludeFromCv: z.boolean().default(false),
-    visual: z.enum(["trace", "mutation", "feedback", "dataflow"]).optional(),
+    visual: z.enum(publicationVisuals).optional(),
   }),
 });
 

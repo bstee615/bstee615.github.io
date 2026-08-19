@@ -1,5 +1,7 @@
 ---
 import { getCollection } from "astro:content";
+import RedirectLayout from "../../layouts/RedirectLayout.astro";
+import { writingPath } from "../../routes";
 import { legacyPostPath } from "../../utils/posts";
 
 export async function getStaticPaths() {
@@ -12,7 +14,7 @@ export async function getStaticPaths() {
     return [
       {
         params: { slug: match[1] },
-        props: { target: `/writing/${post.id}/` },
+        props: { target: writingPath(post.id) },
       },
     ];
   });
@@ -21,15 +23,4 @@ export async function getStaticPaths() {
 const { target } = Astro.props;
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="refresh" content={`0;url=${target}`} />
-    <link rel="canonical" href={target} />
-    <title>Redirecting</title>
-  </head>
-  <body>
-    <p>Redirecting to <a href={target}>{target}</a>.</p>
-  </body>
-</html>
+<RedirectLayout target={target} />

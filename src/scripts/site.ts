@@ -2,6 +2,7 @@ import type {
   TransitionBeforePreparationEvent,
   TransitionBeforeSwapEvent,
 } from "astro:transitions/client";
+import { mainPageRoutes, routes } from "../routes";
 
 type DetailBackTarget = {
   destination: string;
@@ -9,11 +10,9 @@ type DetailBackTarget = {
   label: string;
 };
 
-const pageOrder = new Map([
-  ["/", 0],
-  ["/cv/", 1],
-  ["/writing/", 2],
-]);
+const pageOrder = new Map<string, number>(
+  mainPageRoutes.map((route, index) => [route, index]),
+);
 const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const copyResetTimers = new WeakMap<HTMLButtonElement, number>();
@@ -26,7 +25,7 @@ const isDetailPage = (pathname: string) =>
   /^\/(?:publication|writing)\/[^/]+\/?$/.test(pathname);
 
 const isMainPage = (pathname: string) =>
-  pageOrder.has(pathname) || pathname === "/publications/";
+  pageOrder.has(pathname) || pathname === routes.publications;
 
 const savedTheme = () => {
   const value = document.cookie
@@ -56,8 +55,9 @@ const applySystemTheme = () => {
 };
 
 const pageLabel = () => {
-  const label = document.title.replace(/ · Benjamin Steenhoek$/, "");
-  return label === "Benjamin Steenhoek" ? "Home" : label;
+  const siteName = document.documentElement.dataset.siteName ?? "";
+  const label = document.title.replace(` · ${siteName}`, "");
+  return label === siteName ? "Home" : label;
 };
 
 const detailBackTarget = (): DetailBackTarget | undefined => {
@@ -98,8 +98,8 @@ const configureDetailBackButton = () => {
   if (!(button instanceof HTMLAnchorElement)) return;
 
   const fallback = window.location.pathname.startsWith("/publication/")
-    ? { href: "/publications/", label: "Publications" }
-    : { href: "/writing/", label: "Blog" };
+    ? { href: routes.publications, label: "Publications" }
+    : { href: routes.writing, label: "Blog" };
   const target = detailBackTarget();
   const label = button.querySelector("[data-detail-back-label]");
   button.hidden = !isDetailPage(window.location.pathname);

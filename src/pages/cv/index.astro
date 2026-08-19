@@ -1,8 +1,10 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import CvCitation from "../../components/CvCitation.astro";
 import cv, { type CvEntry } from "../../data/cv";
-import { organizations } from "../../data/site";
+import { organizations, siteMetadata } from "../../data/site";
+import { publicationPath } from "../../routes";
 import { cvPublicationVenueTypes } from "../../utils/publications";
 
 const publications = (await getCollection("publications"))
@@ -23,18 +25,12 @@ const positions = withOrganizations(cv.positions);
 const education = withOrganizations(cv.education);
 const primaryPositions = positions.filter((position) => !position.more);
 const morePositions = positions.filter((position) => position.more);
-
-const highlightName = (citation: string) =>
-  citation
-    .replaceAll("Benjamin Steenhoek", "<mark>Benjamin Steenhoek</mark>")
-    .replaceAll("Steenhoek, Benjamin", "<mark>Steenhoek, Benjamin</mark>")
-    .replaceAll("Steenhoek, B.", "<mark>Steenhoek, B.</mark>");
 ---
 
 <BaseLayout title="CV" description="Curriculum vitae for Benjamin Steenhoek.">
   <article class="cv">
     <header class="cv-header">
-      <h1>Benjamin Steenhoek</h1>
+      <h1>{siteMetadata.name}</h1>
       <p>Building next-generation coding and agent systems.</p>
     </header>
 
@@ -56,7 +52,7 @@ const highlightName = (citation: string) =>
                 </span>
                 <span>{position.location}</span>
               </div>
-              <div class="cv-details" set:html={position.text} />
+              <div class="cv-details" set:html={position.bodyHtml} />
             </article>
           ))
         }
@@ -81,7 +77,7 @@ const highlightName = (citation: string) =>
                       </span>
                       <span>{position.location}</span>
                     </div>
-                    <div class="cv-details" set:html={position.text} />
+                    <div class="cv-details" set:html={position.bodyHtml} />
                   </article>
                 ))
               }
@@ -109,7 +105,7 @@ const highlightName = (citation: string) =>
                 </span>
                 <span>{position.location}</span>
               </div>
-              <div class="cv-details" set:html={position.text} />
+              <div class="cv-details" set:html={position.bodyHtml} />
             </article>
           ))
         }
@@ -123,7 +119,7 @@ const highlightName = (citation: string) =>
           selectedPublications.map((publication) => (
             <li>
               <h3>
-                <a href={`/publication/${publication.id}/`}>
+                <a href={publicationPath(publication.id)}>
                   {publication.data.title}
                 </a>
                 <span class="publication-links">
@@ -134,7 +130,7 @@ const highlightName = (citation: string) =>
                   ))}
                 </span>
               </h3>
-              <p set:html={highlightName(publication.data.citation)} />
+              <CvCitation citation={publication.data.citation} />
             </li>
           ))
         }
@@ -148,7 +144,7 @@ const highlightName = (citation: string) =>
                 morePublications.map((publication) => (
                   <li>
                     <h3>
-                      <a href={`/publication/${publication.id}/`}>
+                      <a href={publicationPath(publication.id)}>
                         {publication.data.title}
                       </a>
                       <span class="publication-links">
@@ -159,7 +155,7 @@ const highlightName = (citation: string) =>
                         ))}
                       </span>
                     </h3>
-                    <p set:html={highlightName(publication.data.citation)} />
+                    <CvCitation citation={publication.data.citation} />
                   </li>
                 ))
               }
@@ -301,17 +297,6 @@ const highlightName = (citation: string) =>
   .cv-publications h3 > a:first-child {
     min-width: 0;
     flex: 1 1 auto;
-  }
-
-  .cv-publications p {
-    margin: 0.2rem 0 0;
-    color: var(--muted);
-    font-size: 0.84rem;
-  }
-
-  .cv-publications :global(mark) {
-    background: none;
-    color: var(--accent);
   }
 
   .publication-links {

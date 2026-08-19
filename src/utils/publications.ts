@@ -10,6 +10,15 @@ export const publicationVenueTypes = [
 
 export type PublicationVenueType = (typeof publicationVenueTypes)[number];
 
+export const publicationVisuals = [
+  "trace",
+  "mutation",
+  "feedback",
+  "dataflow",
+] as const;
+
+export type PublicationVisual = (typeof publicationVisuals)[number];
+
 export const cvPublicationVenueTypes = new Set<PublicationVenueType>([
   "conference-paper",
   "workshop-paper",

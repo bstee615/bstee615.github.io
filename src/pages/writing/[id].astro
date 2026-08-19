@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import InlineMarkdown from "../../components/InlineMarkdown.astro";
+import { formatDate } from "../../utils/dates";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
@@ -24,14 +25,7 @@ const { Content } = await render(post);
     <header>
       <h1><InlineMarkdown text={post.data.title} /></h1>
       <time datetime={post.data.date.toISOString()}>
-        {
-          post.data.date.toLocaleDateString("en-US", {
-            month: "long",
-            day: "numeric",
-            year: "numeric",
-            timeZone: "UTC",
-          })
-        }
+        {formatDate(post.data.date, "full")}
       </time>
     </header>
     {
@@ -134,11 +128,6 @@ const { Content } = await render(post);
     background: transparent;
     font-size: 1em;
     line-height: 1.6;
-  }
-
-  .body :global(.code-sample > pre) {
-    margin: 0;
-    padding-right: 5rem;
   }
 
   .body :global(table) {

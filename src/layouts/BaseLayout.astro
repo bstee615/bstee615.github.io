@@ -2,6 +2,8 @@
 import "../styles/global.css";
 import katexStylesheet from "katex/dist/katex.min.css?url";
 import { ClientRouter } from "astro:transitions";
+import { siteMetadata } from "../data/site";
+import { routes } from "../routes";
 
 interface Props {
   title?: string;
@@ -10,15 +12,15 @@ interface Props {
 }
 
 const {
-  title = "Benjamin Steenhoek",
-  description = "Senior Researcher at Microsoft.",
+  title = siteMetadata.name,
+  description = siteMetadata.defaultDescription,
   math = false,
 } = Astro.props;
 const plainTitle = title.replace(/`([^`]+)`/g, "$1");
 const pageTitle =
-  plainTitle === "Benjamin Steenhoek"
+  plainTitle === siteMetadata.name
     ? plainTitle
-    : `${plainTitle} · Benjamin Steenhoek`;
+    : `${plainTitle} · ${siteMetadata.name}`;
 const pageSlide = {
   forwards: {
     old: {
@@ -52,7 +54,12 @@ const pageSlide = {
 ---
 
 <!doctype html>
-<html lang="en" data-theme="pastel-light" transition:animate="none">
+<html
+  lang="en"
+  data-theme="pastel-light"
+  data-site-name={siteMetadata.name}
+  transition:animate="none"
+>
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
@@ -91,11 +98,11 @@ const pageSlide = {
     >
       <div class="site-header__inner">
         <div class="site-identity">
-          <a class="wordmark" href="/">Benjamin Steenhoek</a>
+          <a class="wordmark" href={routes.home}>{siteMetadata.name}</a>
           <div class="header-controls">
             <a
               class="header-control btn btn-ghost btn-sm"
-              href="/"
+              href={routes.home}
               aria-label="Back"
               data-detail-back
               hidden
@@ -123,13 +130,13 @@ const pageSlide = {
         </div>
         <div class="nav-actions">
           <nav aria-label="Primary navigation">
-            <a href="/#about">About</a>
-            <a href="/#posts">Posts</a>
-            <a href="/#publications">Publications</a>
+            <a href={`${routes.home}#about`}>About</a>
+            <a href={`${routes.home}#posts`}>Posts</a>
+            <a href={`${routes.home}#publications`}>Publications</a>
             <span class="nav-separator" aria-hidden="true"></span>
-            <a href="/cv/">CV</a>
+            <a href={routes.cv}>CV</a>
             <span class="nav-separator" aria-hidden="true"></span>
-            <a href="/writing/">Blog</a>
+            <a href={routes.writing}>Blog</a>
           </nav>
           <button
             id="theme-toggle"
@@ -196,10 +203,6 @@ const pageSlide = {
     --font-sans: "Aptos", "Segoe UI", system-ui, sans-serif;
     --page: min(960px, calc(100% - 5rem));
     --section-padding: clamp(2rem, 4.5vw, 3.5rem);
-  }
-
-  * {
-    box-sizing: border-box;
   }
 
   html {
@@ -278,9 +281,6 @@ const pageSlide = {
       var(--color-secondary-content)
     );
     transform: translateY(-1px);
-  }
-
-  a.btn.btn-secondary:focus-visible {
     outline: 2px solid var(--color-secondary-content);
     outline-offset: 2px;
   }
@@ -687,33 +687,6 @@ const pageSlide = {
     text-transform: uppercase;
   }
 
-  .section {
-    width: var(--page);
-    margin: 0 auto;
-    padding: var(--section-padding) 0;
-  }
-
-  .section-heading {
-    display: grid;
-    grid-template-columns: minmax(0, 0.72fr) minmax(16rem, 1.28fr);
-    gap: 2rem;
-    margin-bottom: clamp(2.5rem, 6vw, 5rem);
-  }
-
-  .section-heading h2 {
-    max-width: 10ch;
-    margin-bottom: 0;
-    font-size: clamp(2.7rem, 6vw, 5.6rem);
-  }
-
-  .section-heading p {
-    max-width: 42rem;
-    align-self: end;
-    margin-bottom: 0.5rem;
-    color: var(--muted);
-    font-size: clamp(1rem, 1.8vw, 1.22rem);
-  }
-
   .text-links {
     display: flex;
     flex-wrap: wrap;
@@ -727,10 +700,6 @@ const pageSlide = {
     letter-spacing: 0.06em;
     text-decoration: none;
     text-transform: uppercase;
-  }
-
-  .text-links a.btn-primary {
-    color: var(--color-primary-content);
   }
 
   .text-links a.btn-secondary {
@@ -861,7 +830,6 @@ const pageSlide = {
       min-height: 2.75rem;
     }
 
-    .section-heading,
     .publication-card {
       grid-template-columns: 1fr;
     }

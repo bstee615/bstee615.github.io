@@ -1,6 +1,8 @@
 ---
+import type { PublicationVisual } from "../utils/publications";
+
 interface Props {
-  kind: "trace" | "mutation" | "feedback" | "dataflow";
+  kind: PublicationVisual;
   title: string;
 }
 
