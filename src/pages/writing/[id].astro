@@ -15,7 +15,7 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description}>
+<BaseLayout title={post.data.title} description={post.data.description} math={post.data.math}>
   <article class="post">
     <header>
       <h1><InlineMarkdown text={post.data.title} /></h1>
@@ -25,7 +25,16 @@ const { Content } = await render(post);
     </header>
     {post.data.image && (
       <figure class="post-cover">
-        <img src={post.data.image} alt={post.data.imageAlt ?? ""} />
+        <img
+          src={post.data.imageMedium ?? post.data.image}
+          srcset={post.data.imageMedium ? `${post.data.imageMedium} 1100w, ${post.data.image} 1520w` : undefined}
+          sizes="(max-width: 760px) calc(100vw - 3rem), 760px"
+          alt={post.data.imageAlt ?? ""}
+          width={post.data.imageWidth}
+          height={post.data.imageHeight}
+          decoding="async"
+          fetchpriority="high"
+        />
         {post.data.imageCreditName && (
           <figcaption>
             Photo by {post.data.imageCreditName}
@@ -73,6 +82,7 @@ const { Content } = await render(post);
 
   .post-cover img {
     width: 100%;
+    height: auto;
     max-height: 28rem;
     object-fit: cover;
     border-radius: var(--radius-box);

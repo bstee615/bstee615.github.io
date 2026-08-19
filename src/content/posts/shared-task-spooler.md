@@ -13,7 +13,10 @@ tags:
   - tooling
 kind: blog
 legacyUrl: /posts/2023/12/shared-task-spooler/
-image: /files/unsplash/super-snapper-sdTL4qTynfM-unsplash.jpg
+image: /media/cover-shared-task-spooler.webp
+imageMedium: /media/cover-shared-task-spooler-1100.webp
+imageWidth: 1520
+imageHeight: 1013
 imageAlt: Playmobil people queuing for a gallery while a fancy red sports car whizzes past
 imageCreditName: Super Snapper
 imageCreditId: "@supersnapper27"

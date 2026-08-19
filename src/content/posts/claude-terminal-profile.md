@@ -18,7 +18,7 @@ Here's the gist: [Windows Terminal profile for Claude](https://gist.github.com/b
 
 Here's what it looks like:
 
-![Screenshot of Claude terminal quick launcher](/images/screenshot-claude-terminal.png)
+![Screenshot of Claude terminal quick launcher](/media/claude-terminal.webp)
 
 You can install it with a PowerShell one-liner:
 

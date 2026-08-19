@@ -1,6 +1,6 @@
 # benjijang.com
 
-Benjamin Steenhoek's personal website, built with Astro, Tailwind CSS, and DaisyUI.
+Benjamin Steenhoek's personal website, built with Astro.
 
 ## Development
 
@@ -17,8 +17,8 @@ The local site runs at `http://localhost:4321`.
 - `src/content/posts/` contains long-form blog posts and short notes.
 - `src/data/cv.ts` contains professional experience and education, referencing shared organization IDs.
 - `src/data/site.ts` contains shared organizations, external links, service records, and projects.
-- `public/files/` contains publication files and post media.
-- `public/images/` contains shared site images.
+- `public/media/` contains delivery-optimized site and post images.
+- `public/files/` retains publication downloads and legacy media URLs.
 
 Content schemas live in `src/content.config.ts`. The build fails when a record does not match its schema.
 

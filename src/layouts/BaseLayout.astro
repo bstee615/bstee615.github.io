@@ -1,16 +1,18 @@
 ---
 import "../styles/global.css";
-import "katex/dist/katex.min.css";
+import katexStylesheet from "katex/dist/katex.min.css?url";
 import { ClientRouter } from "astro:transitions";
 
 interface Props {
   title?: string;
   description?: string;
+  math?: boolean;
 }
 
 const {
   title = "Benjamin Steenhoek",
   description = "Senior Researcher at Microsoft.",
+  math = false,
 } = Astro.props;
 const plainTitle = title.replace(/`([^`]+)`/g, "$1");
 const pageTitle = plainTitle === "Benjamin Steenhoek" ? plainTitle : `${plainTitle} · Benjamin Steenhoek`;
@@ -54,6 +56,7 @@ const pageSlide = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⌁</text></svg>" />
+    {math && <link rel="stylesheet" href={katexStylesheet} />}
     <ClientRouter fallback="animate" />
     <script is:inline>
       const savedTheme = document.cookie
@@ -70,7 +73,7 @@ const pageSlide = {
     </script>
     <title>{pageTitle}</title>
   </head>
-  <body class="bg-base-100 text-base-content">
+  <body>
     <a class="skip-link" href="#content">Skip to content</a>
     <header
       class="site-header"
@@ -78,7 +81,7 @@ const pageSlide = {
       transition:persist="site-header"
       transition:animate="none"
     >
-      <div class="site-header__inner navbar">
+      <div class="site-header__inner">
         <div class="site-identity">
           <a class="wordmark" href="/">Benjamin Steenhoek</a>
           <div class="header-controls">
@@ -112,13 +115,13 @@ const pageSlide = {
         </div>
         <div class="nav-actions">
           <nav aria-label="Primary navigation">
-            <a class="link link-hover" href="/#about">About</a>
-            <a class="link link-hover" href="/#posts">Posts</a>
-            <a class="link link-hover" href="/#publications">Publications</a>
+            <a href="/#about">About</a>
+            <a href="/#posts">Posts</a>
+            <a href="/#publications">Publications</a>
             <span class="nav-separator" aria-hidden="true"></span>
-            <a class="link link-hover" href="/cv/">CV</a>
+            <a href="/cv/">CV</a>
             <span class="nav-separator" aria-hidden="true"></span>
-            <a class="link link-hover" href="/writing/">Blog</a>
+            <a href="/writing/">Blog</a>
           </nav>
           <button id="theme-toggle" class="btn btn-circle btn-ghost btn-sm" type="button" aria-label="Switch to dark mode">
             <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true">

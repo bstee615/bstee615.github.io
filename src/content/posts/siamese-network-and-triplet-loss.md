@@ -9,6 +9,7 @@ tags:
   - stream
   - nn
 kind: stream
+math: true
 legacyUrl: /stream/siamese-network-and-triplet-loss/
 ---
 

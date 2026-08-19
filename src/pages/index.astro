@@ -51,7 +51,16 @@ const publicationsByYear = Array.from(
   <div class="home">
     <section id="about" class="about">
       <div class="portrait">
-        <img src="/images/profile.png" alt="Benjamin Steenhoek" width="640" height="640" />
+        <img
+          src="/media/profile-330.webp"
+          srcset="/media/profile-330.webp 330w, /media/profile.webp 512w"
+          sizes="(max-width: 680px) 110px, clamp(12rem, 21vw, 13rem)"
+          alt="Benjamin Steenhoek"
+          width="512"
+          height="512"
+          decoding="async"
+          fetchpriority="high"
+        />
       </div>
       <div class="about__content">
         <h1>About me</h1>

@@ -11,7 +11,10 @@ tags:
   - tooling
 kind: blog
 legacyUrl: /posts/2022/03/no-pain-no-gain/
-image: /files/unsplash/gene-jeter-79nVN_Cmj3o-unsplash.jpg
+image: /media/cover-no-pain-no-gain.webp
+imageMedium: /media/cover-no-pain-no-gain-1100.webp
+imageWidth: 1520
+imageHeight: 1013
 imageAlt: Weights
 imageCreditName: Gene Jeter
 imageCreditId: "@genejeter"
@@ -25,7 +28,7 @@ Program analysis methods often represent programs as graphs. These graphs should
 - LLVM is great if you want a rock-solid analysis and want to leverage complex program analysis passes used in the Clang compiler, and you can provide compiler information.
 
 <figure>
-  <img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/dkhrdd6e0293r9ledy0y.png">
+  <img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/dkhrdd6e0293r9ledy0y.png" loading="lazy" decoding="async">
   <figcaption>No pain ⇒ no gain. More pain ⇒ more gain???
 (source: <a href="https://www.dreamstime.com/stock-illustration-gradual-development-muscle-building-weakling-to-steep-pitching-funny-cartoon-character-vector-illustration-isolated-image48375937">kharlamova</a>)
 </figcaption>
@@ -63,7 +66,7 @@ C programs are difficult to parse because the preprocessor allows arbitrary text
 C programs also require compiler information such as types and functions defined in header files in order to parse correctly [2]. These header files can be scattered all across the machine, and the standard library headers are are in different locations in different OS or distributions. The compiler information is usually passed to the parser by way of compiler flags such as `-I` or `-D`.
 
 <figure>
-  <img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yejf6uwhdglzftain6u9.png">
+  <img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yejf6uwhdglzftain6u9.png" loading="lazy" decoding="async">
   <figcaption>Relative benefits of SrcML, Joern, and LLVM.
 (source: original)
 </figcaption>
@@ -200,7 +203,7 @@ LLVM and SrcML are pretty similar in performance for all practical matters. Nota
 Joern was the slowest by far. This may be due to the overhead of starting up the Scala VM and Joern's interpreter.
 
 <figure>
-  <img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/varxp2ea4y9zfxbjgrd5.png">
+  <img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/varxp2ea4y9zfxbjgrd5.png" loading="lazy" decoding="async">
   <figcaption>Frameworks are multi-dimensional, not just lightweight/heavyweight.
 (source: <a href="https://www.self.com/story/guide-to-navigating-free-weights-at-the-gym">Morgan Johnson</a>)
 </figcaption>

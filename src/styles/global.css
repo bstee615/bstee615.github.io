@@ -1,15 +1,5 @@
-@import "tailwindcss";
-
-@plugin "daisyui" {
-  themes: false;
-}
-
-@plugin "daisyui/theme" {
-  name: "pastel-light";
-  default: true;
-  prefersdark: false;
+[data-theme="pastel-light"] {
   color-scheme: light;
-
   --color-base-100: oklch(98% 0.018 158);
   --color-base-200: oklch(95% 0.038 158);
   --color-base-300: oklch(90% 0.052 158);
@@ -39,14 +29,13 @@
   --border: 1px;
   --depth: 0;
   --noise: 0;
+  --color-link: oklch(38% 0.1 158);
+  --color-muted: oklch(48% 0.025 166);
+  --color-secondary-text: oklch(46% 0.14 275);
 }
 
-@plugin "daisyui/theme" {
-  name: "pastel-dark";
-  default: false;
-  prefersdark: true;
+[data-theme="pastel-dark"] {
   color-scheme: dark;
-
   --color-base-100: oklch(20% 0.025 166);
   --color-base-200: oklch(24% 0.032 166);
   --color-base-300: oklch(29% 0.04 166);
@@ -76,18 +65,100 @@
   --border: 1px;
   --depth: 0;
   --noise: 0;
-}
-
-[data-theme="pastel-light"] {
-  --color-link: oklch(38% 0.1 158);
-  --color-muted: oklch(48% 0.025 166);
-  --color-secondary-text: oklch(46% 0.14 275);
-}
-
-[data-theme="pastel-dark"] {
   --color-link: oklch(88% 0.07 156);
   --color-muted: oklch(74% 0.025 158);
   --color-secondary-text: oklch(84% 0.09 275);
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0 solid;
+}
+
+ol,
+ul,
+menu {
+  list-style: none;
+}
+
+button,
+input,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+}
+
+.btn {
+  --btn-background: var(--color-base-200);
+  --btn-border: var(--btn-background);
+  --btn-color: var(--color-base-content);
+  --btn-height: 2.5rem;
+  --btn-padding: 1rem;
+  display: inline-flex;
+  height: var(--btn-height);
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding-inline: var(--btn-padding);
+  cursor: pointer;
+  border: 1px solid var(--btn-border);
+  border-radius: var(--radius-field);
+  outline-color: var(--btn-border);
+  color: var(--btn-color);
+  background: var(--btn-background);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.btn-secondary {
+  --btn-background: var(--color-secondary);
+  --btn-border: var(--color-secondary);
+  --btn-color: var(--color-secondary-content);
+}
+
+.btn-ghost {
+  --btn-background: transparent;
+  --btn-border: transparent;
+}
+
+.btn-ghost:hover,
+.btn-ghost:focus-visible {
+  --btn-background: color-mix(in oklch, var(--color-base-content) 10%, transparent);
+}
+
+.btn-sm {
+  --btn-height: 2rem;
+  --btn-padding: 0.75rem;
+  font-size: 0.75rem;
+}
+
+.btn-xs {
+  --btn-height: 1.5rem;
+  --btn-padding: 0.5rem;
+  font-size: 0.6875rem;
+}
+
+.btn-circle {
+  width: var(--btn-height);
+  padding-inline: 0;
+  border-radius: 999px;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--btn-border);
+  outline-offset: 2px;
 }
 
 [data-theme="pastel-dark"] .astro-code,

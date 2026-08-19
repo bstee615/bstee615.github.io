@@ -12,7 +12,10 @@ tags:
   - tooling
 kind: blog
 legacyUrl: /posts/2024/01/shared-hf-cache/
-image: /files/unsplash/duy-pham-Cecb0_8Hx-o-unsplash.jpg
+image: /media/cover-shared-huggingface-cache.webp
+imageMedium: /media/cover-shared-huggingface-cache-1100.webp
+imageWidth: 1520
+imageHeight: 855
 imageAlt: people holding shoulders sitting on wall
 imageCreditName: Duy Pham
 imageCreditId: "@miinyuii"

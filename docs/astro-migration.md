@@ -17,7 +17,7 @@ The migration is successful when the website feels like a concise research noteb
 7. **Fast is a budget, not a feeling.** Optimize images at build time, self-host fonts when practical, avoid third-party runtime dependencies, and keep the initial page lightweight.
 8. **URLs are durable.** Preserve current public URLs or provide explicit redirects. External links, citations, and search results should survive the migration.
 9. **Accessibility is part of the design.** Semantic landmarks, visible focus states, useful image alternatives, keyboard navigation, sufficient contrast, and reduced-motion support are required.
-10. **Own the visual identity.** Use DaisyUI as a maintained component and theme foundation, then keep site-specific composition in a small set of local components instead of adopting a broad website theme.
+10. **Own the visual identity.** Keep the theme and small component vocabulary in local CSS instead of shipping a broad website theme or UI framework.
 
 ## Desired experience
 
@@ -75,7 +75,7 @@ Projects and publications may reference each other. A project can appear on the 
 - Aim for less than 100 KB transferred HTML and CSS on the homepage, excluding images.
 - Responsive AVIF/WebP research images with explicit dimensions.
 - Lazy-load below-the-fold media.
-- DaisyUI and Tailwind are compiled locally; no CDN-loaded CSS framework, icon library, analytics bundle, or web font.
+- No CSS framework, CDN-loaded icon library, analytics bundle, or general-purpose web font.
 - Target Lighthouse scores of 95 or better in performance, accessibility, best practices, and SEO.
 
 ## Migration plan

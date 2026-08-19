@@ -10,7 +10,10 @@ tags:
   - philosophy
 kind: blog
 legacyUrl: /posts/2022/06/meditations-1-thru-4/
-image: /files/unsplash/hikmat-gafarzada-v7KoS0677mg-unsplash.jpg
+image: /media/cover-meditations.webp
+imageMedium: /media/cover-meditations-1100.webp
+imageWidth: 1520
+imageHeight: 2276
 imageAlt: Stoa in Baku, Azerbaijan
 imageCreditName: Hikmat Gafarzada
 imageCreditId: "@hkmtqffr"

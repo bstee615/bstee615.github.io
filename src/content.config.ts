@@ -36,9 +36,13 @@ const posts = defineCollection({
     kind: z.enum(["blog", "stream"]).default("blog"),
     legacyUrl: z.string(),
     image: z.string().optional(),
+    imageMedium: z.string().optional(),
+    imageWidth: z.number().int().positive().optional(),
+    imageHeight: z.number().int().positive().optional(),
     imageAlt: z.string().optional(),
     imageCreditName: z.string().optional(),
     imageCreditId: z.string().optional(),
+    math: z.boolean().default(false),
   }),
 });
 

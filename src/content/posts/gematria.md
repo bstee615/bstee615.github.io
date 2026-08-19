@@ -11,7 +11,10 @@ tags:
   - programming-problems
 kind: blog
 legacyUrl: /posts/2022/05/gematria/
-image: /files/unsplash/tanner-mardis-xUXGHzhIbN4-unsplash.jpg
+image: /media/cover-gematria.webp
+imageMedium: /media/cover-gematria-1100.webp
+imageWidth: 1520
+imageHeight: 1013
 imageAlt: Torah
 imageCreditName: Tanner Mardis
 imageCreditId: "@tannermardis"
