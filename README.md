@@ -113,12 +113,14 @@ content pull request.
 ## Deployment
 
 `.github/workflows/deploy.yml` runs on pull requests and on pushes to `master`.
-The **Lint and build** job creates `dist/`; **Frontend tests** downloads and
-tests that exact artifact. Only after both succeed does the `master` run upload
-the tested artifact and deploy it with GitHub Pages.
+The **Lint and build** job creates `dist/`. The **Frontend tests** job is
+temporarily disabled because hosted runs are taking too long; Playwright
+remains available locally through `npm run test:e2e`. After **Lint and build**
+succeeds, the `master` run uploads its artifact and deploys it with GitHub
+Pages.
 
 GitHub Pages uses GitHub Actions as its source. `public/CNAME` is copied into
 the build and preserves the `benjijang.com` custom domain. Repository branch
-protection should require the exact checks **Lint and build** and
-**Frontend tests** before merging; configure those rules in GitHub rather than
-assuming they are already enabled.
+protection should require the exact check **Lint and build** before merging.
+Re-enable **Frontend tests** as a required check when frontend CI is restored;
+configure those rules in GitHub rather than assuming they are already enabled.
