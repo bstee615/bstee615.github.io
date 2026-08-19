@@ -1,7 +1,12 @@
 export const siteMetadata = {
   name: "Benjamin Steenhoek",
   defaultDescription: "Senior Researcher at Microsoft.",
-  citationNames: ["Benjamin Steenhoek", "Steenhoek, Benjamin", "Steenhoek, B."],
+  citationNames: [
+    "Benjamin Steenhoek",
+    "Benjamin Jeremiah Steenhoek",
+    "Steenhoek, Benjamin",
+    "Steenhoek, B.",
+  ],
 } as const;
 
 export const externalLinks = {

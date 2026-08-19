@@ -275,6 +275,18 @@ test("publication detail Back restores the exact archive scroll", async ({
   );
 });
 
+test("publication detail structurally highlights the site author", async ({
+  page,
+}) => {
+  await page.goto("/publication/2024-04-14-deepdfa/");
+
+  const authors = page.locator(".authors");
+  await expect(authors).toHaveText(
+    "Benjamin Steenhoek · Hongyang Gao · Wei Le",
+  );
+  await expect(authors.locator("mark")).toHaveText("Benjamin Steenhoek");
+});
+
 test("code samples copy exactly and stay contained", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.addInitScript(() => {

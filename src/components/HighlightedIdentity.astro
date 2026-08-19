@@ -1,0 +1,29 @@
+---
+import { siteMetadata } from "../data/site";
+
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+const identityNames = new Set<string>(siteMetadata.citationNames);
+const identityPattern = new RegExp(
+  `(${siteMetadata.citationNames
+    .map((name) => name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+    .join("|")})`,
+);
+const segments = text.split(identityPattern).filter(Boolean);
+---
+
+{
+  segments.map((segment) =>
+    identityNames.has(segment) ? <mark>{segment}</mark> : segment,
+  )
+}
+
+<style>
+  mark {
+    background: none;
+    color: var(--accent);
+  }
+</style>

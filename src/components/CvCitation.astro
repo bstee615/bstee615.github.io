@@ -1,37 +1,19 @@
 ---
-import { siteMetadata } from "../data/site";
+import HighlightedIdentity from "./HighlightedIdentity.astro";
 
 interface Props {
   citation: string;
 }
 
 const { citation } = Astro.props;
-const citationNames = new Set<string>(siteMetadata.citationNames);
-const namePattern = new RegExp(
-  `(${siteMetadata.citationNames
-    .map((name) => name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
-    .join("|")})`,
-);
-const segments = citation.split(namePattern).filter(Boolean);
 ---
 
-<p>
-  {
-    segments.map((segment) =>
-      citationNames.has(segment) ? <mark>{segment}</mark> : segment,
-    )
-  }
-</p>
+<p><HighlightedIdentity text={citation} /></p>
 
 <style>
   p {
     margin: 0.2rem 0 0;
     color: var(--muted);
     font-size: 0.84rem;
-  }
-
-  mark {
-    background: none;
-    color: var(--accent);
   }
 </style>
