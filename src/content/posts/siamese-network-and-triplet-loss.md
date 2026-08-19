@@ -1,0 +1,37 @@
+---
+title: Siamese network and triplet loss
+description: >-
+  Siamese network is an architecture which runs two networks with shared weights (effectively runs the same network
+  twice) on two different inputs simultaneously. It is commonly trained with a contrastive loss such as triplet loss in
+  order to draw together the representations of similar inputs and push apart the representations of contrasting inputs.
+date: 2022-10-10T00:00:00.000Z
+tags:
+  - stream
+  - nn
+kind: stream
+legacyUrl: /stream/siamese-network-and-triplet-loss/
+---
+
+Siamese network is an architecture which runs two networks with shared weights (effectively runs the same network twice) on two different inputs simultaneously.
+It is commonly trained with a contrastive loss such as triplet loss in order to draw together the representations of similar inputs and push apart the representations of contrasting inputs.
+
+Define distance as the norm between the two encodings:
+$$
+d(x_i, x_j) = \lVert f(x_i) - f(x_j) \rVert^2
+$$
+
+Goal: learn parameters so that
+- $x_i, x_j$ are the same person -> $d(x_i, x_j)$ is small
+- $x_i, x_j$ are the different people -> $d(x_i, x_j)$ is large
+
+How to train? Triplet loss
+- Anchor $A$
+- Positive $P$
+- Negative $N$
+- Want:
+	- $d(A, P) \leq d(A, N)$
+	- $d(A, P) - d(A, N) \leq 0$
+	- This can be satisfied trivially with $d(*) = 0$.
+	- To prevent trivial solution, require the difference larger than a margin. $d(A, P) - d(A, N) + \alpha \leq 0$.
+
+End up with Triplet loss $\mathcal L(A, P, N) = max(d(A, P) - d(A, N) + \alpha, 0)$.

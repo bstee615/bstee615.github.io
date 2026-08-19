@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Page not found" description="The requested page could not be found.">
+  <section class="not-found">
+    <p class="eyebrow">404</p>
+    <h1>Page not found</h1>
+    <a class="btn btn-secondary" href="/">Return home</a>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    width: var(--page);
+    min-height: 65vh;
+    margin: 0 auto;
+    padding: var(--section-padding) 0;
+  }
+
+  h1 {
+    margin: 0.5rem 0 2rem;
+    font-size: clamp(2.5rem, 7vw, 5rem);
+  }
+</style>

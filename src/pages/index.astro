@@ -1,0 +1,549 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import InlineMarkdown from "../components/InlineMarkdown.astro";
+import SocialIcon from "../components/SocialIcon.astro";
+import { externalLinks, organizations, projects, service } from "../data/site";
+import { formatVenueWithYear } from "../utils/publications";
+
+const formatMonthYear = (date: Date) =>
+  date.toLocaleDateString("en-US", {
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+
+const publications = (await getCollection("publications"))
+  .filter(({ data }) => data.selected)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const posts = (await getCollection("posts"))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const activityItems = [
+  ...posts.map((post) => ({
+    title: post.data.title,
+    href: `/writing/${post.id}/`,
+    description: `${formatMonthYear(post.data.date)} · ${post.data.kind === "stream" ? "Note" : "Blog"}`,
+    date: post.data.date,
+  })),
+  ...projects.map((project) => {
+    const date = new Date(`${project.published}T00:00:00.000Z`);
+    return {
+      title: project.title,
+      href: project.href,
+      description: `${formatMonthYear(date)} · Project · ${project.description}`,
+      date,
+    };
+  }),
+].sort((a, b) => b.date.valueOf() - a.date.valueOf());
+
+const publicationsByYear = Array.from(
+  publications.reduce((groups, publication) => {
+    const year = publication.data.date.getUTCFullYear();
+    const entries = groups.get(year) ?? [];
+    entries.push(publication);
+    groups.set(year, entries);
+    return groups;
+  }, new Map<number, typeof publications>()),
+);
+---
+
+<BaseLayout>
+  <div class="home">
+    <section id="about" class="about">
+      <div class="portrait">
+        <img src="/images/profile.png" alt="Benjamin Steenhoek" width="640" height="640" />
+      </div>
+      <div class="about__content">
+        <h1>About me</h1>
+        <p>
+          I am a Senior Researcher at{" "}
+          <a href={organizations.microsoftCodeAi.url}>{organizations.microsoftCodeAi.homepageName}</a>,
+          based in Des Moines, Iowa.
+        </p>
+        <p>
+          I work on GitHub Copilot's{" "}
+          <a href="https://code.visualstudio.com/docs/editing/ai-powered-suggestions">code edit suggestion models</a>
+          {" "}and <a href="https://github.com/features/copilot/cli">agents</a>.
+        </p>
+        <div class="profile-links">
+          <a class="btn btn-secondary" href={externalLinks.scholar}>
+            <SocialIcon name="scholar" /> Scholar
+          </a>
+          <a class="btn btn-secondary" href={externalLinks.linkedin}>
+            <SocialIcon name="linkedin" /> LinkedIn
+          </a>
+          <a class="btn btn-secondary" href={externalLinks.github}>
+            <SocialIcon name="github" /> GitHub
+          </a>
+          <a class="btn btn-secondary" href={externalLinks.email}>
+            <SocialIcon name="email" /> Let's talk!
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="posts" class="activity" aria-label="Recent posts, projects, service, and talks">
+      <div class="activity__posts">
+        <header class="activity__heading">
+          <h2>Posts &amp; Projects</h2>
+          <a class="btn btn-secondary btn-sm" href="/writing/" data-slide-navigation>See all</a>
+        </header>
+        <ul class="compact-list activity-scroll">
+          {activityItems.map((item) => (
+            <li>
+              <a href={item.href}><InlineMarkdown text={item.title} /></a>
+              <span>{item.description}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="activity__service">
+        <header class="activity__heading">
+          <h2>Service &amp; Talks</h2>
+        </header>
+        <ul class="service-list activity-scroll">
+          {service.map((item) => (
+            <li>
+              <div>
+                <b><a href={item.url} title={item.title}>{item.name}</a></b>
+                <span>{item.role}</span>
+              </div>
+              <time datetime={item.date}>
+                {formatMonthYear(new Date(`${item.date}T00:00:00.000Z`))}
+              </time>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section id="publications" class="selected-publications">
+      <header>
+        <h2>Selected publications</h2>
+        <a class="btn btn-secondary btn-sm" href={externalLinks.scholar}>See all on Scholar</a>
+      </header>
+
+      <div class="publication-years">
+        {publicationsByYear.map(([year, entries]) => (
+          <section class="publication-year" aria-labelledby={`year-${year}`}>
+            <h3 id={`year-${year}`}>{year}</h3>
+            <div>
+              {entries.map((publication) => (
+                <article class="publication-row">
+                  <div class="publication-row__main">
+                    <h4>
+                      <a href={`/publication/${publication.id}/`}>{publication.data.title}</a>
+                    </h4>
+                    <p class="publication-meta">
+                      <b>{formatVenueWithYear(publication.data.venue, publication.data.date)}</b>
+                      <span aria-hidden="true"></span>
+                      {publication.data.authors.map((author, index) => (
+                        <>
+                          {index > 0 && ", "}
+                          <strong class:list={{ "is-me": author === "Benjamin Steenhoek" }}>{author}</strong>
+                        </>
+                      ))}
+                    </p>
+                    <p class="publication-summary">{publication.data.summary}</p>
+                  </div>
+                  <div class="publication-row__links">
+                    {publication.data.links.map((link) => (
+                      <a class="btn btn-secondary btn-sm" href={link.url}>{link.label}</a>
+                    ))}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+
+      <div class="scholar-cta">
+        <a class="btn btn-secondary" href={externalLinks.scholar}>
+          See all on Scholar
+        </a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .home {
+    width: var(--page);
+    margin: 0 auto;
+  }
+
+  .about,
+  .activity,
+  .selected-publications {
+    scroll-margin-top: 7rem;
+  }
+
+  .about {
+    display: grid;
+    grid-template-columns: clamp(12rem, 21vw, 13rem) minmax(0, 1fr);
+    gap: clamp(2rem, 6vw, 4.5rem);
+    align-items: center;
+    padding: var(--section-padding) 0;
+  }
+
+  .portrait {
+    overflow: hidden;
+    aspect-ratio: 1;
+    border: 2px solid var(--line);
+    border-radius: var(--radius-box);
+    background: var(--color-base-200);
+  }
+
+  .portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .about h1 {
+    max-width: 25ch;
+    margin: 0.5rem 0 1.35rem;
+    font-size: clamp(1.75rem, 4vw, 3.1rem);
+    letter-spacing: -0.035em;
+  }
+
+  .about__content {
+    min-width: 0;
+  }
+
+  .about__content p,
+  .compact-list a,
+  .publication-row {
+    overflow-wrap: anywhere;
+  }
+
+  .about__content > p:not(.eyebrow) {
+    margin-bottom: 0.4rem;
+    color: var(--muted);
+  }
+
+  .about__content > p a {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .profile-links {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.4rem;
+    margin-top: 1.25rem;
+  }
+
+  .profile-links .btn {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .activity {
+    display: grid;
+    grid-template-columns: minmax(0, 13fr) minmax(20rem, 7fr);
+    gap: clamp(1rem, 3vw, 1.5rem);
+    padding: var(--section-padding) 0;
+  }
+
+  .activity > div {
+    min-width: 0;
+    padding: clamp(1rem, 2.5vw, 1.5rem);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-box);
+    background: color-mix(in oklch, var(--color-base-200) 35%, var(--color-base-100));
+    box-shadow: inset 0 1px 0 color-mix(in oklch, var(--ink) 5%, transparent);
+  }
+
+  .activity__heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .activity h2 {
+    margin: 0;
+    font-size: clamp(1.35rem, 3vw, 1.85rem);
+    letter-spacing: -0.025em;
+  }
+
+  .selected-publications > header h2 {
+    margin: 0;
+    font-size: clamp(1.35rem, 3vw, 1.85rem);
+    letter-spacing: -0.025em;
+  }
+
+  .compact-list,
+  .service-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .compact-list {
+    --activity-row-height: 6.25rem;
+    --activity-visible-rows: 2;
+  }
+
+  .service-list {
+    --activity-row-height: 3.125rem;
+    --activity-visible-rows: 4;
+  }
+
+  .activity-scroll {
+    height: calc(var(--activity-row-height) * var(--activity-visible-rows));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-right: 0.75rem;
+    scrollbar-color: var(--muted) transparent;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+  }
+
+  .activity-scroll > li {
+    height: var(--activity-row-height);
+    box-sizing: border-box;
+  }
+
+  .activity-scroll::-webkit-scrollbar {
+    width: 0.45rem;
+  }
+
+  .activity-scroll::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 999px;
+  }
+
+  .activity-scroll::-webkit-scrollbar-thumb {
+    background: var(--muted);
+    border-radius: 999px;
+  }
+
+  .compact-list li {
+    display: grid;
+    align-content: center;
+    padding: 0.85rem 0.35rem;
+  }
+
+  .compact-list li + li,
+  .service-list li + li {
+    border-top: 1px solid var(--line);
+  }
+
+  .compact-list a {
+    display: block;
+    font-weight: 750;
+    line-height: 1.3;
+    text-decoration: none;
+  }
+
+  .compact-list span,
+  .service-list span {
+    display: block;
+    margin-top: 0.1rem;
+    color: var(--muted);
+    font-size: 0.84rem;
+    line-height: 1.25;
+  }
+
+  .service-list li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: clamp(0.75rem, 2vw, 1.5rem);
+    padding: 0.35rem;
+  }
+
+  .service-list li > div {
+    min-width: 0;
+  }
+
+  .service-list b {
+    display: block;
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+
+  .service-list a {
+    overflow-wrap: anywhere;
+    text-decoration: none;
+  }
+
+  .service-list time {
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-weight: 750;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .selected-publications {
+    padding: var(--section-padding) 0;
+  }
+
+  .selected-publications > header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .publication-year {
+    --publication-year-gap: clamp(0.5rem, 1.33vw, 1.17rem);
+    --publication-divider-offset: clamp(0.25rem, 0.665vw, 0.585rem);
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .publication-year + .publication-year {
+    margin-top: 1rem;
+  }
+
+  .publication-year > div {
+    padding-left: var(--publication-year-gap);
+  }
+
+  .publication-year > h3 {
+    position: relative;
+    justify-self: start;
+    margin: 0;
+    padding-top: 1.5rem;
+    color: var(--accent-bright);
+    font-size: 1.35rem;
+    font-weight: 850;
+  }
+
+  .publication-year > h3::after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(50% + 3.5rem + var(--publication-divider-offset));
+    border-left: var(--divider);
+    content: "";
+  }
+
+  .publication-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 6rem;
+    gap: 2rem;
+    padding: 1.5rem 0;
+  }
+
+  .publication-row h4 {
+    max-width: 40rem;
+    margin: 0 0 0.45rem;
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    line-height: 1.25;
+  }
+
+  .publication-row h4 a {
+    text-decoration: none;
+  }
+
+  .publication-meta,
+  .publication-summary {
+    margin-bottom: 0.45rem;
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+
+  .publication-meta > span {
+    display: inline-block;
+    width: 2px;
+    height: 0.9em;
+    margin: 0 0.55rem;
+    border-radius: 999px;
+    background: var(--color-base-content);
+    vertical-align: -0.08em;
+  }
+
+  .publication-meta strong {
+    font-weight: 500;
+  }
+
+  .publication-meta .is-me {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .publication-summary {
+    max-width: 44rem;
+  }
+
+  .publication-row__links {
+    display: grid;
+    align-content: start;
+    gap: 0.6rem;
+    padding-top: 0.1rem;
+  }
+
+  .publication-row__links a {
+    font-size: 0.82rem;
+    font-weight: 550;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .scholar-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+
+  @media (max-width: 680px) {
+    .profile-links {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .about {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+
+    .portrait {
+      width: 110px;
+    }
+
+    .activity {
+      grid-template-columns: 1fr;
+    }
+
+    .publication-year {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .publication-year > div {
+      margin-top: 0.5rem;
+      padding-left: 0;
+      border-top: var(--divider);
+      border-left: 0;
+    }
+
+    .publication-year > h3 {
+      justify-self: stretch;
+    }
+
+    .publication-year > h3::after {
+      content: none;
+    }
+
+    .publication-row {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .publication-row__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+  }
+
+</style>

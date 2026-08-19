@@ -1,0 +1,84 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { formatVenueWithYear } from "../../utils/publications";
+
+export async function getStaticPaths() {
+  const publications = await getCollection("publications");
+  return publications.map((publication) => ({
+    params: { id: publication.id },
+    props: { publication },
+  }));
+}
+
+const { publication } = Astro.props;
+const { Content } = await render(publication);
+const venue = formatVenueWithYear(publication.data.venue, publication.data.date);
+---
+
+<BaseLayout title={publication.data.title} description={publication.data.summary}>
+  <article class="publication">
+    <header>
+      <p class="eyebrow">{venue}</p>
+      <h1>{publication.data.title}</h1>
+      <p class="summary">{publication.data.summary}</p>
+      {publication.data.authors.length > 0 && (
+        <p class="authors">{publication.data.authors.join(" · ")}</p>
+      )}
+      {publication.data.authors.length === 0 && publication.data.citation && (
+        <p class="citation">{publication.data.citation}</p>
+      )}
+      <div class="text-links">
+        {publication.data.links.map((link) => <a class="btn btn-secondary" href={link.url}>{link.label}</a>)}
+      </div>
+    </header>
+    <div class="body">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .publication {
+    width: var(--page);
+    margin: 0 auto;
+    padding: var(--section-padding) 0;
+  }
+
+  .publication header {
+    max-width: 58rem;
+    margin-bottom: var(--section-padding);
+  }
+
+  .publication .eyebrow {
+    margin-bottom: 1rem;
+    font-size: 0.84rem;
+  }
+
+  .publication h1 {
+    margin: 0 0 1.5rem;
+    font-size: clamp(2.4rem, 5.5vw, 4.5rem);
+  }
+
+  .summary {
+    max-width: 42rem;
+    margin-bottom: 1.65rem;
+    color: var(--muted);
+    font-size: 1.25rem;
+  }
+
+  .authors,
+  .citation {
+    max-width: 50rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+
+  .body {
+    max-width: 46rem;
+    margin: var(--section-padding) auto 0;
+    font-family: var(--font-sans);
+    font-size: 1.2rem;
+  }
+</style>

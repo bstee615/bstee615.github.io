@@ -1,0 +1,37 @@
+---
+import { getCollection } from "astro:content";
+import PublicationCard from "../../components/PublicationCard.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const publications = (await getCollection("publications"))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title="Publications" description="Research publications by Benjamin Steenhoek.">
+  <section class="archive-hero">
+    <h1>Publications</h1>
+  </section>
+  <section class="archive-list">
+    {publications.map((publication, index) => (
+      <PublicationCard publication={publication} index={index} />
+    ))}
+  </section>
+</BaseLayout>
+
+<style>
+  .archive-hero,
+  .archive-list {
+    width: var(--page);
+    margin: 0 auto;
+  }
+
+  .archive-hero {
+    padding: var(--section-padding) 0;
+  }
+
+  .archive-hero h1 {
+    margin: 0;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+  }
+
+</style>
