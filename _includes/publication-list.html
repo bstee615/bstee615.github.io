@@ -1,0 +1,46 @@
+{% assign five_years_seconds = 157788000 %}
+{% assign publication_cutoff = site.time | date: "%s" | minus: five_years_seconds %}
+{% assign cv_venues = "conference-paper,workshop-paper,preprint,thesis,dissertation,poster" | split: "," %}
+
+{% for post in site.publications reversed %}
+  {% assign is_selected = false %}
+  {% assign publication_timestamp = post.date | date: "%s" | plus: 0 %}
+  {% assign publication_venue = post.venue | downcase %}
+  {% if post.selected %}
+    {% assign is_selected = true %}
+  {% elsif publication_timestamp > publication_cutoff %}
+    {% unless publication_venue contains "arxiv" %}
+      {% unless publication_venue contains "iowa state" %}
+        {% unless post.venue-type == "thesis" or post.venue-type == "dissertation" %}
+          {% assign is_selected = true %}
+        {% endunless %}
+      {% endunless %}
+    {% endunless %}
+  {% endif %}
+
+  {% assign show_publication = false %}
+  {% if include.selection == "all" %}
+    {% assign show_publication = true %}
+  {% elsif include.selection == "selected" and is_selected %}
+    {% assign show_publication = true %}
+  {% elsif include.selection == "more" and is_selected == false %}
+    {% assign show_publication = true %}
+  {% endif %}
+
+  {% if include.layout == "cv" %}
+    {% unless cv_venues contains post.venue-type %}
+      {% assign show_publication = false %}
+    {% endunless %}
+    {% if post.exclude-from-cv %}
+      {% assign show_publication = false %}
+    {% endif %}
+  {% endif %}
+
+  {% if show_publication %}
+    {% if include.layout == "cv" %}
+      {% include archive-single-cv.html %}
+    {% else %}
+      {% include archive-single.html %}
+    {% endif %}
+  {% endif %}
+{% endfor %}

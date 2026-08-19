@@ -8,6 +8,8 @@ venue: 'CAIN'
 venue-type: conference-paper
 paperurl: '/files/2026-04-12-swebench-mutation.pdf'
 arxivurl: 'https://arxiv.org/abs/2510.08996'
+codeurl: 'https://github.com/microsoft/SWE-Bench-Mutated-CAIN26'
+selected: true
 citation: 'Spandan Garg, Benjamin Steenhoek, and Yufan Huang. 2026. Saving SWE-Bench: A Benchmark Mutation Approach for Realistic Agent Evaluation. In IEEE/ACM International Conference on AI Engineering – Software Engineering for AI (CAIN 2026).'
 ---
 

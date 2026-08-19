@@ -15,4 +15,3 @@ We present DeepVulGuard, an AI-powered vulnerability detection & repair tool bui
 * We offer practical recommendations for evaluating and deploying AI detection and fix models.
 * We analyzed user feedback to reveal several actionable pain points, ranging from incomplete context to lack of customization for the user’s codebase.
 * Although state-of-the-art AI-powered detection and fix tools show promise, they are not yet practical for real-world use due to a high rate of false positives and non-applicable fixes.
-

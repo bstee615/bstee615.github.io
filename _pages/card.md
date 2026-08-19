@@ -9,13 +9,14 @@ author_profile: true
 
 # Benjamin Steenhoek
 
-Senior Researcher, [Microsoft Code\|_AI_](https://www.microsoft.com/en-us/research/group/codeai/)
+Senior Researcher, [Microsoft Code\|AI](https://www.microsoft.com/en-us/research/group/codeai/)
 
 **Current work**:
-* GitHub Copilot [Next Edit Suggestions](https://code.visualstudio.com/docs/copilot/ai-powered-suggestions#_next-edit-suggestions)
+* [GitHub Copilot Inline Suggestions](https://code.visualstudio.com/docs/editing/ai-powered-suggestions)
+* [GitHub Copilot CLI](https://github.com/features/copilot/cli)
 
 **Located in**: Des Moines, IA 🌽
 
-**Work email**: <a href="mailto:benjis@iastate.edu">bensteenhoek@microsoft.com</a>
+**Work email**: <a href="mailto:bensteenhoek@microsoft.com">bensteenhoek@microsoft.com</a>
 
 ## We are hiring! Please reach out if you're interested.

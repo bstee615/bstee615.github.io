@@ -32,11 +32,17 @@
       {% else %}
         <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
       {% endif %}
+      {% if post.paperurl %}
+        <span class="publication-links">
+          <a href="{{ post.paperurl }}">PDF</a>{% if post.codeurl %}<span aria-hidden="true"> · </span><a href="{{ post.codeurl }}">Code</a>{% endif %}
+        </span>
+      {% endif %}
     </h3>
     {% if post.read_time %}
       <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p>
     {% endif %}
-    {% if post.venue%}<p class="archive__item-excerpt" itemprop="description">{{ post.citation }}</p> {% endif %}
+    {% assign formatted_citation = post.citation | replace: "Benjamin Steenhoek", "<strong>Benjamin Steenhoek</strong>" | replace: "Steenhoek, Benjamin", "<strong>Steenhoek, Benjamin</strong>" | replace: "Steenhoek, B.", "<strong>Steenhoek, B.</strong>" %}
+    {% if post.venue%}<p class="archive__item-excerpt" itemprop="description">{{ formatted_citation }}</p> {% endif %}
     </li>
  </article>
 </div>

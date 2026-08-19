@@ -10,7 +10,7 @@ locale                   : "en-US"
 title                    : "Benjamin Steenhoek"
 title_separator          : "-"
 name                     : &name "Benjamin Steenhoek"
-description              : &description "Senior Researcher at Microsoft"
+description              : &description "Senior Researcher at Microsoft Code|AI"
 url                      : https://benjijang.com # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "bstee615/bstee615.github.io"
@@ -82,9 +82,10 @@ analytics:
 author:
   name             : *name
   avatar           : "profile.png"
-  bio              : *description
+  bio              :
   location         : #"Ames, IA"
-  employer         : "Microsoft"
+  employer         : "Microsoft Code|AI"
+  employer_url     : "https://www.microsoft.com/en-us/research/group/codeai/"
   pubmed           :
   googlescholar    : "https://scholar.google.com/citations?user=dzXbaEMAAAAJ"
   email            : "bensteenhoek@microsoft.com"
