@@ -27,7 +27,7 @@ const cv = {
       organizationId: "microsoftCodeAi",
       location: "Des Moines, IA",
       bodyHtml:
-        '<ul>\n<li>Conducted a user study on in-IDE AI-powered security vulnerability detection & repair with <strong>17 professional developers across 24 projects, 6.9K files, and 1.7M+ lines of code</strong>; <a href="/publication/deepvulguard/"><em>Closing the Gap</em>, ICSE 2025</a> (21% acceptance rate).</li>\n<li><strong>Improved unit-test readability and maintainability by up to 21%</strong> through reinforcement learning; the fine-tuned Codex model was <strong>less than half GPT-4\'s size and outperformed it on 4 of 7 quality metrics</strong>; <a href="/publication/rlsqm/"><em>Reinforcement Learning from Automatic Feedback</em>, DeepTest @ ICSE 2025</a>.</li>\n</ul>\n',
+        '<ul>\n<li>Conducted a user study on in-IDE AI-powered security vulnerability detection & repair with <strong>17 professional developers across 24 projects, 6.9K files, and 1.7M+ lines of code</strong>; <a href="/publication/deepvulguard/"><em>Closing the Gap</em>, ICSE 2025</a> (21% acceptance rate).</li>\n<li><strong>Improved unit-test readability and maintainability by up to 21%</strong> through reinforcement learning; the fine-tuned Codex model was <strong>less than half the cost of GPT-4 and outperformed it on 4 of 7 quality metrics</strong>; <a href="/publication/rlsqm/"><em>Reinforcement Learning from Automatic Feedback</em>, DeepTest @ ICSE 2025</a>.</li>\n</ul>\n',
     },
     {
       title: "Research Assistant",
