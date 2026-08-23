@@ -94,8 +94,13 @@ const formatYears = (years: number[]) =>
         <h1>{siteMetadata.name}</h1>
         <div class="cv-links">
           <a href="https://benjijang.com">benjijang.com</a>
-          <a href={externalLinks.email}>
-            <SocialIcon name="email" /> me@benjijang.com
+          <a
+            data-cv-email
+            data-email-user="me"
+            data-email-domain="benjijang.com"
+          >
+            <SocialIcon name="email" />
+            <span>me<span aria-hidden="true">@</span>benjijang.com</span>
           </a>
           <a href={externalLinks.github}>
             <SocialIcon name="github" /> github.com/bstee615
@@ -106,10 +111,18 @@ const formatYears = (years: number[]) =>
         </div>
       </div>
       <a
-        class="btn btn-secondary btn-sm"
+        class="cv-pdf btn btn-secondary btn-sm"
         href="/files/benjamin-steenhoek-cv.pdf"
       >
-        Academic PDF
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 2h8l4 4v16H6z"></path>
+          <path d="M14 2v5h5"></path>
+          <path d="M8.5 16v-5h1.75a1.5 1.5 0 0 1 0 3H8.5"></path>
+          <path
+            d="M13 16v-5h1.25A1.75 1.75 0 0 1 16 12.75v1.5A1.75 1.75 0 0 1 14.25 16z"
+          ></path>
+        </svg>
+        PDF
       </a>
     </header>
 
@@ -296,6 +309,17 @@ const formatYears = (years: number[]) =>
       </section>
     </div>
   </article>
+  <script>
+    document
+      .querySelectorAll<HTMLElement>("[data-cv-email]")
+      .forEach((link) => {
+        const user = link.dataset.emailUser;
+        const domain = link.dataset.emailDomain;
+        if (link instanceof HTMLAnchorElement && user && domain) {
+          link.href = `mailto:${user}@${domain}`;
+        }
+      });
+  </script>
 </BaseLayout>
 
 <style>
@@ -358,6 +382,16 @@ const formatYears = (years: number[]) =>
     border-top: var(--divider);
     border-bottom: var(--divider);
     color: var(--muted);
+  }
+
+  .cv-pdf svg {
+    width: 1rem;
+    height: 1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.7;
   }
 
   .cv section {
