@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import InlineMarkdown from "../components/InlineMarkdown.astro";
+import OrganizationName from "../components/OrganizationName.astro";
 import SocialIcon from "../components/SocialIcon.astro";
 import {
   externalLinks,
@@ -70,7 +71,7 @@ const publicationsByYear = Array.from(
         <p>
           I am a Senior Researcher at{" "}
           <a href={organizations.microsoftCodeAi.url}
-            >{organizations.microsoftCodeAi.homepageName}</a
+            ><OrganizationName name={organizations.microsoftCodeAi.name} /></a
           >, based in Des Moines, Iowa.
         </p>
         <p>

@@ -1,0 +1,17 @@
+---
+interface Props {
+  name: string;
+}
+
+const { name } = Astro.props;
+---
+
+{
+  name === "Microsoft Code|AI" ? (
+    <>
+      Microsoft Code|<em>AI</em>
+    </>
+  ) : (
+    name
+  )
+}

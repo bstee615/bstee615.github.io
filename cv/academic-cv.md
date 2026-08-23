@@ -16,14 +16,14 @@ output: public/files/benjamin-steenhoek-cv-2026.pdf
 
 ### Senior Researcher <span class="dates">Fall 2024–Present</span>
 
-**[Microsoft Code | AI](https://www.microsoft.com/en-us/research/group/codeai/)** · Des Moines, IA
+**[Microsoft Code|_AI_](https://www.microsoft.com/en-us/research/group/codeai/)** · Des Moines, IA
 
-- Drove research engineering for **GitHub Copilot's primary agentic evaluation platform**, building the scalable harness environment, tooling, and key benchmarks that supported its growth from its **greenfield prototype stage to 1M+ monthly executions**, powering evaluations for flagship coding agents including [VS Code Agent](https://code.visualstudio.com/docs/agents/overview), [Copilot Cloud Agent](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent), and [Copilot CLI](https://github.com/features/copilot/cli).
+- Drove research engineering for **GitHub Copilot's primary agentic evaluation platform**, building the scalable harness environment and tooling and onboarding key benchmarks that supported its growth from its **greenfield prototype stage to 1M+ monthly executions**, powering evaluations for flagship coding agents including [VS Code Agent](https://code.visualstudio.com/docs/agents/overview), [Copilot Cloud Agent](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent), and [Copilot CLI](https://github.com/features/copilot/cli).
 - Led training, evaluation, and rollout of customizable [GitHub Copilot Inline Suggestions](https://code.visualstudio.com/docs/editing/ai-powered-suggestions), **addressing 10+ community issues and increasing accepted suggestions by 10%**.
 
 ### Research Intern <span class="dates">May 2023–Aug 2024</span>
 
-**[Microsoft Code | AI](https://www.microsoft.com/en-us/research/group/codeai/)** · Des Moines, IA
+**[Microsoft Code|_AI_](https://www.microsoft.com/en-us/research/group/codeai/)** · Des Moines, IA
 
 - Conducted a user study on in-IDE AI-powered security vulnerability detection & repair with **17 professional developers across 24 projects, 6.9K files, and 1.7M+ lines of code**; [_Closing the Gap_, ICSE 2025](https://benjijang.com/publication/deepvulguard/) (21% acceptance rate).
 - **Improved unit-test readability and maintainability by up to 21%** through reinforcement learning; the fine-tuned Codex model was **less than half the cost of GPT-4 and outperformed it on 4 of 7 quality metrics**; [_Reinforcement Learning from Automatic Feedback_, DeepTest @ ICSE 2025](https://benjijang.com/publication/rlsqm/).

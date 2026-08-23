@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CvCitation from "../../components/CvCitation.astro";
+import OrganizationName from "../../components/OrganizationName.astro";
 import SocialIcon from "../../components/SocialIcon.astro";
 import cv, { type CvEntry } from "../../data/cv";
 import {
@@ -143,7 +144,7 @@ const formatYears = (years: number[]) =>
               <div class="cv-entry__meta">
                 <span>
                   <a href={position.organization.url}>
-                    {position.organization.name}
+                    <OrganizationName name={position.organization.name} />
                   </a>
                 </span>
                 <span>{position.location}</span>
@@ -168,7 +169,7 @@ const formatYears = (years: number[]) =>
                     <div class="cv-entry__meta">
                       <span>
                         <a href={position.organization.url}>
-                          {position.organization.name}
+                          <OrganizationName name={position.organization.name} />
                         </a>
                       </span>
                       <span>{position.location}</span>
@@ -254,7 +255,7 @@ const formatYears = (years: number[]) =>
               <div class="cv-entry__meta">
                 <span>
                   <a href={position.organization.url}>
-                    {position.organization.name}
+                    <OrganizationName name={position.organization.name} />
                   </a>
                 </span>
                 <span>{position.location}</span>
