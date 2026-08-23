@@ -26,7 +26,7 @@ output: public/files/benjamin-steenhoek-cv.pdf
 **[Microsoft Code | AI](https://www.microsoft.com/en-us/research/group/codeai/)** · Des Moines, IA
 
 - Conducted a user study on in-IDE AI-powered security vulnerability detection & repair with **17 professional developers across 24 projects, 6.9K files, and 1.7M+ lines of code**; [_Closing the Gap_, ICSE 2025](https://benjijang.com/publication/deepvulguard/) (21% acceptance rate).
-- **Improved unit-test readability and maintainability by up to 21%** through reinforcement learning; the fine-tuned Codex model was **less than half GPT-4's size and outperformed it on 4 of 7 quality metrics**; [_Reinforcement Learning from Automatic Feedback_, DeepTest @ ICSE 2025](https://benjijang.com/publication/rlsqm/).
+- **Improved unit-test readability and maintainability by up to 21%** through reinforcement learning; the fine-tuned Codex model was **less than half the cost of GPT-4 and outperformed it on 4 of 7 quality metrics**; [_Reinforcement Learning from Automatic Feedback_, DeepTest @ ICSE 2025](https://benjijang.com/publication/rlsqm/).
 
 ### Research Assistant <span class="dates">2020–2024</span>
 
