@@ -18,7 +18,7 @@ output: public/files/benjamin-steenhoek-cv-2026.pdf
 
 **[Microsoft Code|_AI_](https://www.microsoft.com/en-us/research/group/codeai/)** · Des Moines, IA
 
-- Drove research engineering for **GitHub Copilot's primary agentic evaluation platform**, building the scalable harness environment and tooling and onboarding key benchmarks that supported its growth from its **greenfield prototype stage to 1M+ monthly executions**, powering evaluations for flagship coding agents including [VS Code Agent](https://code.visualstudio.com/docs/agents/overview), [Copilot Cloud Agent](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent), and [Copilot CLI](https://github.com/features/copilot/cli).
+- Drove research engineering for **GitHub Copilot's primary agentic evaluation platform**, onboarding users, tooling, and key benchmarks onto its scalable harness environment to grow it from a **greenfield prototype to 1M+ monthly executions** during my tenure, powering evaluations for flagship coding agents including [VS Code Agent](https://code.visualstudio.com/docs/agents/overview), [Copilot Cloud Agent](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent), and [Copilot CLI](https://github.com/features/copilot/cli).
 - Led training, evaluation, and rollout of customizable [GitHub Copilot Inline Suggestions](https://code.visualstudio.com/docs/editing/ai-powered-suggestions), **addressing 10+ community issues and increasing accepted suggestions by 10%**.
 
 ### Research Intern <span class="dates">May 2023–Aug 2024</span>
