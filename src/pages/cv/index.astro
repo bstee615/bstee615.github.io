@@ -2,8 +2,15 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CvCitation from "../../components/CvCitation.astro";
+import SocialIcon from "../../components/SocialIcon.astro";
 import cv, { type CvEntry } from "../../data/cv";
-import { organizations, siteMetadata } from "../../data/site";
+import {
+  externalLinks,
+  organizations,
+  projects,
+  service,
+  siteMetadata,
+} from "../../data/site";
 import { publicationPath } from "../../routes";
 import { cvPublicationVenueTypes } from "../../utils/publications";
 
@@ -14,8 +21,26 @@ const publications = (await getCollection("publications"))
   )
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const selectedPublications = publications.filter(({ data }) => data.selected);
-const morePublications = publications.filter(({ data }) => !data.selected);
+const paperVenueTypes = new Set([
+  "conference-paper",
+  "workshop-paper",
+  "preprint",
+]);
+const selectedPublications = publications.filter(({ data }) => {
+  const firstAuthor = siteMetadata.citationNames.some(
+    (name) => name === data.authors[0],
+  );
+  return (
+    paperVenueTypes.has(data.venueType) &&
+    (firstAuthor || data.venue.toLowerCase() !== "arxiv")
+  );
+});
+const selectedPublicationIds = new Set(
+  selectedPublications.map(({ id }) => id),
+);
+const morePublications = publications.filter(
+  ({ id }) => !selectedPublicationIds.has(id),
+);
 const withOrganizations = (entries: CvEntry[]) =>
   entries.map((entry) => ({
     ...entry,
@@ -25,17 +50,78 @@ const positions = withOrganizations(cv.positions);
 const education = withOrganizations(cv.education);
 const primaryPositions = positions.filter((position) => !position.more);
 const morePositions = positions.filter((position) => position.more);
+const projectOrder = [
+  "cfactor",
+  "tree-climber",
+  "pal-tools",
+  "rrun",
+  "wslwatch",
+];
+const selectedProjects = [
+  {
+    title: "DeepDFA",
+    description: "Efficient, dataflow-inspired vulnerability detection",
+    href: "https://github.com/ISU-PAAL/DeepDFA",
+  },
+  {
+    title: "TRACED",
+    description: "C/C++ execution tracing for model pre-training",
+    href: "https://github.com/ARiSE-Lab/TRACED_ICSE_24/tree/main/tracer",
+  },
+  ...projectOrder.flatMap((title) => {
+    const project = projects.find((item) => item.title === title);
+    return project ? [project] : [];
+  }),
+];
+const serviceByVenue = Array.from(
+  service.reduce((groups, item) => {
+    const key = `${item.role}|${item.name}|${item.url}`;
+    const existing = groups.get(key) ?? { ...item, years: [] as number[] };
+    existing.years.push(Number(item.date.slice(0, 4)));
+    groups.set(key, existing);
+    return groups;
+  }, new Map<string, (typeof service)[number] & { years: number[] }>()),
+  ([, item]) => item,
+);
+const formatYears = (years: number[]) =>
+  [...new Set(years)].sort((a, b) => b - a).join(", ");
 ---
 
 <BaseLayout title="CV" description="Curriculum vitae for Benjamin Steenhoek.">
   <article class="cv">
     <header class="cv-header">
-      <h1>{siteMetadata.name}</h1>
-      <p>Building next-generation coding and agent systems.</p>
+      <div>
+        <h1>{siteMetadata.name}</h1>
+        <div class="cv-links">
+          <a href="https://benjijang.com">benjijang.com</a>
+          <a href={externalLinks.email}>
+            <SocialIcon name="email" /> me@benjijang.com
+          </a>
+          <a href={externalLinks.github}>
+            <SocialIcon name="github" /> github.com/bstee615
+          </a>
+          <a href={externalLinks.linkedin}>
+            <SocialIcon name="linkedin" /> linkedin.com/in/ben-steenhoek
+          </a>
+        </div>
+      </div>
+      <a
+        class="btn btn-secondary btn-sm"
+        href="/files/benjamin-steenhoek-cv.pdf"
+      >
+        Academic PDF
+      </a>
     </header>
 
+    <p class="cv-summary">
+      AI/ML researcher building code-editing and agentic systems for software
+      engineering. Current focus areas are LLM post-training and agent harness
+      engineering. Research interests include agent evaluation, LLM fine-tuning,
+      software security, and program analysis.<br />Based in Des Moines, Iowa.
+    </p>
+
     <section>
-      <h2>Professional Experience</h2>
+      <h2>Experience</h2>
       <div class="cv-entries">
         {
           primaryPositions.map((position) => (
@@ -113,7 +199,12 @@ const morePositions = positions.filter((position) => position.more);
     </section>
 
     <section>
-      <h2>Selected Publications</h2>
+      <div class="section-heading">
+        <h2>Selected Publications</h2>
+        <a href={externalLinks.scholar}>
+          <SocialIcon name="scholar" /> See all on Google Scholar
+        </a>
+      </div>
       <ol class="cv-publications">
         {
           selectedPublications.map((publication) => (
@@ -164,6 +255,46 @@ const morePositions = positions.filter((position) => position.more);
         </div>
       </details>
     </section>
+
+    <div class="cv-columns">
+      <section>
+        <h2>Invited Talks &amp; Service</h2>
+        <ul class="cv-compact-list">
+          {
+            serviceByVenue.map((item) => (
+              <li>
+                <span>
+                  <strong>{item.role}</strong> ·{" "}
+                  <a href={item.url}>{item.name}</a>
+                </span>
+                <time>{formatYears(item.years)}</time>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section>
+        <div class="section-heading">
+          <h2>Selected Projects</h2>
+          <a href={externalLinks.github}>
+            <SocialIcon name="github" /> See all on GitHub
+          </a>
+        </div>
+        <ul class="cv-compact-list cv-projects">
+          {
+            selectedProjects.map((project) => (
+              <li>
+                <a href={project.href}>
+                  <strong>{project.title}</strong>
+                </a>
+                <span>— {project.description}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </div>
   </article>
 </BaseLayout>
 
@@ -177,6 +308,10 @@ const morePositions = positions.filter((position) => position.more);
   }
 
   .cv-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
     margin-bottom: 0;
     padding-bottom: 0;
   }
@@ -194,6 +329,37 @@ const morePositions = positions.filter((position) => position.more);
     font-size: 1rem;
   }
 
+  .cv-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1rem;
+    margin-top: 0.65rem;
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  .cv-links a,
+  .section-heading > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .cv-links :global(svg),
+  .section-heading :global(svg) {
+    width: 0.9rem;
+    min-width: 0.9rem;
+    height: 0.9rem;
+  }
+
+  .cv-summary {
+    margin-top: 1.25rem;
+    padding: 0.8rem 0;
+    border-top: var(--divider);
+    border-bottom: var(--divider);
+    color: var(--muted);
+  }
+
   .cv section {
     margin-top: var(--section-padding);
   }
@@ -204,6 +370,28 @@ const morePositions = positions.filter((position) => position.more);
     font-size: 1.2rem;
     letter-spacing: 0.04em;
     text-transform: uppercase;
+  }
+
+  .section-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.35rem;
+    border-bottom: var(--divider);
+  }
+
+  .section-heading h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .section-heading > a {
+    flex: 0 0 auto;
+    font-size: 0.78rem;
   }
 
   .cv-entries {
@@ -312,7 +500,57 @@ const morePositions = positions.filter((position) => position.more);
     text-transform: uppercase;
   }
 
+  .cv-columns {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 2.5rem;
+  }
+
+  .cv-compact-list {
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .cv-compact-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .cv-compact-list time {
+    flex: 0 0 auto;
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  .cv-projects li {
+    justify-content: flex-start;
+  }
+
+  .cv-projects a {
+    flex: 0 0 auto;
+  }
+
+  .cv-projects span {
+    color: var(--muted);
+  }
+
   @media (max-width: 600px) {
+    .cv-header {
+      flex-direction: column;
+    }
+
+    .cv-columns {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .section-heading {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
     .cv-entry__heading,
     .cv-entry__meta {
       display: block;

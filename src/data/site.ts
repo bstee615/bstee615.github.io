@@ -13,7 +13,7 @@ export const externalLinks = {
   scholar: "https://scholar.google.com/citations?user=uJk56S4AAAAJ",
   linkedin: "https://www.linkedin.com/in/ben-steenhoek",
   github: "https://github.com/bstee615",
-  email: "mailto:bensteenhoek@microsoft.com",
+  email: "mailto:me@benjijang.com",
 } as const;
 
 export const organizations = {
@@ -117,15 +117,13 @@ export const service = serviceRecords.map(({ date, venue, role }) => ({
 export const projects = [
   {
     title: "wslwatch",
-    description:
-      "Windows watchdog service that keeps WSL2 distributions running",
+    description: "Watchdog that keeps WSL2 distributions running",
     href: "https://github.com/bstee615/wslwatch",
     published: "2026-03-27",
   },
   {
     title: "rrun",
-    description:
-      "Remote runner that syncs Git-tracked files and streams commands over SSH",
+    description: "Git-aware remote command runner over SSH",
     href: "https://github.com/bstee615/rrun",
     published: "2026-03-22",
   },

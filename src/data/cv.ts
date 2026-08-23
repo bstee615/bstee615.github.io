@@ -17,17 +17,17 @@ const cv = {
       title: "Senior Researcher",
       date: "Fall 2024 - Present",
       organizationId: "microsoftCodeAi",
-      location: "Des Moines, IA (Remote)",
+      location: "Des Moines, IA",
       bodyHtml:
-        '<ul>\n<li>Led training, evaluation, and rollout of a customizable <a href="https://code.visualstudio.com/docs/editing/ai-powered-suggestions">GitHub Copilot Inline Suggestions model</a>, addressing 10+ community issues and increasing accepted suggestions by 10%.</li>\n<li>Drove the core science development and release of an internal agent evaluation & analysis platform, collaborating across teams to scale a greenfield prototype to 1M+ monthly benchmark executions that now serves as the primary evaluation infrastructure for GitHub Copilot\'s flagship coding agents: <a href="https://code.visualstudio.com/docs/agents/overview">VS Code Agent</a>, <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent">Copilot Cloud Agent</a>, and <a href="https://github.com/features/copilot/cli">Copilot CLI</a>, plus many others.</li>\n</ul>\n',
+        '<ul>\n<li>Led training, evaluation, and rollout of customizable <a href="https://code.visualstudio.com/docs/editing/ai-powered-suggestions">GitHub Copilot Inline Suggestions</a>, <strong>addressing 10+ community issues and increasing accepted suggestions by 10%</strong>.</li>\n<li>Drove the core science development and release of an internal agent evaluation and analysis platform, <strong>scaling a greenfield prototype to 1M+ monthly benchmark executions</strong>. It is now the primary evaluation infrastructure for GitHub Copilot\'s flagship coding agents: <a href="https://code.visualstudio.com/docs/agents/overview">VS Code Agent</a>, <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent">Copilot Cloud Agent</a>, and <a href="https://github.com/features/copilot/cli">Copilot CLI</a>.</li>\n</ul>\n',
     },
     {
       title: "Research Intern",
       date: "May 2023 - Aug 2024",
       organizationId: "microsoftCodeAi",
-      location: "Remote",
+      location: "Des Moines, IA",
       bodyHtml:
-        '<ul>\n<li>Conducted a user study on in-IDE AI-powered vulnerability detection & repair with 17 professional developers across 24 projects, 6.9K files, and 1.7M+ lines of code; <a href="/publication/deepvulguard/">"Closing the Gap: A User Study on the Real-world Usefulness of AI-powered Vulnerability Detection & Repair in the IDE", ICSE 2025</a> (21% acceptance rate).</li>\n<li>Improved unit test readability & maintainability by up to 21% through reinforcement learning, fine-tuning a Codex model less than half GPT-4\'s size to produce nearly 100% syntactically correct code and outperform it on 4 of 7 quality metrics; <a href="/publication/rlsqm/">"Reinforcement Learning from Automatic Feedback for High-Quality Unit Test Generation", DeepTest @ ICSE 2025</a>.</li>\n</ul>\n',
+        '<ul>\n<li>Conducted a user study on in-IDE AI-powered security vulnerability detection & repair with <strong>17 professional developers across 24 projects, 6.9K files, and 1.7M+ lines of code</strong>; <a href="/publication/deepvulguard/"><em>Closing the Gap</em>, ICSE 2025</a> (21% acceptance rate).</li>\n<li><strong>Improved unit-test readability and maintainability by up to 21%</strong> through reinforcement learning; the fine-tuned Codex model was <strong>less than half GPT-4\'s size and outperformed it on 4 of 7 quality metrics</strong>; <a href="/publication/rlsqm/"><em>Reinforcement Learning from Automatic Feedback</em>, DeepTest @ ICSE 2025</a>.</li>\n</ul>\n',
     },
     {
       title: "Research Assistant",
@@ -35,7 +35,7 @@ const cv = {
       organizationId: "programAnalysisAiLab",
       location: "Ames, IA",
       bodyHtml:
-        '<ul>\n<li>Achieved state-of-the-art Big-Vul vulnerability detection performance (96.46 F1) by combining a dataflow-inspired graph model with an LLM; the graph model trained in 9 minutes—75x faster than the strongest baseline—and detected 8.7 of 17 real-world vulnerabilities where baselines found none. <a href="/publication/2024-04-14-deepdfa/">"Dataflow Analysis-Inspired Deep Learning for Efficient Vulnerability Detection", ICSE 2024</a> (<a href="https://github.com/ISU-PAAL/DeepDFA">code</a>; 22% acceptance rate).</li>\n<li>Built a <a href="https://github.com/ARiSE-Lab/TRACED_ICSE_24/tree/main/tracer">C/C++ execution tracing engine</a> from scratch for <a href="/publication/2024-04-14-traced/">"TRACED: Execution-aware Pre-training for Source Code", ICSE 2024</a> (<a href="https://github.com/ARiSE-Lab/TRACED_ICSE_24">code</a>; 22% acceptance rate), enabling execution-aware pre-training that improved complete path prediction by 12.4% and runtime value prediction by 25.2%; the Java variant of the engine was later used for <a href="/publication/codesense/">"CodeSense", ICLR 2026</a>.</li>\n<li>Conducted an empirical study of 9 state-of-the-art vulnerability detection models across 2 datasets, examining model capabilities, training data, and model interpretation; found substantial run-to-run variance and low agreement among model outputs. <a href="/publication/2023-05-14-empirical/">"An Empirical Study of Deep Learning Models for Vulnerability Detection", ICSE 2023</a> (<a href="https://github.com/ISU-PAAL/DL-VD-Empirical-Study">code</a>; 26% acceptance rate).</li>\n<li>Collaborated with ARiSE lab at Columbia University and CERT lab @ Carnegie-Mellon University.</li>\n<li>Improved experiment iteration time by building tools for static analysis (<a href="https://github.com/bstee615/tree-climber">tree-climber</a>) and dynamic analysis and code generation (<a href="https://github.com/bstee615/pal-tools">pal-tools</a>).</li>\n</ul>\n',
+        '<ul>\n<li>Achieved <strong>state-of-the-art Big-Vul vulnerability detection performance (96.46 F1)</strong> by combining a dataflow-inspired graph model with an LLM. Our model trained in 9 minutes—<strong>75x faster than the strongest baseline</strong>—and detected 8.7 of 17 real-world vulnerabilities where baselines found none; <a href="/publication/2024-04-14-deepdfa/"><em>DeepDFA</em>, ICSE 2024</a> (<a href="https://github.com/ISU-PAAL/DeepDFA">code</a>; 22% acceptance rate).</li>\n<li>Built a <a href="https://github.com/ARiSE-Lab/TRACED_ICSE_24/tree/main/tracer">C/C++ execution tracing engine</a> from scratch for <a href="/publication/2024-04-14-traced/"><em>TRACED</em>, ICSE 2024</a> (<a href="https://github.com/ARiSE-Lab/TRACED_ICSE_24">code</a>; 22% acceptance rate), enabling execution-aware pre-training that <strong>improved complete path prediction by 12.4% and runtime value prediction by 25.2%</strong>. Built a Java counterpart later used for <a href="/publication/codesense/"><em>CodeSense</em>, ICLR 2026</a>.</li>\n<li>Reproduced and evaluated <strong>9 state-of-the-art vulnerability detection models across 2 datasets</strong>, uncovering substantial run-to-run variance and low agreement among model outputs; <a href="/publication/2023-05-14-empirical/"><em>An Empirical Study of Deep Learning Models for Vulnerability Detection</em>, ICSE 2023</a> (<a href="https://github.com/ISU-PAAL/DL-VD-Empirical-Study">code</a>; 26% acceptance rate).</li>\n<li>Collaborated with Columbia University\'s ARiSE Lab and Carnegie Mellon University\'s CERT division; built open-source static and dynamic analysis tools including <a href="https://github.com/bstee615/tree-climber">tree-climber</a> and <a href="https://github.com/bstee615/pal-tools">pal-tools</a>.</li>\n</ul>\n',
     },
     {
       title: "Software Developer Intern",
@@ -66,7 +66,7 @@ const cv = {
   ],
   education: [
     {
-      title: "PhD Computer Science",
+      title: "PhD, Computer Science",
       date: "2019 - 2024",
       organizationId: "programAnalysisAiLab",
       location: "Ames, IA",
@@ -74,7 +74,7 @@ const cv = {
         '<ul>\n<li>Thesis: <a href="/publication/2024-12-19-phddissertation/">Understanding and improving deep learning models for vulnerability detection</a>.</li>\n</ul>\n',
     },
     {
-      title: "MS Computer Science",
+      title: "MS, Computer Science",
       date: "2019 - 2021",
       organizationId: "programAnalysisAiLab",
       location: "Ames, IA",
@@ -82,7 +82,7 @@ const cv = {
         '<ul>\n<li>Thesis: <a href="/publication/2021-12-19-msthesis/">Refactoring programs to improve the performance of deep learning for vulnerability detection</a>.</li>\n<li>Released code as <a href="https://github.com/bstee615/cfactor">open-source library cfactor</a>.</li>\n<li>GPA 3.91/4.00.</li>\n</ul>\n',
     },
     {
-      title: "BS Computer Science",
+      title: "BS, Computer Science",
       date: "Aug 2016 - May 2019",
       organizationId: "bobJonesComputerScience",
       location: "Greenville, SC",
