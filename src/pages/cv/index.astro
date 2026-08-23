@@ -106,10 +106,18 @@ const formatYears = (years: number[]) =>
         </div>
       </div>
       <a
-        class="btn btn-secondary btn-sm"
+        class="cv-pdf btn btn-secondary btn-sm"
         href="/files/benjamin-steenhoek-cv.pdf"
       >
-        Academic PDF
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 2h8l4 4v16H6z"></path>
+          <path d="M14 2v5h5"></path>
+          <path d="M8.5 16v-5h1.75a1.5 1.5 0 0 1 0 3H8.5"></path>
+          <path
+            d="M13 16v-5h1.25A1.75 1.75 0 0 1 16 12.75v1.5A1.75 1.75 0 0 1 14.25 16z"
+          ></path>
+        </svg>
+        PDF
       </a>
     </header>
 
@@ -358,6 +366,16 @@ const formatYears = (years: number[]) =>
     border-top: var(--divider);
     border-bottom: var(--divider);
     color: var(--muted);
+  }
+
+  .cv-pdf svg {
+    width: 1rem;
+    height: 1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.7;
   }
 
   .cv section {
