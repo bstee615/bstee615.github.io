@@ -91,7 +91,7 @@ const formatYears = (years: number[]) =>
   <article class="cv">
     <header class="cv-header">
       <div>
-        <h1>{siteMetadata.name}</h1>
+        <h1>{siteMetadata.name}, PhD</h1>
         <div class="cv-links">
           <a
             data-cv-email
@@ -117,7 +117,7 @@ const formatYears = (years: number[]) =>
       </div>
       <a
         class="btn btn-secondary btn-sm"
-        href="/files/benjamin-steenhoek-cv.pdf"
+        href="/files/benjamin-steenhoek-cv-2026.pdf"
       >
         PDF
       </a>
@@ -184,31 +184,6 @@ const formatYears = (years: number[]) =>
     </section>
 
     <section>
-      <h2>Education</h2>
-      <div class="cv-entries">
-        {
-          education.map((position) => (
-            <article class="cv-entry">
-              <div class="cv-entry__heading">
-                <h3>{position.title}</h3>
-                <time>{position.date}</time>
-              </div>
-              <div class="cv-entry__meta">
-                <span>
-                  <a href={position.organization.url}>
-                    {position.organization.name}
-                  </a>
-                </span>
-                <span>{position.location}</span>
-              </div>
-              <div class="cv-details" set:html={position.bodyHtml} />
-            </article>
-          ))
-        }
-      </div>
-    </section>
-
-    <section>
       <div class="section-heading">
         <h2>Selected Publications</h2>
         <a href={externalLinks.scholar}>
@@ -264,6 +239,31 @@ const formatYears = (years: number[]) =>
           </div>
         </div>
       </details>
+    </section>
+
+    <section class="education-section">
+      <h2>Education</h2>
+      <div class="cv-entries">
+        {
+          education.map((position) => (
+            <article class="cv-entry">
+              <div class="cv-entry__heading">
+                <h3>{position.title}</h3>
+                <time>{position.date}</time>
+              </div>
+              <div class="cv-entry__meta">
+                <span>
+                  <a href={position.organization.url}>
+                    {position.organization.name}
+                  </a>
+                </span>
+                <span>{position.location}</span>
+              </div>
+              <div class="cv-details" set:html={position.bodyHtml} />
+            </article>
+          ))
+        }
+      </div>
     </section>
 
     <div class="cv-columns">
@@ -455,6 +455,11 @@ const formatYears = (years: number[]) =>
   .cv :global(.cv-details ul) {
     list-style: disc;
     padding-left: 1.35rem;
+  }
+
+  .education-section :global(.cv-details ul) {
+    padding-left: 1rem;
+    list-style: none;
   }
 
   .cv :global(.cv-details li),

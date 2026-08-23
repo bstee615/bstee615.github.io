@@ -8,4 +8,4 @@ npm run build:cv
 ```
 
 The command also writes `academic-cv.html` as a local rendering preview and
-outputs the final PDF to `public/files/benjamin-steenhoek-cv.pdf`.
+outputs the final PDF to `public/files/benjamin-steenhoek-cv-2026.pdf`.

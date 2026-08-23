@@ -1,11 +1,11 @@
 ---
-title: Benjamin Steenhoek — Academic CV
-output: public/files/benjamin-steenhoek-cv.pdf
+title: benjamin-steenhoek-cv-2026.pdf
+output: public/files/benjamin-steenhoek-cv-2026.pdf
 ---
 
 <!-- markdownlint-disable MD033 -->
 
-# Benjamin Steenhoek
+# Benjamin Steenhoek, PhD
 
 [![Website](icons/globe.svg) benjijang.com](https://benjijang.com) · [![Email](icons/email.svg) benjaminjsteenhoek@gmail.com](mailto:benjaminjsteenhoek@gmail.com) · [![Google Scholar](icons/scholar.svg) Scholar](https://scholar.google.com/citations?user=uJk56S4AAAAJ) · [![GitHub](icons/github.svg) github.com/bstee615](https://github.com/bstee615) · [![LinkedIn](icons/linkedin.svg) linkedin.com/in/ben-steenhoek](https://www.linkedin.com/in/ben-steenhoek)
 
@@ -18,8 +18,8 @@ output: public/files/benjamin-steenhoek-cv.pdf
 
 **[Microsoft Code | AI](https://www.microsoft.com/en-us/research/group/codeai/)** · Des Moines, IA
 
+- Established the primary evaluation platform for GitHub Copilot's flagship coding agents—[VS Code Agent](https://code.visualstudio.com/docs/agents/overview), [Copilot Cloud Agent](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent), and [Copilot CLI](https://github.com/features/copilot/cli)—by **starting and scaling its core science from a greenfield prototype to 1M+ monthly benchmark executions**.
 - Led training, evaluation, and rollout of customizable [GitHub Copilot Inline Suggestions](https://code.visualstudio.com/docs/editing/ai-powered-suggestions), **addressing 10+ community issues and increasing accepted suggestions by 10%**.
-- Drove the core science development and release of an internal agent evaluation and analysis platform, **scaling a greenfield prototype to 1M+ monthly benchmark executions**. It is now the primary evaluation infrastructure for GitHub Copilot's flagship coding agents: [VS Code Agent](https://code.visualstudio.com/docs/agents/overview), [Copilot Cloud Agent](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent), and [Copilot CLI](https://github.com/features/copilot/cli).
 
 ### Research Intern <span class="dates">May 2023–Aug 2024</span>
 
@@ -37,14 +37,6 @@ output: public/files/benjamin-steenhoek-cv.pdf
 - Reproduced and evaluated **9 state-of-the-art vulnerability detection models across 2 datasets**, uncovering substantial run-to-run variance and low agreement among model outputs; [_An Empirical Study of Deep Learning Models for Vulnerability Detection_, ICSE 2023](https://benjijang.com/publication/2023-05-14-empirical/) ([code](https://github.com/ISU-PAAL/DL-VD-Empirical-Study); 26% acceptance rate).
 - Collaborated with Columbia University's ARiSE Lab and Carnegie Mellon University's CERT division; built open-source static and dynamic analysis tools including [tree-climber](https://github.com/bstee615/tree-climber) and [pal-tools](https://github.com/bstee615/pal-tools).
 
-## Education
-
-| Degree                    | Institution                                                                                                                                                                                               |     Dates |
-| :------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------: |
-| **PhD, Computer Science** | Iowa State University<br>Dissertation: [_Understanding and improving deep learning models for vulnerability detection_](https://benjijang.com/publication/2024-12-19-phddissertation/)                    | 2019–2024 |
-| **MS, Computer Science**  | Iowa State University · GPA 3.91/4.00<br>Thesis: [_Refactoring programs to improve the performance of deep learning for vulnerability detection_](https://benjijang.com/publication/2021-12-19-msthesis/) | 2019–2021 |
-| **BS, Computer Science**  | Bob Jones University · _magna cum laude_ · GPA 3.84/4.00                                                                                                                                                  | 2016–2019 |
-
 ## Selected Publications <span class="section-link">See all: ![Google Scholar](icons/scholar.svg) [scholar.google.com/citations?user=uJk56S4AAAAJ](https://scholar.google.com/citations?user=uJk56S4AAAAJ)</span>
 
 1. Monoshi Kumar Roy, Simin Chen, **Benjamin Steenhoek**, Jinjun Peng, Gail Kaiser, Baishakhi Ray, and Wei Le. (2026). _CodeSense: a Real-World Benchmark and Dataset for Code Semantic Reasoning._ _ICLR'26_. [Paper](https://arxiv.org/abs/2506.00750) · [Code](https://github.com/codesense-bench/codesense-codes)
@@ -57,6 +49,22 @@ output: public/files/benjamin-steenhoek-cv.pdf
 8. **Benjamin Steenhoek**, Md Mahbubur Rahman, Shaila Sharmin, and Wei Le. (2023). _Do Language Models Learn Semantics of Code? A Case Study in Vulnerability Detection._ _arXiv_. [Paper](https://arxiv.org/abs/2311.04109)
 9. **Benjamin Steenhoek**, Md Mahbubur Rahman, Richard Jiles, and Wei Le. (2023). _An Empirical Study of Deep Learning Models for Vulnerability Detection._ _ICSE'23_. [Paper](https://doi.org/10.48550/arXiv.2212.08109) · [Code](https://github.com/ISU-PAAL/DL-VD-Empirical-Study)
 10. Ashwin Kallingal Joshy, Xueyuan Chen, **Benjamin Steenhoek**, and Wei Le. (2021). _Validating Static Warnings via Testing Code Fragments._ _ISSTA'21_. [Paper](https://doi.org/10.1145/3460319.3464832)
+
+## Education
+
+<div class="education-entry">
+<div class="education-heading"><strong>PhD, Computer Science</strong><span>Iowa State University</span><time>2019–2024</time></div>
+<p>Dissertation: <a href="https://benjijang.com/publication/2024-12-19-phddissertation/"><em>Understanding and improving deep learning models for vulnerability detection</em></a></p>
+</div>
+
+<div class="education-entry">
+<div class="education-heading"><strong>MS, Computer Science</strong><span>Iowa State University · GPA 3.91/4.00</span><time>2019–2021</time></div>
+<p>Thesis: <a href="https://benjijang.com/publication/2021-12-19-msthesis/"><em>Refactoring programs to improve the performance of deep learning for vulnerability detection</em></a></p>
+</div>
+
+<div class="education-entry">
+<div class="education-heading"><strong>BS, Computer Science</strong><span>Bob Jones University · <em>magna cum laude</em> · GPA 3.84/4.00</span><time>2016–2019</time></div>
+</div>
 
 <div class="columns">
 <section>
