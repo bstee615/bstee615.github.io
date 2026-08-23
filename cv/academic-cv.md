@@ -7,7 +7,7 @@ output: public/files/benjamin-steenhoek-cv.pdf
 
 # Benjamin Steenhoek
 
-[![Website](icons/globe.svg) benjijang.com](https://benjijang.com) · [![Email](icons/email.svg) me@benjijang.com](mailto:me@benjijang.com) · [![GitHub](icons/github.svg) github.com/bstee615](https://github.com/bstee615) · [![LinkedIn](icons/linkedin.svg) linkedin.com/in/ben-steenhoek](https://www.linkedin.com/in/ben-steenhoek)
+[![Website](icons/globe.svg) benjijang.com](https://benjijang.com) · [![Email](icons/email.svg) me@benjijang.com](mailto:me@benjijang.com) · [![Google Scholar](icons/scholar.svg) Scholar](https://scholar.google.com/citations?user=uJk56S4AAAAJ) · [![GitHub](icons/github.svg) github.com/bstee615](https://github.com/bstee615) · [![LinkedIn](icons/linkedin.svg) linkedin.com/in/ben-steenhoek](https://www.linkedin.com/in/ben-steenhoek)
 
 > AI/ML researcher building code-editing and agentic systems for software engineering. Current focus areas are LLM post-training and agent harness engineering. Research interests include agent evaluation, LLM fine-tuning, software security, and program analysis.  
 > Based in Des Moines, Iowa.
