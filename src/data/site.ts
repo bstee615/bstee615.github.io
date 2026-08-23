@@ -13,7 +13,7 @@ export const externalLinks = {
   scholar: "https://scholar.google.com/citations?user=uJk56S4AAAAJ",
   linkedin: "https://www.linkedin.com/in/ben-steenhoek",
   github: "https://github.com/bstee615",
-  email: "mailto:me@benjijang.com",
+  email: "mailto:benjaminjsteenhoek@gmail.com",
 } as const;
 
 export const organizations = {
