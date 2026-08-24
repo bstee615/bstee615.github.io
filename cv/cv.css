@@ -79,6 +79,18 @@ h3 + p {
   color: var(--muted);
   font-size: 9pt;
 }
+.code-ai {
+  white-space: nowrap;
+}
+.code-ai-divider {
+  margin: 0 -0.04em;
+}
+.code-ai em {
+  display: inline-block;
+  margin-left: -0.02em;
+  font-style: italic;
+  transform: skewX(-10deg);
+}
 p {
   margin: 0;
 }

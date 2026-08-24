@@ -16,14 +16,14 @@ output: public/files/benjamin-steenhoek-cv-2026.pdf
 
 ### Senior Researcher <span class="dates">Fall 2024–Present</span>
 
-**[Microsoft Code|_AI_](https://www.microsoft.com/en-us/research/group/codeai/)** · Des Moines, IA
+<strong><a href="https://www.microsoft.com/en-us/research/group/codeai/">Microsoft <span class="code-ai">Code<span class="code-ai-divider">|</span><em>AI</em></span></a></strong> · Des Moines, IA
 
 - Drove research engineering for **GitHub Copilot's primary agentic evaluation platform**, building its scalable harness environment & tooling and onboarding key benchmarks. During my tenure, we grew it from a **greenfield prototype to 1M+ monthly executions**, and it now powers evaluations for flagship coding agents, including [VS Code Agent](https://code.visualstudio.com/docs/agents/overview), [Copilot Cloud Agent](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent), and [Copilot CLI](https://github.com/features/copilot/cli).
 - Led post-training, evaluation, and rollout of a production model for [GitHub Copilot Inline Suggestions](https://code.visualstudio.com/docs/editing/ai-powered-suggestions) that **increased suggestion acceptance by 10%** and enabled a configurable eagerness feature that **addressed 10+ long-standing community issues**.
 
 ### Research Intern <span class="dates">May 2023–Aug 2024</span>
 
-**[Microsoft Code|_AI_](https://www.microsoft.com/en-us/research/group/codeai/)** · Des Moines, IA
+<strong><a href="https://www.microsoft.com/en-us/research/group/codeai/">Microsoft <span class="code-ai">Code<span class="code-ai-divider">|</span><em>AI</em></span></a></strong> · Des Moines, IA
 
 - Conducted a user study on in-IDE AI-powered security vulnerability detection & repair with **17 professional developers across 24 projects, 6.9K files, and 1.7M+ lines of code**; [_Closing the Gap_, ICSE 2025](https://benjijang.com/publication/deepvulguard/) (21% acceptance rate).
 - **Improved unit-test readability and maintainability by up to 21%** through reinforcement learning; the fine-tuned Codex model was **less than half the cost of GPT-4 and outperformed it on 4 of 7 quality metrics**; [_Reinforcement Learning from Automatic Feedback_, DeepTest @ ICSE 2025](https://benjijang.com/publication/rlsqm/).
