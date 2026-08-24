@@ -287,7 +287,7 @@ const publicationsByYear = Array.from(
 
   .profile-links {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
     gap: 0.4rem;
     margin-top: 1.25rem;
   }
@@ -295,6 +295,7 @@ const publicationsByYear = Array.from(
   .profile-links .btn {
     width: 100%;
     font-size: 1rem;
+    white-space: nowrap;
   }
 
   .activity {
@@ -555,6 +556,12 @@ const publicationsByYear = Array.from(
     display: flex;
     justify-content: center;
     margin-top: 1.5rem;
+  }
+
+  @media (max-width: 820px) {
+    .profile-links {
+      grid-template-columns: repeat(2, minmax(7rem, 1fr));
+    }
   }
 
   @media (max-width: 680px) {
