@@ -19,7 +19,6 @@ export const externalLinks = {
 export const organizations = {
   microsoftCodeAi: {
     name: "Microsoft Code|AI",
-    homepageName: "Microsoft Code | AI",
     url: "https://www.microsoft.com/en-us/research/group/codeai/",
   },
   programAnalysisAiLab: {
