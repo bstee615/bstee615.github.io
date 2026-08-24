@@ -7,7 +7,7 @@ output: public/files/benjamin-steenhoek-cv-2026.pdf
 
 # Benjamin Steenhoek, PhD
 
-[![Website](icons/globe.svg) benjijang.com](https://benjijang.com) · [![Email](icons/email.svg) benjaminjsteenhoek@gmail.com](mailto:benjaminjsteenhoek@gmail.com) · [![Google Scholar](icons/scholar.svg) Scholar](https://scholar.google.com/citations?user=uJk56S4AAAAJ) · [![GitHub](icons/github.svg) github.com/bstee615](https://github.com/bstee615) · [![LinkedIn](icons/linkedin.svg) linkedin.com/in/ben-steenhoek](https://www.linkedin.com/in/ben-steenhoek)
+[![Website](https://benjijang.com/images/globe.svg) benjijang.com](https://benjijang.com) · [![Email](https://benjijang.com/images/email.svg) benjaminjsteenhoek@gmail.com](mailto:benjaminjsteenhoek@gmail.com) · [![Google Scholar](https://benjijang.com/images/scholar.svg) Scholar](https://scholar.google.com/citations?user=uJk56S4AAAAJ) · [![GitHub](https://benjijang.com/images/github.svg) github.com/bstee615](https://github.com/bstee615) · [![LinkedIn](https://benjijang.com/images/linkedin.svg) linkedin.com/in/ben-steenhoek](https://www.linkedin.com/in/ben-steenhoek)
 
 > AI/ML researcher building code-editing and agentic systems for software engineering. Current focus areas are LLM post-training and agent harness engineering. Research interests include agent evaluation, LLM fine-tuning, software security, and program analysis.  
 > Based in Des Moines, Iowa.
@@ -37,7 +37,7 @@ output: public/files/benjamin-steenhoek-cv-2026.pdf
 - Reproduced and evaluated **9 state-of-the-art vulnerability detection models across 2 datasets**, uncovering substantial run-to-run variance and low agreement among model outputs; [_An Empirical Study of Deep Learning Models for Vulnerability Detection_, ICSE 2023](https://benjijang.com/publication/2023-05-14-empirical/) ([code](https://github.com/ISU-PAAL/DL-VD-Empirical-Study); 26% acceptance rate).
 - Collaborated with Columbia University's ARiSE Lab and Carnegie Mellon University's CERT division; built open-source static and dynamic analysis tools including [tree-climber](https://github.com/bstee615/tree-climber) and [pal-tools](https://github.com/bstee615/pal-tools).
 
-## Selected Publications <span class="section-link">See all: ![Google Scholar](icons/scholar.svg) [scholar.google.com/citations?user=uJk56S4AAAAJ](https://scholar.google.com/citations?user=uJk56S4AAAAJ)</span>
+## Selected Publications <span class="section-link">See all: ![Google Scholar](https://benjijang.com/images/scholar.svg) [scholar.google.com/citations?user=uJk56S4AAAAJ](https://scholar.google.com/citations?user=uJk56S4AAAAJ)</span>
 
 1. Monoshi Kumar Roy, Simin Chen, **Benjamin Steenhoek**, Jinjun Peng, Gail Kaiser, Baishakhi Ray, and Wei Le. (2026). _CodeSense: a Real-World Benchmark and Dataset for Code Semantic Reasoning._ _ICLR'26_. [Paper](https://arxiv.org/abs/2506.00750) · [Code](https://github.com/codesense-bench/codesense-codes)
 2. Spandan Garg, **Benjamin Steenhoek**, and Yufan Huang. (2026). _Saving SWE-Bench: A Benchmark Mutation Approach for Realistic Agent Evaluation._ _CAIN'26_. [Paper](https://arxiv.org/abs/2510.08996) · [Code](https://github.com/microsoft/SWE-Bench-Mutated-CAIN26)
@@ -82,7 +82,7 @@ output: public/files/benjamin-steenhoek-cv-2026.pdf
 </section>
 <section>
 
-## Selected Projects <span class="section-link projects-link">See all: <img src="icons/github.svg" alt="GitHub" /> <a href="https://github.com/bstee615">github.com/bstee615</a></span>
+## Selected Projects <span class="section-link projects-link">See all: <img src="https://benjijang.com/images/github.svg" alt="GitHub" /> <a href="https://github.com/bstee615">github.com/bstee615</a></span>
 
 - [**DeepDFA**](https://github.com/ISU-PAAL/DeepDFA) — efficient, dataflow-inspired vulnerability detection
 - [**TRACED**](https://github.com/ARiSE-Lab/TRACED_ICSE_24/tree/main/tracer) — C/C++ execution tracing for model pre-training

@@ -18,19 +18,19 @@ pip install git+https://github.com/hamidzr/webcam-mods@master
 
 Original
 
-![Pasted image 20220707144227.png](/media/webcam-step-1.webp)
+![Pasted image 20220707144227.png](/images/webcam-step-1.webp)
 
 Cropped: `webcam_mods crop-cam`. I was impressed with the interactive cropping mode which allowed me to crop to my profile pretty easily. The crop settings are saved to disk for future runs.
 
-![Pasted image 20220707144141.png](/media/webcam-step-2.webp)
+![Pasted image 20220707144141.png](/images/webcam-step-2.webp)
 
 Cropped and blurred: `webcam_mods bg-blur`
 
-![Pasted image 20220707144301.png](/media/webcam-step-3.webp)
+![Pasted image 20220707144301.png](/images/webcam-step-3.webp)
 
 Cropped with bg: `webcam_mods bg-swap`
 
-![Pasted image 20220707144332.png](/media/webcam-step-4.webp)
+![Pasted image 20220707144332.png](/images/webcam-step-4.webp)
 
 Video feed was displayed with [ffplay](https://ffmpeg.org/ffplay.html).
 Runner-ups that I tried:
