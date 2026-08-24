@@ -13,6 +13,7 @@
     "lint": "npm run format:check && npm run lint:code && npm run lint:markdown",
     "lint:code": "eslint . && astro check",
     "lint:markdown": "markdownlint-cli2",
+    "optimize:images": "node scripts/optimize-images.mjs",
     "preview": "astro preview",
     "test": "npm run build && npm run test:e2e",
     "test:e2e": "playwright test"

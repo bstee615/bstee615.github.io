@@ -15,14 +15,15 @@ Posts and publications are Astro content collections validated by
 | Service records | ISO `date`, reusable `venue` ID, and `role`                                                                                                        |
 | CV entries      | `title`, `organizationId`, `location`, and trusted `bodyHtml`; optional `date` and `more`                                                          |
 
-| Data                                                       | Location                                                                             |
-| ---------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| Posts                                                      | [`src/content/posts/`](src/content/posts/)                                           |
-| Publications                                               | [`src/content/publications/`](src/content/publications/)                             |
-| Site metadata, links, organizations, projects, and service | [`src/data/site.ts`](src/data/site.ts)                                               |
-| Web CV experience and education                            | [`src/data/cv.ts`](src/data/cv.ts)                                                   |
-| PDF CV content and styles                                  | [`cv/academic-cv.md`](cv/academic-cv.md), [`cv/academic-cv.css`](cv/academic-cv.css) |
-| Routes                                                     | [`src/routes.ts`](src/routes.ts)                                                     |
+| Data                                                       | Location                                                 |
+| ---------------------------------------------------------- | -------------------------------------------------------- |
+| Posts                                                      | [`src/content/posts/`](src/content/posts/)               |
+| Publications                                               | [`src/content/publications/`](src/content/publications/) |
+| Site metadata, links, organizations, projects, and service | [`src/data/site.ts`](src/data/site.ts)                   |
+| Web CV experience and education                            | [`src/data/cv.ts`](src/data/cv.ts)                       |
+| PDF CV content and styles                                  | [`cv/cv.md`](cv/cv.md), [`cv/cv.css`](cv/cv.css)         |
+| Images and icons                                           | [`public/images/`](public/images/)                       |
+| Routes                                                     | [`src/routes.ts`](src/routes.ts)                         |
 
 ## Development
 
@@ -72,6 +73,18 @@ npm run build:cv
 ```sh
 npm run import:gist -- https://gist.github.com/USER/GIST_ID
 npm run import:gist -- --help
+```
+
+### Optimize images
+
+[`scripts/optimize-images.mjs`](scripts/optimize-images.mjs) uses ImageMagick
+to create a filename-normalized WebP in `public/images/`. Keep source images
+outside `public/` so the repository contains only the optimized copy.
+
+```sh
+npm run optimize:images -- ~/Downloads/example.png
+npm run optimize:images -- --width 1100 --quality 80 ~/Downloads/example.png
+npm run optimize:images -- --help
 ```
 
 ### Deployment

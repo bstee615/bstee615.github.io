@@ -12,9 +12,8 @@
   Layouts and components own presentation; `src/scripts/site.ts` owns the
   small client runtime for themes, transitions, history, scrolling, and code
   copy.
-- `public/media/` contains optimized images used by the current site.
-  `public/files/` contains downloads and compatibility assets whose public URLs
-  must remain stable.
+- `public/images/` contains the site's flat, canonical image and icon set.
+  `public/files/` contains downloads whose public URLs must remain stable.
 
 CV entry bodies are trusted, repository-authored HTML because their dense prose
 contains many inline links. The `bodyHtml` field makes that boundary explicit;
@@ -30,9 +29,8 @@ as text and highlighted structurally.
 2. Set `title`, `description`, an ISO `date` (`YYYY-MM-DD`), and `kind`
    (`blog` or `stream`). Optional fields are `math` and `cover`; covers require
    paths, intrinsic dimensions, alt text, and optional credit.
-3. Put optimized delivery images in `public/media/` and reference them with
-   root-relative URLs. Keep downloads or previously published asset URLs in
-   `public/files/`.
+3. Put optimized delivery images in the flat `public/images/` directory and
+   reference them with root-relative URLs. Keep downloads in `public/files/`.
 4. Review legacy routing in `src/utils/posts.ts`. Streams automatically retain
    `/stream/<slug>/`; blogs retain `/posts/YYYY/MM/<slug>/`. Add an override
    when an old slug differs, or explicitly disable a route that never existed.
@@ -75,3 +73,16 @@ overrides, then review the generated Markdown and legacy route behavior.
 The **Import gist as post** workflow offers the same flow through
 `workflow_dispatch` or `workflow_call`; it validates the site and opens a
 content pull request.
+
+### Optimizing images
+
+Use `scripts/optimize-images.mjs` for new raster assets. It requires ImageMagick
+and writes a normalized WebP to the flat `public/images/` directory by default.
+Keep source images outside `public/`; do not commit both an original and an
+optimized derivative.
+
+```sh
+npm run optimize:images -- ~/Downloads/example.png
+npm run optimize:images -- --width 1100 --quality 80 ~/Downloads/example.png
+npm run optimize:images -- --help
+```

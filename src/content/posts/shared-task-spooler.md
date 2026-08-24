@@ -10,8 +10,8 @@ description: >-
 date: 2023-12-16
 kind: blog
 cover:
-  src: /media/cover-shared-task-spooler.webp
-  srcMedium: /media/cover-shared-task-spooler-1100.webp
+  src: /images/cover-shared-task-spooler.webp
+  srcMedium: /images/cover-shared-task-spooler-1100.webp
   width: 1520
   height: 1013
   alt: Playmobil people queuing for a gallery while a red sports car passes

@@ -6,4 +6,4 @@ test-results/
 *.log
 .DS_Store
 # Generated CV preview (the PDF is intentionally committed for the website).
-cv/academic-cv.html
+cv/cv.html

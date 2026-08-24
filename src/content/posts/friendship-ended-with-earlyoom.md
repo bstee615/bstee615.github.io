@@ -8,12 +8,12 @@ date: 2023-02-13
 kind: stream
 ---
 
-![friendship ended with earlyoom, now nohang is my best friend](/media/earlyoom-meme.webp)
+![friendship ended with earlyoom, now nohang is my best friend](/images/earlyoom-meme.webp)
 
 I used to use `earlyoom` to ensure that my desktop PC will still keep running if a program hogs all the memory (e.g. loading a too-large dataset into memory). I recently couldn't get `earlyoom` to work with Fedora 37, and while searching for a solution I found `nohang`. Here are some useful features of `nohang` which convinced me to switch:
 
 - Desktop notification when a program is killed.
-  ![OOM notification](/media/nohang-notification.webp)
+  ![OOM notification](/images/nohang-notification.webp)
 - Includes a demo command, `nohang --memload`, to safely test out a low-memory situation.
 - Easy to build from source and sensible default config.
 

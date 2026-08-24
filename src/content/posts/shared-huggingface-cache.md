@@ -9,8 +9,8 @@ description: >-
 date: 2024-01-16
 kind: blog
 cover:
-  src: /media/cover-shared-huggingface-cache.webp
-  srcMedium: /media/cover-shared-huggingface-cache-1100.webp
+  src: /images/cover-shared-huggingface-cache.webp
+  srcMedium: /images/cover-shared-huggingface-cache-1100.webp
   width: 1520
   height: 855
   alt: People sitting on a wall with their arms around each other

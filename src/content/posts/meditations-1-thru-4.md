@@ -6,8 +6,8 @@ description: >-
 date: 2022-06-03
 kind: blog
 cover:
-  src: /media/cover-meditations.webp
-  srcMedium: /media/cover-meditations-1100.webp
+  src: /images/cover-meditations.webp
+  srcMedium: /images/cover-meditations-1100.webp
   width: 1520
   height: 2276
   alt: Stoa in Baku, Azerbaijan

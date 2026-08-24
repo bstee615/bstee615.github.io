@@ -7,8 +7,8 @@ description: >-
 date: 2022-05-13
 kind: blog
 cover:
-  src: /media/cover-gematria.webp
-  srcMedium: /media/cover-gematria-1100.webp
+  src: /images/cover-gematria.webp
+  srcMedium: /images/cover-gematria-1100.webp
   width: 1520
   height: 1013
   alt: Torah

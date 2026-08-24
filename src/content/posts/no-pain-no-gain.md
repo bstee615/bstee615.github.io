@@ -7,8 +7,8 @@ description: >-
 date: 2022-03-07
 kind: blog
 cover:
-  src: /media/cover-no-pain-no-gain.webp
-  srcMedium: /media/cover-no-pain-no-gain-1100.webp
+  src: /images/cover-no-pain-no-gain.webp
+  srcMedium: /images/cover-no-pain-no-gain-1100.webp
   width: 1520
   height: 1013
   alt: Weights

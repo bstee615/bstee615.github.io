@@ -180,8 +180,13 @@ test("generated routes and local references remain intact", async ({
   }
 
   for (const asset of [
-    "/media/profile-330.webp",
-    "/media/profile.webp",
+    "/images/email.svg",
+    "/images/github.svg",
+    "/images/globe.svg",
+    "/images/linkedin.svg",
+    "/images/profile-330.webp",
+    "/images/profile.webp",
+    "/images/scholar.svg",
     "/files/2022-04-01-poster.pdf",
     "/files/2022-04-26-coms515-opensource.pdf",
     "/files/2024-12-19-dissertation.pdf",
@@ -193,6 +198,43 @@ test("generated routes and local references remain intact", async ({
       value.trim(),
     ),
   ).resolves.toBe("benjijang.com");
+});
+
+test("optimized images decode on every image-bearing page", async ({
+  page,
+}) => {
+  for (const route of [
+    "/",
+    "/publication/2022-04-01-poster/",
+    "/publication/2022-04-26-coms515/",
+    "/writing/claude-terminal-profile/",
+    "/writing/encoder-decoder-models/",
+    "/writing/friendship-ended-with-earlyoom/",
+    "/writing/gematria/",
+    "/writing/meditations-1-thru-4/",
+    "/writing/no-pain-no-gain/",
+    "/writing/shared-huggingface-cache/",
+    "/writing/shared-task-spooler/",
+    "/writing/twitter-limiter/",
+    "/writing/webcam-mods-for-linux-background-blur-swap/",
+  ]) {
+    await page.goto(route);
+    const images = page.locator("img");
+    const count = await images.count();
+    expect(count, `${route} should contain an image`).toBeGreaterThan(0);
+    for (let index = 0; index < count; index += 1) {
+      const image = images.nth(index);
+      await image.scrollIntoViewIfNeeded();
+      await expect
+        .poll(() =>
+          image.evaluate((element) => {
+            const htmlImage = element as HTMLImageElement;
+            return htmlImage.complete && htmlImage.naturalWidth > 0;
+          }),
+        )
+        .toBe(true);
+    }
+  }
 });
 
 test("homepage navigation and saved theme preference work", async ({
