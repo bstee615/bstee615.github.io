@@ -379,6 +379,55 @@ test("code samples copy exactly and stay contained", async ({ page }) => {
   }
 });
 
+for (const width of [390, 1440]) {
+  for (const theme of ["pastel-light", "pastel-dark"]) {
+    test(`Meditations prose stays legible at ${width}px in ${theme}`, async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await page
+        .context()
+        .addCookies([
+          { name: "site-theme", value: theme, url: "http://127.0.0.1:4321" },
+        ]);
+      await page.goto("/writing/meditations-1-thru-4/");
+      await expect(page.locator("html")).toHaveAttribute("data-theme", theme);
+
+      const body = page.locator(".body");
+      await expect(body).not.toContainText("{: .notice");
+      await expect(body.locator("aside.notice--info")).toHaveCount(2);
+      await expect(body.locator("aside.notice--info").first()).toContainText(
+        "Note: Part I",
+      );
+      await expect(body.locator("aside em")).toHaveText(
+        "The Subtle Art of Not Giving a Fuck",
+      );
+      await expect(body.locator("blockquote")).toHaveCount(8);
+
+      const styles = await body.evaluate((element) => {
+        const paragraph = getComputedStyle(element.querySelector("p")!);
+        const quote = getComputedStyle(element.querySelector("blockquote")!);
+        const list = getComputedStyle(element.querySelector("ul")!);
+        const note = getComputedStyle(element.querySelector("aside")!);
+        return {
+          paragraphGap: parseFloat(paragraph.marginBottom),
+          quoteBorder: parseFloat(quote.borderInlineStartWidth),
+          quoteInset: parseFloat(quote.paddingInlineStart),
+          listMarker: list.listStyleType,
+          noteBackground: note.backgroundColor,
+          pageBackground: getComputedStyle(document.body).backgroundColor,
+        };
+      });
+      expect(styles.paragraphGap).toBeGreaterThanOrEqual(20);
+      expect(styles.quoteBorder).toBeGreaterThan(0);
+      expect(styles.quoteInset).toBeGreaterThanOrEqual(16);
+      expect(styles.listMarker).toBe("disc");
+      expect(styles.noteBackground).not.toBe(styles.pageBackground);
+      await expectNoPageOverflow(page);
+    });
+  }
+}
+
 test("legacy post and stream URLs redirect to canonical writing pages", async ({
   page,
   request,
