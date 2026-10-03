@@ -396,8 +396,12 @@ for (const width of [390, 1440]) {
       const body = page.locator(".body");
       await expect(body).not.toContainText("{: .notice");
       await expect(body.locator("aside.notice--info")).toHaveCount(2);
+      await expect(body.locator("aside .notice-title")).toHaveText([
+        "Note",
+        "Note",
+      ]);
       await expect(body.locator("aside.notice--info").first()).toContainText(
-        "Note: Part I",
+        "Part I",
       );
       await expect(body.locator("aside em")).toHaveText(
         "The Subtle Art of Not Giving a Fuck",
@@ -414,15 +418,21 @@ for (const width of [390, 1440]) {
           quoteBorder: parseFloat(quote.borderInlineStartWidth),
           quoteInset: parseFloat(quote.paddingInlineStart),
           listMarker: list.listStyleType,
-          noteBackground: note.backgroundColor,
-          pageBackground: getComputedStyle(document.body).backgroundColor,
+          noteRadius: note.borderRadius,
+          noteBorder: parseFloat(note.borderInlineStartWidth),
+          noteIcon: getComputedStyle(
+            element.querySelector(".notice-title")!,
+            "::before",
+          ).maskImage,
         };
       });
       expect(styles.paragraphGap).toBeGreaterThanOrEqual(20);
       expect(styles.quoteBorder).toBeGreaterThan(0);
       expect(styles.quoteInset).toBeGreaterThanOrEqual(16);
       expect(styles.listMarker).toBe("disc");
-      expect(styles.noteBackground).not.toBe(styles.pageBackground);
+      expect(styles.noteRadius).toBe("0px");
+      expect(styles.noteBorder).toBe(4);
+      expect(styles.noteIcon).not.toBe("none");
       await expectNoPageOverflow(page);
     });
   }

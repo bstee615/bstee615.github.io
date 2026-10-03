@@ -4,8 +4,8 @@ Chromium screenshots of the same article, captured at 1440 × 1800 with a light
 color scheme. The comparison views begin at the opening paragraph and show paragraph spacing,
 the first note, and quotations.
 
-| Before migration                          | After migration                         | Final               |
-| ----------------------------------------- | --------------------------------------- | ------------------- |
+| Before migration                           | After migration                         | Final               |
+| ------------------------------------------ | --------------------------------------- | ------------------- |
 | ![Before migration](before-migration.webp) | ![After migration](after-migration.png) | ![Final](final.png) |
 
 - **Before migration:** rebuilt the original Jekyll source at
@@ -24,7 +24,8 @@ Additional final views at 390 × 1200:
 
 The prose styles restore paragraph spacing, quote borders and inset serif type,
 and list markers throughout `.body` content. The article's two Jekyll attribute
-annotations are replaced by semantic asides with theme-aware callout styling.
+annotations are replaced by semantic asides with GitHub-style square corners, a blue left rule, and an
+info icon beside a separate Note heading in both themes.
 Its wording is preserved; the longer aside is split into two paragraphs.
 
 Validation: Prettier, ESLint, Astro Check, Markdownlint, a static build, and all

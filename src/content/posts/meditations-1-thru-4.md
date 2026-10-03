@@ -28,7 +28,9 @@ Thanks to MIT's Internet Classics Archive [1] for providing the full text in dig
 
 <aside class="notice--info" aria-label="Reading note">
 
-**Note:** Part I is Aurelius's Grammy nomination speech - thanking everyone including his father, friends, and the gods.
+<p class="notice-title">Note</p>
+
+Part I is Aurelius's Grammy nomination speech - thanking everyone including his father, friends, and the gods.
 Because of this, most of the notable passages in this article come from parts II-IV.
 
 </aside>
@@ -92,6 +94,8 @@ Things only happen as they are meant to happen.
 Things cannot affect the soul; my opinion that it has hurt me is the thing which "does violence to the soul".
 
 <aside class="notice--info" aria-label="Related reading">
+
+<p class="notice-title">Note</p>
 
 **Interestingly,** as the same time I was reading this, my wife also read _The Subtle Art of Not Giving a Fuck_ by Mark Manson [2].
 As she shared what she got from the book, we realized that in many ways, that book argues for a modern (and spicier-worded) version of the Stoic philosophy. Instead of chasing pleasure, one should chase happiness and by doing so, cease to give a fuck about things that don't matter.
