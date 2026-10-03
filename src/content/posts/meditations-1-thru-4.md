@@ -26,9 +26,14 @@ Here are my thoughts and the passages I noted while reading, from parts I-IV.
 I referenced the passages using the book/passage numbers in [0].
 Thanks to MIT's Internet Classics Archive [1] for providing the full text in digital form.
 
-**Note:** Part I is Aurelius's Grammy nomination speech - thanking everyone including his father, friends, and the gods.
+<aside class="notice--info" aria-label="Reading note">
+
+<p class="notice-title">Note</p>
+
+Part I is Aurelius's Grammy nomination speech - thanking everyone including his father, friends, and the gods.
 Because of this, most of the notable passages in this article come from parts II-IV.
-{: .notice--info}
+
+</aside>
 
 ## Moral consistency
 
@@ -88,11 +93,17 @@ This is driven by the combination of two metaphysical claims:
 Things only happen as they are meant to happen.
 Things cannot affect the soul; my opinion that it has hurt me is the thing which "does violence to the soul".
 
+<aside class="notice--info" aria-label="Related reading">
+
+<p class="notice-title">Note</p>
+
 **Interestingly,** as the same time I was reading this, my wife also read _The Subtle Art of Not Giving a Fuck_ by Mark Manson [2].
 As she shared what she got from the book, we realized that in many ways, that book argues for a modern (and spicier-worded) version of the Stoic philosophy. Instead of chasing pleasure, one should chase happiness and by doing so, cease to give a fuck about things that don't matter.
+
 Manson doesn't quite identify the object of happiness but leaves as a general sense of "being a good person", while Aurelius identifies Stoic virtue (defined in a concrete sense as alignment with nature, tightly bound to Stoic metaphysics) as the object of his happiness.
 In my mind, this may be a reflection of the difference between the two eras (postmodern vs. early A.D.'s), or a difference in audience (bestseller vs. journal).
-{: .notice--info}
+
+</aside>
 
 This principle is mostly useful to remember as I face another person who I believe has wronged me.
 I should realize that though they are a person, they are only acting in accordance to his nature, and that I can choose to be hurt by it or I can choose to "take away the complaint", recognizing that it has not made me worse.

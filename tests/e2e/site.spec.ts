@@ -379,6 +379,138 @@ test("code samples copy exactly and stay contained", async ({ page }) => {
   }
 });
 
+for (const width of [390, 1440]) {
+  for (const theme of ["pastel-light", "pastel-dark"]) {
+    test(`Meditations prose stays legible at ${width}px in ${theme}`, async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await page
+        .context()
+        .addCookies([
+          { name: "site-theme", value: theme, url: "http://127.0.0.1:4321" },
+        ]);
+      await page.goto("/writing/meditations-1-thru-4/");
+      await expect(page.locator("html")).toHaveAttribute("data-theme", theme);
+
+      const body = page.locator(".body");
+      await expect(body).not.toContainText("{: .notice");
+      await expect(body.locator("aside.notice--info")).toHaveCount(2);
+      await expect(body.locator("aside .notice-title")).toHaveText([
+        "Note",
+        "Note",
+      ]);
+      await expect(body.locator("aside.notice--info").first()).toContainText(
+        "Part I",
+      );
+      await expect(body.locator("aside em")).toHaveText(
+        "The Subtle Art of Not Giving a Fuck",
+      );
+      await expect(body.locator("blockquote")).toHaveCount(8);
+
+      const styles = await body.evaluate((element) => {
+        const paragraph = getComputedStyle(element.querySelector("p")!);
+        const quote = getComputedStyle(element.querySelector("blockquote")!);
+        const list = getComputedStyle(element.querySelector("ul")!);
+        const note = getComputedStyle(element.querySelector("aside")!);
+        return {
+          paragraphGap: parseFloat(paragraph.marginBottom),
+          quoteBorder: parseFloat(quote.borderInlineStartWidth),
+          quoteInset: parseFloat(quote.paddingInlineStart),
+          listMarker: list.listStyleType,
+          noteRadius: note.borderRadius,
+          noteBorder: parseFloat(note.borderInlineStartWidth),
+          noteIcon: getComputedStyle(
+            element.querySelector(".notice-title")!,
+            "::before",
+          ).maskImage,
+        };
+      });
+      expect(styles.paragraphGap).toBeGreaterThanOrEqual(20);
+      expect(styles.quoteBorder).toBeGreaterThan(0);
+      expect(styles.quoteInset).toBeGreaterThanOrEqual(16);
+      expect(styles.listMarker).toBe("disc");
+      expect(styles.noteRadius).toBe("0px");
+      expect(styles.noteBorder).toBe(4);
+      expect(styles.noteIcon).not.toBe("none");
+      await expectNoPageOverflow(page);
+    });
+  }
+}
+
+for (const theme of ["pastel-light", "pastel-dark"]) {
+  test(`all alert types have distinct, readable accents in ${theme}`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page
+      .context()
+      .addCookies([
+        { name: "site-theme", value: theme, url: "http://127.0.0.1:4321" },
+      ]);
+    await page.goto("/writing/meditations-1-thru-4/");
+    const alerts = await page.locator(".body").evaluate((body) => {
+      const variants = ["info", "tip", "important", "warning", "caution"];
+      body.replaceChildren();
+      for (const variant of variants) {
+        const aside = document.createElement("aside");
+        aside.className = `notice--${variant}`;
+        const title = document.createElement("p");
+        title.className = "notice-title";
+        title.textContent = variant === "info" ? "Note" : variant;
+        const content = document.createElement("p");
+        content.textContent =
+          "Useful information with an identifiable heading.";
+        aside.append(title, content);
+        body.append(aside);
+      }
+
+      const canvas = document.createElement("canvas");
+      canvas.width = canvas.height = 1;
+      const context = canvas.getContext("2d")!;
+      const luminance = (color: string) => {
+        context.fillStyle = color;
+        context.fillRect(0, 0, 1, 1);
+        const rgb = Array.from(context.getImageData(0, 0, 1, 1).data).slice(
+          0,
+          3,
+        );
+        const [r, g, b] = rgb.map((channel) => {
+          const value = channel / 255;
+          return value <= 0.04045
+            ? value / 12.92
+            : ((value + 0.055) / 1.055) ** 2.4;
+        });
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+      };
+      const background = luminance(
+        getComputedStyle(document.body).backgroundColor,
+      );
+      return Array.from(body.querySelectorAll("aside"), (aside) => {
+        const title = aside.querySelector(".notice-title")!;
+        const style = getComputedStyle(title);
+        const accent = luminance(style.color);
+        return {
+          color: style.color,
+          borderColor: getComputedStyle(aside).borderInlineStartColor,
+          contrast:
+            (Math.max(accent, background) + 0.05) /
+            (Math.min(accent, background) + 0.05),
+          icon: getComputedStyle(title, "::before").maskImage,
+        };
+      });
+    });
+    expect(new Set(alerts.map((alert) => alert.color)).size).toBe(5);
+    expect(new Set(alerts.map((alert) => alert.icon)).size).toBe(5);
+    for (const alert of alerts) {
+      expect(alert.contrast).toBeGreaterThanOrEqual(4.5);
+      expect(alert.borderColor).toBe(alert.color);
+      expect(alert.icon).not.toBe("none");
+    }
+    await expectNoPageOverflow(page);
+  });
+}
+
 test("legacy post and stream URLs redirect to canonical writing pages", async ({
   page,
   request,

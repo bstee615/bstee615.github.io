@@ -2,7 +2,15 @@ export default {
   config: {
     "line-length": false,
     "no-inline-html": {
-      allowed_elements: ["a", "div", "figcaption", "figure", "img"],
+      allowed_elements: [
+        "a",
+        "aside",
+        "div",
+        "figcaption",
+        "figure",
+        "img",
+        "p",
+      ],
     },
     "no-duplicate-heading": {
       siblings_only: true,
