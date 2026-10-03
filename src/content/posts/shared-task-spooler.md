@@ -20,7 +20,7 @@ cover:
     id: "@supersnapper27"
 ---
 
-# TL;DR
+## TL;DR
 
 I set up a wrapper around task-spooler.
 See the repository: [https://github.com/bstee615/shared-task-spooler](https://github.com/bstee615/shared-task-spooler).
@@ -46,7 +46,7 @@ ID   State      Output               E-Level  Times(r/u/s)   Command [run=0/1]
 0    finished   /tmp/ts-out.t7NbRs   0        0.00/0.00/0.00 [alice]echo hello
 ```
 
-# Why?
+## Why?
 
 I share a machine with several labmates. This machine has a single high-powered GPU which we share for our experiments. However, only one of us (usually) can use it at a time. This means that if someone else is running an experiment, I have to write down my command, wait for their experiment to be over (which can run several hours), get pinged by them, then check back when they're done and run by experiment. If I run my experiment without checking if the GPU is in-use, it can my program can experience an error, or worse, the other person's in-progress program may experience an error and they'll have to reset it. How can we efficiently run our experiments?
 
@@ -54,7 +54,7 @@ There are several shared queueing systems, such as [Slurm](https://slurm.schedmd
 Instead, I set up a shared queue using `task-spooler` ([link](https://vicerveza.homeunix.net/~viric/soft/ts/))!
 This solution generally works best when the users are somewhat technical and will not overrun the resources of the machine and interrupt other users' projects. Also, it only works on one machine and can't manage jobs distributed over a cluster. For more advanced systems which can limit resources or run on a cluster, see the alternatives listed above.
 
-# How I developed it
+## How I developed it
 
 `task-spooler` tool is used to _spool_ Bash scripts, or execute them in sequence.
 
@@ -91,12 +91,8 @@ alice@shared-box:~$ TS_SOCKET=/tmp/shared-socket tsp
 c: cannot connect to the server
 ```
 
-Uh oh, now `bill` ncannot access the same queue.
+Uh oh, now `bill` cannot access the same queue.
 Looking into the source code, we see this is because when bill's tsp tries to open the socket file, they receive the error `ENOACCESS`, which spouts the error message.
-
-```c
-
-```
 
 Now we can make the socket file accessible by all users using `chmod 777`. If you want more restrictive permissions (for example, to restrict access to a specific group of users), you can use [Linux permission groups](https://www.redhat.com/sysadmin/manage-permissions).
 
