@@ -15,6 +15,11 @@
   --color-link: oklch(38% 0.1 158);
   --color-muted: oklch(48% 0.025 166);
   --color-secondary-text: oklch(46% 0.14 275);
+  --color-notice-info: oklch(42% 0.07 185);
+  --color-notice-tip: oklch(43% 0.085 150);
+  --color-notice-important: var(--color-secondary-text);
+  --color-notice-warning: oklch(46% 0.095 80);
+  --color-notice-caution: oklch(47% 0.1 350);
 }
 
 [data-theme="pastel-dark"] {
@@ -34,6 +39,11 @@
   --color-link: oklch(88% 0.07 156);
   --color-muted: oklch(74% 0.025 158);
   --color-secondary-text: oklch(84% 0.09 275);
+  --color-notice-info: oklch(82% 0.07 185);
+  --color-notice-tip: oklch(80% 0.09 150);
+  --color-notice-important: var(--color-secondary-text);
+  --color-notice-warning: oklch(82% 0.11 80);
+  --color-notice-caution: oklch(80% 0.09 350);
 }
 
 *,

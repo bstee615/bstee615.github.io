@@ -438,6 +438,79 @@ for (const width of [390, 1440]) {
   }
 }
 
+for (const theme of ["pastel-light", "pastel-dark"]) {
+  test(`all alert types have distinct, readable accents in ${theme}`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page
+      .context()
+      .addCookies([
+        { name: "site-theme", value: theme, url: "http://127.0.0.1:4321" },
+      ]);
+    await page.goto("/writing/meditations-1-thru-4/");
+    const alerts = await page.locator(".body").evaluate((body) => {
+      const variants = ["info", "tip", "important", "warning", "caution"];
+      body.replaceChildren();
+      for (const variant of variants) {
+        const aside = document.createElement("aside");
+        aside.className = `notice--${variant}`;
+        const title = document.createElement("p");
+        title.className = "notice-title";
+        title.textContent = variant === "info" ? "Note" : variant;
+        const content = document.createElement("p");
+        content.textContent =
+          "Useful information with an identifiable heading.";
+        aside.append(title, content);
+        body.append(aside);
+      }
+
+      const canvas = document.createElement("canvas");
+      canvas.width = canvas.height = 1;
+      const context = canvas.getContext("2d")!;
+      const luminance = (color: string) => {
+        context.fillStyle = color;
+        context.fillRect(0, 0, 1, 1);
+        const rgb = Array.from(context.getImageData(0, 0, 1, 1).data).slice(
+          0,
+          3,
+        );
+        const [r, g, b] = rgb.map((channel) => {
+          const value = channel / 255;
+          return value <= 0.04045
+            ? value / 12.92
+            : ((value + 0.055) / 1.055) ** 2.4;
+        });
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+      };
+      const background = luminance(
+        getComputedStyle(document.body).backgroundColor,
+      );
+      return Array.from(body.querySelectorAll("aside"), (aside) => {
+        const title = aside.querySelector(".notice-title")!;
+        const style = getComputedStyle(title);
+        const accent = luminance(style.color);
+        return {
+          color: style.color,
+          borderColor: getComputedStyle(aside).borderInlineStartColor,
+          contrast:
+            (Math.max(accent, background) + 0.05) /
+            (Math.min(accent, background) + 0.05),
+          icon: getComputedStyle(title, "::before").maskImage,
+        };
+      });
+    });
+    expect(new Set(alerts.map((alert) => alert.color)).size).toBe(5);
+    expect(new Set(alerts.map((alert) => alert.icon)).size).toBe(5);
+    for (const alert of alerts) {
+      expect(alert.contrast).toBeGreaterThanOrEqual(4.5);
+      expect(alert.borderColor).toBe(alert.color);
+      expect(alert.icon).not.toBe("none");
+    }
+    await expectNoPageOverflow(page);
+  });
+}
+
 test("legacy post and stream URLs redirect to canonical writing pages", async ({
   page,
   request,
