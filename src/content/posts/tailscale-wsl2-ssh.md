@@ -13,7 +13,7 @@ I do a lot of work from my phone while away from my desk and wanted a clean way 
 
 The solution I landed on was running a single Windows OpenSSH server on three ports — 2222 for PowerShell, 2223 for Debian, 2224 for Alpine — and using `Match LocalPort` directives in `sshd_config` to forward each port to the right WSL distro via `wsl.exe`. One Tailscale node on Windows handles all the routing.
 
-# TL;DR
+## TL;DR
 
 See the gist: [Tailscale + SSH setup for Windows + WSL2](https://gist.github.com/bstee615/d510992d535e955fb175028eb5c5c4d0).
 

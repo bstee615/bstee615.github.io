@@ -597,3 +597,34 @@ test.describe("focused mobile coverage", () => {
     }
   });
 });
+
+test("all posts retain readable heading, code, image, and math markup", async ({
+  page,
+}) => {
+  const posts = (await readdir("src/content/posts")).filter((file) =>
+    file.endsWith(".md"),
+  );
+  for (const file of posts) {
+    const route = `/writing/${file.slice(0, -3)}/`;
+    await page.goto(route);
+    await expect(page.locator("h1"), route).toHaveCount(1);
+    const problems = await page.locator(".body").evaluate((body) => ({
+      emptyCode: [...body.querySelectorAll("pre")].filter(
+        (code) => !code.textContent?.trim(),
+      ).length,
+      placeholderAlt: [...body.querySelectorAll("img")].filter(
+        (image) => !image.alt || /pasted image|attachments\//i.test(image.alt),
+      ).length,
+      brokenInlineCode: [...body.querySelectorAll(":not(pre) > code")].filter(
+        (code) => /cont\s+inue/.test(code.textContent ?? ""),
+      ).length,
+      mathErrors: body.querySelectorAll(".katex-error").length,
+    }));
+    expect(problems, route).toEqual({
+      emptyCode: 0,
+      placeholderAlt: 0,
+      brokenInlineCode: 0,
+      mathErrors: 0,
+    });
+  }
+});

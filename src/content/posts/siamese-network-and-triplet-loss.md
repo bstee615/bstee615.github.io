@@ -34,4 +34,8 @@ How to train? Triplet loss
   - This can be satisfied trivially with $d(*) = 0$.
   - To prevent trivial solution, require the difference larger than a margin. $d(A, P) - d(A, N) + \alpha \leq 0$.
 
-End up with Triplet loss $\mathcal L(A, P, N) = max(d(A, P) - d(A, N) + \alpha, 0)$.
+End up with Triplet loss:
+
+$$
+\mathcal L(A, P, N) = \max(d(A, P) - d(A, N) + \alpha, 0)
+$$
