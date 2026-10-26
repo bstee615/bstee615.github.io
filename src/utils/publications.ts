@@ -6,6 +6,7 @@ export const publicationVenueTypes = [
   "dissertation",
   "poster",
   "course-project",
+  "product-blog",
 ] as const;
 
 export type PublicationVenueType = (typeof publicationVenueTypes)[number];
