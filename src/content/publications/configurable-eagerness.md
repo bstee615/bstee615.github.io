@@ -1,10 +1,8 @@
 ---
 title: "Tune GitHub Copilot Inline Suggestions with Configurable Eagerness"
 summary: >-
-  A Visual Studio Code product announcement introducing configurable eagerness
-  for GitHub Copilot inline suggestions, giving developers control over how
-  proactively suggestions appear.
-date: 2026-10-27
+  💡 How proactively should Copilot suggest code? You decide!
+date: 2026-10-26
 venue: Visual Studio Code Blog
 venueType: product-blog
 citation: >-
