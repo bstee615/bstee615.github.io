@@ -5,6 +5,7 @@ summary: >-
 date: 2026-10-26
 venue: Visual Studio Code Blog
 venueType: product-blog
+selected: true
 citation: >-
   Visual Studio Code Blog. 2026. Tune GitHub Copilot Inline Suggestions with
   Configurable Eagerness.
