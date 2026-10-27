@@ -5,14 +5,16 @@ summary: >-
 date: 2026-10-26
 venue: Visual Studio Code Blog
 venueType: product-blog
+authors:
+  - Ben Steenhoek
+  - Ulugbek Abdullaev
 selected: true
 citation: >-
   Visual Studio Code Blog. 2026. Tune GitHub Copilot Inline Suggestions with
   Configurable Eagerness.
 links:
-  - label: Blog post
+  - label: Blog
     url: https://code.visualstudio.com/blogs/2026/10/27/configurable-eagerness
 ---
 
-This product announcement introduces a setting for tuning the eagerness of
-GitHub Copilot inline suggestions in Visual Studio Code.
+This product announcement introduces a setting for tuning the eagerness of GitHub Copilot Inline Suggestions in Visual Studio Code.
